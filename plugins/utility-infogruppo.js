@@ -1,19 +1,17 @@
 // Plug-in creato da elixir
-// Plug-in creato da elixir - INFO GRUPPO PRO
 const handler = async (m, { conn, participants, groupMetadata }) => {
-  // 1. Recupero Immagine del gruppo o fallback
-  const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || 'https://i.ibb.co/N25rgPrX/Gaara.jpg';
+  const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || 'https://ibb.co';
   
-  // 2. Recupero impostazioni dal database (con valori di default se non esistono)
   const chat = global.db.data.chats[m.chat] || {}
   const groupAdmins = participants.filter((p) => p.admin);
+  
+  // FIX TAG ADMIN: usiamo solo la prima parte dell'ID nel testo
   const listAdmin = groupAdmins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
+  
   const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
   
-  // 3. Funzione per le icone di stato
   const status = (val) => val ? '『 ✅ 』' : '『 ❌ 』'
   
-  // 4. Mappatura delle funzioni attive
   const funzioni = [
     ['Welcome', chat.welcome],
     ['Rilevamento', chat.detect],
@@ -27,7 +25,6 @@ const handler = async (m, { conn, participants, groupMetadata }) => {
     .map(([nome, val]) => `│ ${status(val)}- ${nome}`)
     .join('\n')
   
-  // 5. Costruzione del Testo
   const text = `
 ⋆｡˚『 ╭ \`INFO ✧ GRUPPO\` ╯ 』˚｡⋆
 ╭
@@ -45,9 +42,9 @@ ${statoFunzioni}
 │ ${groupMetadata.desc?.toString() || 'Nessuna descrizione'}
 ╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─`.trim();
   
-  // 6. Invio del messaggio con anteprima professionale
   await conn.sendMessage(m.chat, {
     text: text,
+    // Array di tutti gli ID da taggare (fondamentale per rendere i @ cliccabili)
     mentions: [...groupAdmins.map((v) => v.id), owner],
     contextInfo: {
       externalAdReply: {
