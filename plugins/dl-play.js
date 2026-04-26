@@ -1,5 +1,4 @@
 import yts from 'yt-search';
-import fg from 'api-dylux';
 import fetch from 'node-fetch';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
@@ -7,7 +6,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     const search = await yts(text);
-    const vid = search.videos[0]; // Preso il primo risultato correttamente
+    const vid = search.videos[0];
     if (!vid) return m.reply('⚠️ *Risultato non trovato.*');
 
     const url = vid.url;
@@ -29,27 +28,31 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
 
-    let downloadUrl = null;
+    // Nuova API (Beta-API) più stabile
     const isAudio = command === 'playaud';
+    const type = isAudio ? 'mp3' : 'mp4';
+    
+    // Tentativo con API alternativa
+    const res = await fetch(`https://siputzx.my.id{url}`);
+    const json = await res.json();
+    
+    let downloadUrl = isAudio ? json.data?.dl_mp3 : json.data?.dl_mp4;
 
-    try {
-        // Prova API Dylux
-        let res = isAudio ? await fg.yta(url) : await fg.ytv(url);
-        if (res && res.dl_url) downloadUrl = res.dl_url;
-    } catch {
-        // Fallback API Vreden
-        let type = isAudio ? 'ytmp3' : 'ytmp4';
-        let res = await fetch(`https://vreden.my.id{type}?url=${url}`);
-        let json = await res.json();
-        downloadUrl = json.result?.download?.url || json.result?.url;
+    // Se la prima fallisce, proviamo una seconda sorgente (Alya-API)
+    if (!downloadUrl) {
+        const res2 = await fetch(`https://alyachan.dev{url}&apikey=GataDios`);
+        const json2 = await res2.json();
+        downloadUrl = isAudio ? json2.data?.mp3?.url : json2.data?.mp4?.url;
     }
 
-    if (!downloadUrl) throw new Error('Link di download non trovato');
+    if (!downloadUrl) throw new Error('Sorgenti offline');
 
-    // SCARICHIAMO IL BUFFER (Risolve il problema del file non riproducibile)
-    const response = await fetch(downloadUrl);
-    const buffer = await response.buffer();
+    // Download effettivo
+    const fileRes = await fetch(downloadUrl);
+    if (!fileRes.ok) throw new Error('Errore nel recupero del file dal server');
+    const buffer = await fileRes.buffer();
 
+    // Invio file
     if (isAudio) {
         await conn.sendMessage(m.chat, {
             audio: buffer,
@@ -61,6 +64,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             video: buffer,
             mimetype: 'video/mp4',
             caption: `✅ *Scaricato da Elixir Bot*`,
+            fileName: `${vid.title}.mp4`
         }, { quoted: m });
     }
 
@@ -68,7 +72,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   } catch (e) {
     console.error(e);
-    m.reply('🚀 *Errore:* Impossibile recuperare il file. Riprova tra poco.');
+    m.reply('🚀 *Errore:* Le sorgenti sono al momento offline o il file è troppo grande.');
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
   }
 };
