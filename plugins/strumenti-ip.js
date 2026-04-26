@@ -44,8 +44,6 @@ let handler = async (m, { conn, args, usedPrefix }) => {
   ${usedPrefix}ip 1.1.1.1
   ${usedPrefix}ip google.com
   ${usedPrefix}ip youtube.com
-
-_☣️ Geolocalizzazione IP gratuita via ip-api.com_`, m)
   }
 
   const target = args[0].toLowerCase().trim()
@@ -105,8 +103,6 @@ _☣️ Geolocalizzazione IP gratuita via ip-api.com_`, m)
  │ 📌 *Coordinate:* ${d.lat}, ${d.lon}
  │ 🔍 *Tipo:* ${tagLine}
  └───────────────────
-
-_☣️ Dati forniti da ip-api.com_`
     }, { quoted: m })
 
   } catch (e) {
