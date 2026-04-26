@@ -28,42 +28,31 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key } });
 
-    // Nuova API (Beta-API) più stabile
     const isAudio = command === 'playaud';
-    const type = isAudio ? 'mp3' : 'mp4';
     
-    // Tentativo con API alternativa
-    const res = await fetch(`https://siputzx.my.id{url}`);
+    // API Semplice e pulita (Corretta la sintassi dell'URL)
+    let apiUrl = `https://vreden.my.id{encodeURIComponent(url)}`;
+    if (!isAudio) apiUrl = `https://vreden.my.id{encodeURIComponent(url)}`;
+
+    const res = await fetch(apiUrl);
     const json = await res.json();
     
-    let downloadUrl = isAudio ? json.data?.dl_mp3 : json.data?.dl_mp4;
+    const downloadUrl = json.result?.download?.url || json.result?.url;
 
-    // Se la prima fallisce, proviamo una seconda sorgente (Alya-API)
-    if (!downloadUrl) {
-        const res2 = await fetch(`https://alyachan.dev{url}&apikey=GataDios`);
-        const json2 = await res2.json();
-        downloadUrl = isAudio ? json2.data?.mp3?.url : json2.data?.mp4?.url;
-    }
+    if (!downloadUrl) throw new Error('API Error');
 
-    if (!downloadUrl) throw new Error('Sorgenti offline');
-
-    // Download effettivo
-    const fileRes = await fetch(downloadUrl);
-    if (!fileRes.ok) throw new Error('Errore nel recupero del file dal server');
-    const buffer = await fileRes.buffer();
-
-    // Invio file
+    // Invio diretto tramite URL (più leggero per il tuo server)
     if (isAudio) {
         await conn.sendMessage(m.chat, {
-            audio: buffer,
+            audio: { url: downloadUrl },
             mimetype: 'audio/mpeg',
             fileName: `${vid.title}.mp3`
         }, { quoted: m });
     } else {
         await conn.sendMessage(m.chat, {
-            video: buffer,
+            video: { url: downloadUrl },
             mimetype: 'video/mp4',
-            caption: `✅ *Scaricato da Elixir Bot*`,
+            caption: `✅ *Scaricato con successo*`,
             fileName: `${vid.title}.mp4`
         }, { quoted: m });
     }
@@ -72,7 +61,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   } catch (e) {
     console.error(e);
-    m.reply('🚀 *Errore:* Le sorgenti sono al momento offline o il file è troppo grande.');
+    m.reply('🚀 *Errore:* Il servizio di download è momentaneamente occupato. Riprova tra pochi secondi.');
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
   }
 };
