@@ -5,10 +5,10 @@
 
 import qrcode from 'qrcode'
 
-let handler = async (m, { conn, args, usedPrefix, isGroup }) => {
+let handler = async (m, { conn, args, usedPrefix }) => {
 
   // ✅ Solo nei gruppi
-  if (!isGroup) {
+  if (!m.isGroup) {
     return conn.reply(m.chat, '❌ Questo comando è disponibile solo nei gruppi.', m)
   }
 
