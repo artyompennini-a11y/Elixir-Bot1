@@ -14,16 +14,14 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     const url = vid.url;
 
-    // Menu principale Elixir
     if (command === 'play') {
-        let infoMsg = `┏━━━━━━━━━━━━━━━━━━━┓\n      🎧 ᴇʟɪxɪʀ ʙᴏᴛ ᴘʟᴀʏᴇʀ 🎧\n┗━━━━━━━━━━━━━━━━━━━┛\n\n`;
-        infoMsg += `◈ 📌 *𝗧𝗶𝘁𝗼𝗹𝗼:* ${vid.title}\n◈ ⏱️ *𝗗𝘂𝗿𝗮𝘁𝗮:* ${vid.timestamp}\n\n`;
-        infoMsg += `*𝗦𝗲𝗹𝗲𝘇𝗶𝗼𝗻𝗮 𝗶𝗹 𝗳𝗼𝗿𝗺𝗮𝘁𝗼:*`;
+        let infoMsg = `┏━━━━━━━━━━━━━━━━━━━━┓\n   🎧  *𝐁𝐋𝐎𝐎𝐃 𝐁𝐎𝐓 𝐏𝐋𝐀𝐘𝐄𝐑* 🎧\n┗━━━━━━━━━━━━━━━━━━━━┛\n\n`;
+        infoMsg += `◈ 📌 *𝗧𝗶𝘁𝗼𝗹𝗼:* ${vid.title}\n◈ ⏱️ *𝗗𝘂𝗿𝗮𝘁𝗮:* ${vid.timestamp}\n\n*𝗦𝗲𝗹𝗲𝘇𝗶𝗼𝗻𝗮 𝗶𝗹 𝗳𝗼𝗿𝗺𝗮𝘁𝗼:*`;
 
         return await conn.sendMessage(m.chat, {
             image: { url: vid.thumbnail },
             caption: infoMsg,
-            footer: 'ᴇʟɪxɪʀ ʙᴏᴛ • 𝟤𝟢𝟤𝟨',
+            footer: '𝐁𝐋𝐎𝐎𝐃 𝐁𝐎𝐓 • 𝟤𝟢𝟤𝟨',
             buttons: [
                 { buttonId: `${usedPrefix}playaud ${url}`, buttonText: { displayText: '🎵 𝗔𝗨𝗗𝗜𝗢 (𝗠𝗣𝟯)' }, type: 1 },
                 { buttonId: `${usedPrefix}playvid ${url}`, buttonText: { displayText: '🎬 𝗩𝗜𝗗𝗘𝗢 (𝗠𝗣𝟰)' }, type: 1 }
@@ -37,34 +35,42 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     let downloadUrl = null;
     const isAudio = command === 'playaud';
 
-    // Lista API con rotazione automatica per massima stabilità
+    // LISTA API AGGIORNATA AL 22 APRILE 2026
     const apiList = [
-        `https://vreden.my.id{isAudio ? '3' : '4'}?url=${encodeURIComponent(url)}`,
-        `https://boxiwan.my.id{isAudio ? '3' : '4'}?url=${encodeURIComponent(url)}`,
-        `https://skizo.tech{encodeURIComponent(url)}`,
-        `https://eu.org{isAudio ? '3' : '4'}?url=${encodeURIComponent(url)}&apikey=btch-932`
+        `https://api.boxiwan.my.id/api/download/ytmp${isAudio ? '3' : '4'}?url=${url}`,
+        `https://api.skizo.tech/api/y2mate?url=${url}`,
+        `https://api.tesshu.my.id/api/download/ytmp${isAudio ? '3' : '4'}?url=${url}`,
+        `https://api.botcahx.eu.org/api/dowloader/ytmp${isAudio ? '3' : '4'}?url=${url}&apikey=btch-932`
     ];
 
     for (let api of apiList) {
         try {
+            console.log(`[BLOOD] Tentativo su: ${api}`);
             let res = await fetch(api);
             let json = await res.json();
-            downloadUrl = json.result?.download?.url || json.data?.url || json.result?.url || json.url || json.result?.link;
-            if (downloadUrl && downloadUrl.startsWith('http')) break;
-        } catch { continue; }
+            
+            // Estrazione flessibile del link
+            downloadUrl = json.data?.url || json.result?.url || json.result?.dl || json.url || json.result?.link;
+            
+            if (downloadUrl && typeof downloadUrl === 'string' && downloadUrl.startsWith('http')) break;
+        } catch (e) {
+            continue;
+        }
     }
 
-    if (!downloadUrl) throw new Error('SERVER_OFFLINE');
+    if (!downloadUrl) {
+        throw new Error('SERVER_OFFLINE');
+    }
 
     const tmpDir = os.tmpdir();
-    const filePath = path.join(tmpDir, `elixir_${Date.now()}.${isAudio ? 'mp3' : 'mp4'}`);
+    const filePath = path.join(tmpDir, `blood_${Date.now()}.${isAudio ? 'mp3' : 'mp4'}`);
 
-    // Download del file con User-Agent per evitare il blocco 403
+    // Download con headers per simulare un browser (evita blocchi 403)
     const response = await fetch(downloadUrl, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }
     });
     
-    if (!response.ok) throw new Error('ERR_FILE');
+    if (!response.ok) throw new Error('ERRORE_DOWNLOAD');
     const buffer = await response.buffer();
     fs.writeFileSync(filePath, buffer);
 
@@ -72,26 +78,23 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         await conn.sendMessage(m.chat, {
             audio: fs.readFileSync(filePath),
             mimetype: 'audio/mpeg',
-            fileName: `${vid.title}.mp3`,
-            ptt: false
+            fileName: `${vid.title}.mp3`
         }, { quoted: m });
     } else {
         await conn.sendMessage(m.chat, {
             video: fs.readFileSync(filePath),
             mimetype: 'video/mp4',
-            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ ᴇʟɪxɪʀ ʙᴏᴛ*`,
-            fileName: `${vid.title}.mp4`
+            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ ᴇʟɪxɪʀ ʙᴏᴛ*`
         }, { quoted: m });
     }
 
-    // Pulizia file temporaneo
     if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
     await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
 
   } catch (e) {
-    console.error(e);
+    console.error('DEBUG:', e);
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
-    m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* File non disponibile o server sovraccarico.');
+    m.reply(`🚀ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:\n\nNessun server disponibile. Prova a scrivere il titolo esatto della canzone o usa un link diretto.`);
   }
 };
 
