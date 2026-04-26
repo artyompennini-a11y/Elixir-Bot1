@@ -3,27 +3,30 @@ const handler = async (m, { conn, text, participants, groupMetadata }) => {
   let targetMetadata = groupMetadata;
   let isExternal = false;
 
-  // 1. Controllo se l'utente ha inserito un link per cercare un gruppo esterno
-  if (text && text.includes('://whatsapp.com')) {
-    let code = text.split('://whatsapp.com')[1].trim();
+  // 1. Estrazione pulita del codice invito
+  if (text && text.match(/://whatsapp.com\/([0-9A-Za-z]{20,24})/i)) {
+    let inviteCode = text.match(/://whatsapp.com\/([0-9A-Za-z]{20,24})/i)[1];
     try {
-      targetMetadata = await conn.groupGetInviteInfo(code);
+      // Otteniamo le info del gruppo esterno
+      targetMetadata = await conn.groupGetInviteInfo(inviteCode);
       isExternal = true;
     } catch (e) {
-      return m.reply('❌ *Errore:* Link non valido o scaduto.');
+      console.error(e);
+      return m.reply('❌ *Errore:* Impossibile trovare il gruppo. Il link potrebbe essere scaduto.');
     }
   }
 
-  const { subject, owner, desc, id } = targetMetadata;
+  // 2. Definizione variabili per il messaggio
+  const { subject, owner, desc, id, size } = targetMetadata;
   const pp = await conn.profilePictureUrl(isExternal ? id : m.chat, 'image').catch((_) => null) || 'https://ibb.co';
   
-  // 2. Dati del gruppo e Amministratori
   const chat = global.db.data.chats[isExternal ? id : m.chat] || {};
   const admins = isExternal ? [] : participants.filter((p) => p.admin);
-  const listAdmin = isExternal ? '│ _Non disponibili via link_' : admins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
-  const creator = owner || (isExternal ? null : admins.find((p) => p.admin === 'superadmin')?.id) || m.chat.split`-`[0] + '@s.whatsapp.net';
+  const listAdmin = isExternal ? '│ _Info admin non disponibili via link_' : admins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
   
-  // 3. Icone di stato e Tutte le Funzioni Originali
+  // Il creatore per i gruppi esterni è nell'owner, per quelli interni va cercato
+  const creator = isExternal ? owner : (owner || admins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net');
+  
   const status = (val) => val ? '『 ✅ 』' : '『 ❌ 』';
   
   const funzioni = [
@@ -36,17 +39,16 @@ const handler = async (m, { conn, text, participants, groupMetadata }) => {
     ['Antitoxic', chat.antiToxic]
   ];
   
-  const statoFunzioni = isExternal ? '│ _Configurazione locale_' : funzioni
+  const statoFunzioni = isExternal ? '│ _Configurazione non visibile_' : funzioni
     .map(([nome, val]) => `│ ${status(val)}- ${nome}`)
     .join('\n');
   
-  // 4. Costruzione del Testo
   const infoText = `
 ⋆｡˚『 ╭ \`INFO ✧ GRUPPO\` ╯ 』˚｡⋆
 ╭
 │ 『 📛 』 *Nome:* ${subject}
-│ 『 👥 』 *Membri:* ${targetMetadata.size || participants.length}
-│ 『 👑 』 *Creatore:* @${creator.split('@')[0]}
+│ 『 👥 』 *Membri:* ${isExternal ? size : participants.length}
+│ 『 👑 』 *Creatore:* ${creator ? `@${creator.split('@')[0]}` : 'Non rilevato'}
 │
 │ 『 ✨ 』 *Amministratori:*
 ${listAdmin}
@@ -58,13 +60,13 @@ ${statoFunzioni}
 │ ${desc?.toString() || 'Nessuna descrizione'}
 ╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─`.trim();
   
-  // 5. Invio Messaggio con FIX TAG @user
+  // 3. Invio con tag funzionanti
   await conn.sendMessage(m.chat, {
     text: infoText,
-    mentions: isExternal ? [] : [...admins.map((v) => v.id), creator],
+    mentions: isExternal ? [] : [...admins.map((v) => v.id), creator].filter(Boolean),
     contextInfo: {
       externalAdReply: {
-        title: isExternal ? `📌 INFO: ${subject}` : `🏠 INFO GRUPPO CORRENTE`,
+        title: isExternal ? `🔎 GRUPPO ESTERNO: ${subject}` : `🏠 INFO GRUPPO ATTUALE`,
         body: `ᴇʟɪxɪʀ ʙᴏᴛ • 𝟤𝟢𝟤𝟨`,
         thumbnailUrl: pp,
         mediaType: 1,
