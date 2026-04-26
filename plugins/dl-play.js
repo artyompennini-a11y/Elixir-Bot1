@@ -8,7 +8,7 @@ import path from 'path';
 import os from 'os';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return m.reply(`🩸 *ᴇʟɪxɪʀ ʙᴏᴛ*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
+  if (!text) return m.reply(`🔮 *ᴇʟɪxɪʀ ʙᴏᴛ*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
 
   // Percorsi file temporanei definiti fuori per essere accessibili al finally
   const tmpDir = os.tmpdir();
@@ -44,7 +44,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 
     // Reazione di caricamento
-    await conn.sendMessage(m.chat, { react: { text: "🩸", key: m.key } });
+    await conn.sendMessage(m.chat, { react: { text: "🔮", key: m.key } });
 
     let downloadUrl = null;
     const isAudio = command === 'playaud';
