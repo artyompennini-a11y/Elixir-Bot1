@@ -45,11 +45,11 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   const timeLeft = await formatTime(user.premiumTime - now);
 
   const report = `
-┏━━━〔 🎟️ **ELIXIR PREMIUM** 〕━━━┓
+┏━━━〔 🎟️ *ELIXIR PREMIUM* 〕━━━┓
 ┃
-┃ ✨ **Utente:** ${name}
-┃ 🕐 **Durata aggiunta:** ${type}
-┃ 📉 **Scadenza totale:** ┃ ╰╼> ${timeLeft}
+┃ ✨ *Utente:* ${name}
+┃ 🕐 *Durata aggiunta:* ${type}
+┃ 📉 *Scadenza totale:* ┃ ╰╼> ${timeLeft}
 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━┛
 *STATUS: ACCOUNT AGGIORNATO*`;
