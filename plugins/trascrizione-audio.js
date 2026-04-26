@@ -1,10 +1,8 @@
 // Plug-in creato da elixir
-import { downloadContentFromMessage } from '@whiskeysockets/baileys'
 import fs from 'fs'
-import { exec } from 'child_process'
-import path from 'os'
 
 let handler = async (m, { conn, usedPrefix, command }) => {
+    // Controlla se il messaggio è un audio o se si sta rispondendo a un audio
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || ''
     
@@ -13,24 +11,22 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     await conn.sendMessage(m.chat, { react: { text: "✍️", key: m.key } })
 
     try {
+        // Usiamo il metodo di download interno del tuo bot senza importare Baileys
         let media = await q.download()
-        let audioPath = `./tmp/${Date.now()}.mp3`
-        if (!fs.existsSync('./tmp')) fs.mkdirSync('./tmp')
-        fs.writeFileSync(audioPath, media)
-
-        // Qui usiamo un'API di trascrizione gratuita o Whisper
-        // Per ora simuliamo la logica di invio a un'API di riconoscimento vocale
-        m.reply("_Sto trascrivendo l'audio, attendi..._")
         
-        // ESEMPIO DI RISULTATO (Puoi collegarlo a OpenAI Whisper o Google Speech)
+        // Se il download fallisce
+        if (!media) throw new Error('Impossibile scaricare il media')
+
+        m.reply("_Sto analizzando l'audio..._")
+        
+        // Simulazione trascrizione (qui andrebbe l'API di OpenAI o Whisper)
         setTimeout(() => {
-            m.reply(`📝 *𝗧𝗿𝗮𝘀𝗰𝗿𝗶𝘇𝗶𝗼𝗻𝗲 𝗩𝗼𝗰𝗮𝗹𝗲:* \n\n"Ciao! Questo è un esempio di testo estratto dal tuo audio."`)
-            fs.unlinkSync(audioPath)
+            m.reply(`📝 *𝗧𝗿𝗮𝘀𝗰𝗿𝗶𝘇𝗶𝗼𝗻𝗲 𝗩𝗼𝗰𝗮𝗹𝗲:* \n\n"Ehi, ho ricevuto il tuo vocale! Per ora questa è una trascrizione di test. Per quella reale serve collegare un'API tipo OpenAI."`)
         }, 3000)
 
     } catch (e) {
         console.error(e)
-        m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* Impossibile leggere questo audio.')
+        m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* Problema nel download dell\'audio.')
     }
 }
 
