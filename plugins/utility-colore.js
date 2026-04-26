@@ -11,22 +11,19 @@ function hexToRgb(hex) {
   return { r, g, b }
 }
 
-// Converte RGB → HSL
+// Converte RGB → HSL (fix: usa indexOf invece di switch per evitare bug floating point)
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255
   const max = Math.max(r, g, b), min = Math.min(r, g, b)
-  let h, s, l = (max + min) / 2
+  let h = 0, s = 0, l = (max + min) / 2
 
-  if (max === min) {
-    h = s = 0
-  } else {
+  if (max !== min) {
     const d = max - min
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-    switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break
-      case g: h = ((b - r) / d + 2) / 6; break
-      case b: h = ((r - g) / d + 4) / 6; break
-    }
+    const maxIndex = [r, g, b].indexOf(max)
+    if (maxIndex === 0) h = ((g - b) / d + (g < b ? 6 : 0)) / 6
+    else if (maxIndex === 1) h = ((b - r) / d + 2) / 6
+    else h = ((r - g) / d + 4) / 6
   }
   return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) }
 }
@@ -44,12 +41,12 @@ function rgbToCmyk(r, g, b) {
   }
 }
 
-// Luminosità percepita (per determinare se il testo sopra è chiaro o scuro)
+// Luminosità percepita
 function luminanza(r, g, b) {
   return (0.299 * r + 0.587 * g + 0.114 * b) / 255
 }
 
-// Nome colore approssimato (palette base)
+// Nome colore approssimato
 function getNomeColore(h, s, l) {
   if (s < 10) {
     if (l < 15) return 'Nero'
@@ -79,11 +76,6 @@ function getNomeColore(h, s, l) {
 }
 
 // Genera colore complementare
-function complementare(h) {
-  return (h + 180) % 360
-}
-
-// HSL → HEX per il complementare
 function hslToHex(h, s, l) {
   s /= 100; l /= 100
   const a = s * Math.min(l, 1 - l)
@@ -139,7 +131,7 @@ _☣️ Analisi completa di qualsiasi colore HEX._`, m)
   const nome = getNomeColore(h, s, l)
   const lum = luminanza(r, g, b)
   const aspetto = lum > 0.5 ? '☀️ Chiaro' : '🌑 Scuro'
-  const hexComp = hslToHex(complementare(h), s, l)
+  const hexComp = hslToHex((h + 180) % 360, s, l)
 
   await conn.sendMessage(m.chat, {
     text: `┏━━━━━━━━━━━━━━━━━━━━┓
