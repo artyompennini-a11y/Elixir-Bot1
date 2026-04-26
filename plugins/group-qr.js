@@ -1,58 +1,38 @@
-// Plug-in creato da elixir - QR & Group QR (FIXED)
+// Plug-in creato da elixir - QR FIXED
 import axios from 'axios'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   
   if (command === 'qrgruppo') {
-    if (!m.isGroup) return m.reply('❌ Questo comando funziona solo nei gruppi!')
+    if (!m.isGroup) return m.reply('❌ Comando solo per i gruppi!')
     
-    // Controllo se il bot è admin (necessario per groupInviteCode)
-    const groupMetadata = await conn.groupMetadata(m.chat)
-    const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net'
-    const isBotAdmin = groupMetadata.participants.find(p => p.id === botId)?.admin
-    
-    if (!isBotAdmin) return m.reply('⚠️ Devo essere *Admin* per generare il QR del gruppo!')
-
-    await conn.sendMessage(m.chat, { react: { text: "🔗", key: m.key } })
-
     try {
-      const code = await conn.groupInviteCode(m.chat)
-      const groupLink = `https://whatsapp.com{code}`
-      const qrUrl = `https://qrserver.com{groupLink}`
+      // Metodo più diretto per ottenere il link d'invito
+      let res = await conn.groupInviteCode(m.chat)
+      let link = 'https://whatsapp.com' + res
       
-      // Scarichiamo l'immagine per sicurezza prima di inviarla
-      const response = await axios.get(qrUrl, { responseType: 'arraybuffer' })
-      const buffer = Buffer.from(response.data, 'utf-8')
-
-      await conn.sendMessage(m.chat, { 
-        image: buffer, 
-        caption: `✨ *QR CODE DEL GRUPPO*\n\n🔗 *Link:* ${groupLink}` 
+      let qr = `https://qrserver.com{link}`
+      
+      return await conn.sendMessage(m.chat, { 
+        image: { url: qr }, 
+        caption: `✨ *QR GRUPPO*\n🔗 ${link}` 
       }, { quoted: m })
       
     } catch (e) {
-      console.error("ERRORE QRGRUPPO:", e.message)
-      m.reply('🚀 Errore tecnico nel generare il link d\'invito.')
+      console.error(e)
+      return m.reply('⚠️ Errore! Assicurati che io sia Admin e che i link d\'invito siano attivi.')
     }
-    return
   }
 
-  // LOGICA .qr NORMALE
-  if (!text) return m.reply(`🔮 _Scrivi:_ ${usedPrefix + command} testo o link`)
-
-  try {
-    const qrUrl = `https://qrserver.com{encodeURIComponent(text)}`
-    const response = await axios.get(qrUrl, { responseType: 'arraybuffer' })
-    const buffer = Buffer.from(response.data, 'utf-8')
-
-    await conn.sendMessage(m.chat, { 
-      image: buffer, 
-      caption: `✅ *QR GENERATO*\n\n📝 *Testo:* ${text}` 
-    }, { quoted: m })
-
-  } catch (e) {
-    console.error("ERRORE QR:", e.message)
-    m.reply('🚀 Errore durante la creazione del QR.')
-  }
+  // Comando QR Normale
+  if (!text) return m.reply(`💡 Esempio: ${usedPrefix + command} Ciao`)
+  
+  let qrGen = `https://qrserver.com{encodeURIComponent(text)}`
+  
+  await conn.sendMessage(m.chat, { 
+    image: { url: qrGen }, 
+    caption: `✅ *QR GENERATO*\n📝 ${text}` 
+  }, { quoted: m })
 }
 
 handler.help = ['qr', 'qrgruppo']
