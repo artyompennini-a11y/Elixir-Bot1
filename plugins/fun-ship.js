@@ -1,5 +1,4 @@
 // Plug-in creato da elixir
-// Plug-in creato da elixir - SHIP FIXED
 let handler = async (m, { conn, participants }) => {
   let member = participants.map(u => u.id)
   let a = member[Math.floor(Math.random() * member.length)]
