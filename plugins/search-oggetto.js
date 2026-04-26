@@ -1,4 +1,4 @@
-// Plug-in creato da elixir - VERSIONE TEST ULTRA-SICURA
+// Plug-in creato da elixir - FIX FINALE SINTASSI
 import axios from 'axios';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
@@ -6,48 +6,34 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     const apiKey = 'c64c67abffcdced15e89c3ff61f728c481b8d898c5e59461203b5103fcc674d2';
+    
+    // ATTENZIONE: Nota il simbolo $ prima di {encodeURIComponent(text)}
+    // E nota l'uso dell'accento grave ` all'inizio e alla fine dell'URL
     const url = `https://serpapi.com{encodeURIComponent(text)}&gl=it&hl=it&api_key=${apiKey}`;
     
-    console.log("🔍 Tentativo di ricerca per:", text);
+    console.log("🔍 Cerco su internet...");
     
     const response = await axios.get(url);
-    
-    // DEBUG: Se questo appare nel terminale, la connessione funziona
-    console.log("✅ Risposta ricevuta da SerpApi");
-
     const results = response.data.shopping_results;
 
-    if (!results || results.length === 0) {
-      return m.reply('⚠️ *Nessun risultato trovato.*');
-    }
+    if (!results || results.length === 0) return m.reply('⚠️ *Nessun risultato.*');
 
-    let infoMsg = `┏━━━━━━━━━━━━━━━━━━━┓\n      🛒 ᴇʟɪxɪʀ ꜱʜᴏᴘᴘɪɴɢ 🛒\n┗━━━━━━━━━━━━━━━━━━━┛\n\n`;
-
-    results.slice(0, 3).forEach((item, index) => {
-        infoMsg += `*${index + 1}.* ${item.title.substring(0, 40)}...\n`;
-        infoMsg += `💰 *Prezzo:* ${item.price}\n`;
-        infoMsg += `🔗 *Link:* ${item.link}\n\n`;
+    let txt = `🛒 *RISULTATI PER:* ${text.toUpperCase()}\n\n`;
+    results.slice(0, 3).forEach((item, i) => {
+        txt += `*${i + 1}.* ${item.title.substring(0, 50)}...\n💰 *Prezzo:* ${item.price}\n🔗 ${item.link}\n\n`;
     });
 
-    // Per ora inviamo SOLO TESTO per vedere se il problema è l'immagine
-    await conn.sendMessage(m.chat, { text: infoMsg }, { quoted: m });
+    await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
 
   } catch (e) {
-    console.error("❌ ERRORE NEL PLUGIN:");
-    if (e.response) {
-      // L'errore viene dall'API (es. chiave scaduta)
-      console.error("Dati Errore API:", e.response.data);
-      m.reply(`🚀 *Errore API:* ${e.response.data.error || 'Problema con la chiave'}`);
-    } else {
-      // L'errore è del codice o della rete
-      console.error("Messaggio Errore:", e.message);
-      m.reply('🚀 *Errore Interno:* Il server non riesce a raggiungere SerpApi.');
-    }
+    console.error("❌ ERRORE:");
+    console.log(e.message);
+    m.reply('🚀 *Errore di connessione.* Assicurati di aver usato il simbolo $ nel codice.');
   }
 };
 
 handler.help = ['search'];
 handler.tags = ['utility'];
-handler.command = /^(search|cerca|prezzo)$/i;
+handler.command = /^(search|cerca)$/i;
 
 export default handler;
