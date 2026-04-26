@@ -42,7 +42,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isSam }) {
   
   const text = `${header}
 ╭
-┃ 🛡️ \`Stato:\` *Protocollo Blood Attivo*
+┃ 🛡️ \`Stato:\` *Protocollo Elixir Attivo*
 ┃
 ┃ 『 👤 』 \`Target:\` @${m.sender.split('@')[0]}
 ┃ 『 🖼️ 』 \`Rilevato:\` *Media Permanente*
@@ -58,7 +58,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isSam }) {
       mentions: [m.sender],
       contextInfo: {
         externalAdReply: {
-          title: 'BLOOD SECURITY',
+          title: 'ELIXIR SECURITY',
           body: 'Restrizione media attiva',
           thumbnailUrl: 'https://qu.ax/TfUj.jpg',
           mediaType: 1
