@@ -14,15 +14,14 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
   if (!sender) return;
 
   const botJid = conn.user.id.split(':')[0] + '@s.whatsapp.net';
-  
+
   // --- PROTEZIONE OWNER DEL BOT ---
-  // Prende la lista degli owner dal global.owner e la formatta correttamente
   const BOT_OWNERS = global.owner
     .filter(o => o[0])
     .map(o => o[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net');
 
   const localWhitelist = chat.whitelist || [];
-  
+
   let ownerGroup = null;
   try {
     const metadata = await conn.groupMetadata(m.chat);
@@ -39,7 +38,6 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
     ownerGroup
   ].filter(Boolean);
 
-  // Se l'azione è compiuta da un OWNER del bot o autorizzato, l'antinuke si ferma
   if (allowed.includes(sender)) return;
 
   if (m.messageStubType === 28) {
@@ -50,7 +48,6 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
   const senderData = participants.find(p => p.jid === sender);
   if (!senderData?.admin) return;
 
-  // FILTRO: Rimuove admin a tutti tranne che agli OWNER del bot e autorizzati
   const usersToDemote = participants
     .filter(p => p.admin)
     .map(p => p.jid)
@@ -62,39 +59,41 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
     await conn.groupParticipantsUpdate(m.chat, usersToDemote, 'demote');
   }
 
-  // Chiude il gruppo
   await conn.groupSettingUpdate(m.chat, 'announcement');
 
   const action =
-    m.messageStubType === 21 ? 'cambio nome' :
-    m.messageStubType === 28 ? 'rimozione membro' :
-    m.messageStubType === 29 ? 'promozione admin' :
-    'retrocessione admin';
+    m.messageStubType === 21 ? 'MODIFICA NOME' :
+    m.messageStubType === 28 ? 'RIMOZIONE UTENTE' :
+    m.messageStubType === 29 ? 'PROMOZIONE ADMIN' :
+    'RETROCESSIONE ADMIN';
 
   const text = `
-  ⋆｡˚『 ╭ \`ANTINUKE ATTIVO\` ╯ 』˚｡⋆
-╭
-┃ 🚨 \`Stato:\` *ᴇʟɪxɪʀ ʜᴀ ᴍᴇꜱꜱᴏ ɪʟ ᴘʀᴇꜱᴇʀᴠᴀᴛɪᴠᴏ*
+┏━━━〔 🛡️ **ELIXIR ANTINUKE** 〕━━━┓
 ┃
-┃ 『 👤 』 \`Autore:\` @${sender.split('@')[0]}
-┃ 『 🚫 』 \`Azione:\` *${action}* NON autorizzata
+┃ ⚠️ *ATTIVITÀ SOSPETTA RILEVATA*
 ┃
-┃ 🔻 \`Sanzioni Applicate:\`
-┃ ➤ *Admin rimossi* (Owner Bot protetti)
-┃ ➤ *Gruppo chiuso in sola lettura*
+┃ 👤 **Autore:** @${sender.split('@')[0]}
+┃ 🚫 **Azione:** ${action}
+┃ ⚡ **Stato:** Intervento Rapido Eseguito
 ┃
-┃ 👑 \`Proprietari avvisati.\`
-╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒`
+┣━━━〔 ⚖️ **SANZIONI** 〕━━━┓
+┃
+┃ 📉 Admin revocati a tutti i sospetti.
+┃ 🔒 Gruppo impostato in sola lettura.
+┃ 💎 Gli Owner sono stati protetti.
+┃
+┗━━━━━━━━━━━━━━━━━━━━━━┛
+*SISTEMA DI SICUREZZA ELIXIR BOT*`
 
   await conn.sendMessage(m.chat, {
     text,
     contextInfo: {
       mentionedJid: [sender, ...usersToDemote, ...BOT_OWNERS].filter(Boolean),
       externalAdReply: {
-        title: 'SISTEMA DI SICUREZZA OWNER',
-        body: 'Protezione Proprietari Attiva',
+        title: '🛡️ ELIXIR SECURITY SYSTEM',
+        body: 'Protocollo di Emergenza Attivo',
         thumbnailUrl: 'https://qu.ax/TfUj.jpg',
-        sourceUrl: 'BLOODANTINUKE',
+        sourceUrl: 'ELIXIR_ANTINUKE',
         mediaType: 1,
         renderLargerThumbnail: true
       }
