@@ -1,24 +1,40 @@
-
 const handler = async (m, {conn, text, usedPrefix, command}) => {
   let who;
   if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : false;
   else who = m.chat;
+
+  if (!who) return m.reply(`⚠️ *Istruzioni:* Tagga l'utente o rispondi a un suo messaggio per rimuovere il Premium.`);
+
   const user = global.db.data.users[who];
-  if (!who) throw `🏓 Inserisci un @tag per rimuovere il premium a quell'utente`;
-  if (!user) throw `*☘️ Questo utente non è presente nel mio database*`;
-  if (user.premiumTime === 0) throw '*🥷 Questo utente non è un utente premium 👑*';
-  const txt = text.replace('@' + who.split`@`[0], '').trim();
+  if (!user) return m.reply(`❌ L'utente non è presente nel database di *Elixir Bot*.`);
 
+  // Controllo se è effettivamente premium
+  if (!user.premium && (user.premiumTime === 0 || !user.premiumTime)) {
+    return m.reply(`🥷 L'utente @${who.split('@')[0]} non possiede attualmente alcun abbonamento *Premium* 👑`, null, { mentions: [who] });
+  }
+
+  // Reset dei valori
   user.premiumTime = 0;
-
   user.premium = false;
 
-  const textdelprem = `*@${who.split`@`[0]} non è più un utente premium 👑*`;
-  m.reply(textdelprem, null, {mentions: conn.parseMention(textdelprem)});
+  const textdelprem = `
+┏━━━〔 🎟️ *ELIXIR PREMIUM* 〕━━━┓
+┃
+┃ ❌ *Status:* Premium Revocato
+┃ 👤 *Utente:* @${who.split('@')[0]}
+┃ ⚖️ *Azione:* Downgrade a Utente Standard
+┃
+┗━━━━━━━━━━━━━━━━━━━━━━┛
+*STATUS: ACCOUNT AGGIORNATO*`;
+
+  await m.reply(textdelprem, null, { mentions: [who] });
 };
-handler.help = ['delprem <@user>'];
+
+handler.help = ['delpremium <@user>'];
 handler.tags = ['creatore'];
+// Supporta: .delpremium, .-premium, .removepremium
 handler.command = /^(remove|-|del)premium$/i;
 handler.group = true;
-handler.prems = true;
+handler.owner = true; // Solo l'owner può togliere i privilegi premium
+
 export default handler;
