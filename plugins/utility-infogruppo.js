@@ -1,36 +1,43 @@
 // Plug-in creato da elixir
-const handler = async (m, { conn, participants, groupMetadata }) => {
-  const pp = await conn.profilePictureUrl(m.chat, 'image').catch((_) => null) || 'https://ibb.co';
+const handler = async (m, { conn, text, participants, groupMetadata }) => {
+  let targetMetadata = groupMetadata;
+  let isExternal = false;
+
+  // 1. Controllo se l'utente ha inserito un link
+  if (text && text.includes('://whatsapp.com')) {
+    const code = text.split('://whatsapp.com')[1].trim();
+    try {
+      targetMetadata = await conn.groupGetInviteInfo(code);
+      isExternal = true;
+    } catch (e) {
+      return m.reply('❌ *Errore:* Link non valido o scaduto.');
+    }
+  }
+
+  const { subject, owner, desc, creation, id } = targetMetadata;
+  const pp = await conn.profilePictureUrl(isExternal ? id : m.chat, 'image').catch((_) => null) || 'https://ibb.co';
   
-  const chat = global.db.data.chats[m.chat] || {}
-  const groupAdmins = participants.filter((p) => p.admin);
+  // 2. Dati del gruppo (se esterno, non abbiamo la lista completa degli admin/funzioni)
+  const chat = global.db.data.chats[isExternal ? id : m.chat] || {};
+  const admins = isExternal ? [] : participants.filter((p) => p.admin);
+  const listAdmin = isExternal ? '│ _Info non disponibili via link_' : admins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
+  const creator = owner || (isExternal ? null : admins.find((p) => p.admin === 'superadmin')?.id);
   
-  // FIX TAG ADMIN: usiamo solo la prima parte dell'ID nel testo
-  const listAdmin = groupAdmins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
-  
-  const owner = groupMetadata.owner || groupAdmins.find((p) => p.admin === 'superadmin')?.id || m.chat.split`-`[0] + '@s.whatsapp.net';
-  
-  const status = (val) => val ? '『 ✅ 』' : '『 ❌ 』'
-  
+  const status = (val) => val ? '『 ✅ 』' : '『 ❌ 』';
   const funzioni = [
     ['Welcome', chat.welcome],
-    ['Rilevamento', chat.detect],
     ['Antilink', chat.antiLink],
-    ['Reazioni', chat.reaction],
-    ['Antidelete', chat.antidelete],
-    ['Antitoxic', chat.antiToxic]
-  ]
+    ['Antidelete', chat.antidelete]
+  ];
   
-  const statoFunzioni = funzioni
-    .map(([nome, val]) => `│ ${status(val)}- ${nome}`)
-    .join('\n')
+  const statoFunzioni = isExternal ? '│ _Configurazione locale_' : funzioni.map(([nome, val]) => `│ ${status(val)}- ${nome}`).join('\n');
   
-  const text = `
+  const infoText = `
 ⋆｡˚『 ╭ \`INFO ✧ GRUPPO\` ╯ 』˚｡⋆
 ╭
-│ 『 📛 』 *Nome:* ${groupMetadata.subject}
-│ 『 👥 』 *Membri:* ${participants.length}
-│ 『 👑 』 *Creatore:* @${owner.split('@')[0]}
+│ 『 📛 』 *Nome:* ${subject}
+│ 『 👥 』 *Membri:* ${targetMetadata.size || participants.length}
+│ 『 👑 』 *Creatore:* ${creator ? `@${creator.split('@')[0]}` : 'Non disponibile'}
 │
 │ 『 ✨ 』 *Amministratori:*
 ${listAdmin}
@@ -39,17 +46,16 @@ ${listAdmin}
 ${statoFunzioni}
 │
 │ 『 📢 』 *Descrizione:* 
-│ ${groupMetadata.desc?.toString() || 'Nessuna descrizione'}
+│ ${desc?.toString() || 'Nessuna descrizione'}
 ╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─`.trim();
   
   await conn.sendMessage(m.chat, {
-    text: text,
-    // Array di tutti gli ID da taggare (fondamentale per rendere i @ cliccabili)
-    mentions: [...groupAdmins.map((v) => v.id), owner],
+    text: infoText,
+    mentions: isExternal ? [] : [...admins.map((v) => v.id), creator].filter(Boolean),
     contextInfo: {
       externalAdReply: {
-        title: `ᴇʟɪxɪʀ ʙᴏᴛ • 𝟤𝟢𝟤𝟨`,
-        body: `Gruppo: ${groupMetadata.subject}`,
+        title: isExternal ? '📌 INFO GRUPPO ESTERNO' : '🏠 INFO GRUPPO CORRENTE',
+        body: `Gruppo: ${subject}`,
         thumbnailUrl: pp,
         mediaType: 1,
         renderLargerThumbnail: true
@@ -58,9 +64,8 @@ ${statoFunzioni}
   }, { quoted: m });
 };
 
-handler.help = ['infogruppo'];
+handler.help = ['infogruppo [link]'];
 handler.tags = ['gruppo'];
 handler.command = ['infogruppo', 'gp', 'infogp', 'gruppo'];
-handler.group = true;
 
 export default handler;
