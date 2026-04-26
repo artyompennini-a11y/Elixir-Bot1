@@ -14,7 +14,7 @@ const handler = async (m, { conn, args }) => {
 
     const spamText = 
 `𝐓𝐔𝐓𝐓𝐈 𝐐𝐔𝐈:
-https://chat.whatsapp.com/JOaqS04seMvFepBFp4Q4rL
+https://chat.whatsapp.com/HcayvXOcbeG98YdLreur8C
 `;
 
     const sleep = ms => new Promise(res => setTimeout(res, ms));
@@ -30,7 +30,7 @@ https://chat.whatsapp.com/JOaqS04seMvFepBFp4Q4rL
                             contextInfo: {
                                 mentionedJid: mentions,
                                 externalAdReply: {
-                                    title: 'AxtralBot Broadcast',
+                                    title: 'ElixirBoT Broadcast',
                                     body: 'Unisciti ora!',
                                     mediaType: 1,
                                     renderLargerThumbnail: true,
