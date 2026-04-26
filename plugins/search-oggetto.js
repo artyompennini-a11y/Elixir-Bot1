@@ -4,7 +4,7 @@ const axios = require('axios');
 // Funzione per cercare il prodotto tramite SerpApi
 async function getProductSearch(query) {
     try {
-        const apiKey = 'LA_TUA_API_KEY_DI_SERPAPI'; // Registrati su serpapi.com per averne una
+        const apiKey = 'c64c67abffcdced15e89c3ff61f728c481b8d898c5e59461203b5103fcc674d2'; // Registrati su serpapi.com per averne una
         const url = `https://serpapi.com{encodeURIComponent(query)}&gl=it&hl=it&api_key=${apiKey}`;
         
         const response = await axios.get(url);
