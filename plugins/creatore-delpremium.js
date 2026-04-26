@@ -30,10 +30,10 @@ const handler = async (m, {conn, text, usedPrefix, command}) => {
   await m.reply(textdelprem, null, { mentions: [who] });
 };
 
-handler.help = ['delpremium <@user>'];
+handler.help = ['delprem <@user>'];
 handler.tags = ['creatore'];
 // Supporta: .delpremium, .-premium, .removepremium
-handler.command = /^(remove|-|del)premium$/i;
+handler.command = /^(remove|-|del)prem$/i;
 handler.group = true;
 handler.owner = true; // Solo l'owner può togliere i privilegi premium
 
