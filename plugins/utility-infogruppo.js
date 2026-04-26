@@ -3,9 +3,9 @@ const handler = async (m, { conn, text, participants, groupMetadata }) => {
   let targetMetadata = groupMetadata;
   let isExternal = false;
 
-  // 1. Controllo se l'utente ha inserito un link
+  // 1. Controllo se l'utente ha inserito un link per cercare un gruppo esterno
   if (text && text.includes('://whatsapp.com')) {
-    const code = text.split('://whatsapp.com')[1].trim();
+    let code = text.split('://whatsapp.com')[1].trim();
     try {
       targetMetadata = await conn.groupGetInviteInfo(code);
       isExternal = true;
@@ -14,30 +14,39 @@ const handler = async (m, { conn, text, participants, groupMetadata }) => {
     }
   }
 
-  const { subject, owner, desc, creation, id } = targetMetadata;
+  const { subject, owner, desc, id } = targetMetadata;
   const pp = await conn.profilePictureUrl(isExternal ? id : m.chat, 'image').catch((_) => null) || 'https://ibb.co';
   
-  // 2. Dati del gruppo (se esterno, non abbiamo la lista completa degli admin/funzioni)
+  // 2. Dati del gruppo e Amministratori
   const chat = global.db.data.chats[isExternal ? id : m.chat] || {};
   const admins = isExternal ? [] : participants.filter((p) => p.admin);
-  const listAdmin = isExternal ? '│ _Info non disponibili via link_' : admins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
-  const creator = owner || (isExternal ? null : admins.find((p) => p.admin === 'superadmin')?.id);
+  const listAdmin = isExternal ? '│ _Non disponibili via link_' : admins.map((v, i) => `│ 『 *${i + 1}* 』 @${v.id.split('@')[0]}`).join('\n');
+  const creator = owner || (isExternal ? null : admins.find((p) => p.admin === 'superadmin')?.id) || m.chat.split`-`[0] + '@s.whatsapp.net';
   
+  // 3. Icone di stato e Tutte le Funzioni Originali
   const status = (val) => val ? '『 ✅ 』' : '『 ❌ 』';
+  
   const funzioni = [
     ['Welcome', chat.welcome],
+    ['Rilevamento', chat.detect],
     ['Antilink', chat.antiLink],
-    ['Antidelete', chat.antidelete]
+    ['Antilink 2', chat.antiLink2],
+    ['Reazioni', chat.reaction],
+    ['Antidelete', chat.antidelete],
+    ['Antitoxic', chat.antiToxic]
   ];
   
-  const statoFunzioni = isExternal ? '│ _Configurazione locale_' : funzioni.map(([nome, val]) => `│ ${status(val)}- ${nome}`).join('\n');
+  const statoFunzioni = isExternal ? '│ _Configurazione locale_' : funzioni
+    .map(([nome, val]) => `│ ${status(val)}- ${nome}`)
+    .join('\n');
   
+  // 4. Costruzione del Testo
   const infoText = `
 ⋆｡˚『 ╭ \`INFO ✧ GRUPPO\` ╯ 』˚｡⋆
 ╭
 │ 『 📛 』 *Nome:* ${subject}
 │ 『 👥 』 *Membri:* ${targetMetadata.size || participants.length}
-│ 『 👑 』 *Creatore:* ${creator ? `@${creator.split('@')[0]}` : 'Non disponibile'}
+│ 『 👑 』 *Creatore:* @${creator.split('@')[0]}
 │
 │ 『 ✨ 』 *Amministratori:*
 ${listAdmin}
@@ -49,13 +58,14 @@ ${statoFunzioni}
 │ ${desc?.toString() || 'Nessuna descrizione'}
 ╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─`.trim();
   
+  // 5. Invio Messaggio con FIX TAG @user
   await conn.sendMessage(m.chat, {
     text: infoText,
-    mentions: isExternal ? [] : [...admins.map((v) => v.id), creator].filter(Boolean),
+    mentions: isExternal ? [] : [...admins.map((v) => v.id), creator],
     contextInfo: {
       externalAdReply: {
-        title: isExternal ? '📌 INFO GRUPPO ESTERNO' : '🏠 INFO GRUPPO CORRENTE',
-        body: `Gruppo: ${subject}`,
+        title: isExternal ? `📌 INFO: ${subject}` : `🏠 INFO GRUPPO CORRENTE`,
+        body: `ᴇʟɪxɪʀ ʙᴏᴛ • 𝟤𝟢𝟤𝟨`,
         thumbnailUrl: pp,
         mediaType: 1,
         renderLargerThumbnail: true
@@ -64,8 +74,9 @@ ${statoFunzioni}
   }, { quoted: m });
 };
 
-handler.help = ['infogruppo [link]'];
+handler.help = ['infogruppo', 'infogruppo [link]'];
 handler.tags = ['gruppo'];
 handler.command = ['infogruppo', 'gp', 'infogp', 'gruppo'];
+handler.group = true;
 
 export default handler;
