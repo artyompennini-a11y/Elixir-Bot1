@@ -1,9 +1,11 @@
 // Plug-in creato da elixir
+// Plug-in creato da elixir - SHIP FIXED
 let handler = async (m, { conn, participants }) => {
   let member = participants.map(u => u.id)
   let a = member[Math.floor(Math.random() * member.length)]
   let b = member[Math.floor(Math.random() * member.length)]
   
+  // Evitiamo che il bot scelga la stessa persona
   while (b === a) b = member[Math.floor(Math.random() * member.length)]
   
   let love = Math.floor(Math.random() * 100)
@@ -13,10 +15,19 @@ let handler = async (m, { conn, participants }) => {
   caption += `💓 *Compatibilità:* ${love}%\n\n`
   caption += love > 70 ? "🔥 Una coppia esplosiva!" : "🧊 Forse è meglio restare amici..."
 
-  // Il segreto è passare gli ID nell'array mentions
+  // FIX: Le menzioni vanno dentro contextInfo per essere cliccabili
   await conn.sendMessage(m.chat, { 
     text: caption, 
-    mentions: [a, b] 
+    contextInfo: {
+      mentionedJid: [a, b],
+      externalAdReply: {
+        title: `💞 LOVE TEST 💞`,
+        body: `Compatibilità: ${love}%`,
+        thumbnailUrl: 'https://ibb.co', // Puoi cambiare questa immagine
+        mediaType: 1,
+        renderLargerThumbnail: false
+      }
+    }
   }, { quoted: m })
 }
 
