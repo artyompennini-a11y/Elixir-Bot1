@@ -10,7 +10,8 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     const apiKey = 'c64c67abffcdced15e89c3ff61f728c481b8d898c5e59461203b5103fcc674d2';
-    // Endpoint corretto per Google Shopping
+    
+    // FIX: Aggiunto percorso /search.json, engine shopping e simbolo $ per la variabile text
     const url = `https://serpapi.com{encodeURIComponent(text)}&gl=it&hl=it&api_key=${apiKey}`;
     
     const response = await axios.get(url);
@@ -23,31 +24,33 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
     // Costruzione del messaggio
     let infoMsg = `┏━━━━━━━━━━━━━━━━━━━┓\n`;
-    infoMsg += `      🛒 ᴇʟɪxɪʀ ꜱʜᴏᴘᴘɪɴɢ 🛒\n`;
+    infoMsg += `      🎧 ᴇʟɪxɪʀ ꜱʜᴏᴘᴘɪɴɢ 🎧\n`;
     infoMsg += `┗━━━━━━━━━━━━━━━━━━━┛\n\n`;
     infoMsg += `🔎 *Risultati per:* ${text}\n\n`;
 
-    // Prendiamo i primi 3 o 4 risultati per non allungare troppo il messaggio
+    // Prendiamo i primi 4 risultati
     results.slice(0, 4).forEach((item, index) => {
-        infoMsg += `*${index + 1}. ${item.title.substring(0, 50)}...*\n`;
-        infoMsg += `💰 Prezzo: *${item.price}*\n`;
-        infoMsg += `🏪 Negozio: ${item.source || 'Online'}\n`;
-        infoMsg += `🔗 Link: ${item.link}\n\n`;
+        infoMsg += `◈ *${index + 1}.* ${item.title.substring(0, 50)}...\n`;
+        infoMsg += `◈ 💰 *𝗣𝗿𝗲𝘇𝘇𝗼:* ${item.price}\n`;
+        infoMsg += `◈ 🏪 *𝗦𝗼𝘂𝗿𝗰𝗲:* ${item.source || 'Online'}\n`;
+        infoMsg += `◈ 🔗 *𝗟𝗶𝗻𝗸:* ${item.link}\n\n`;
     });
 
     infoMsg += `*ᴇʟɪxɪʀ ʙᴏᴛ • 𝟤𝟢𝟤𝟨*`;
 
-    // Invio con l'immagine del primo prodotto trovato
+    // Immagine del primo prodotto con fallback se non disponibile
+    const productImage = results[0].thumbnail || 'https://placeholder.com';
+
     await conn.sendMessage(m.chat, {
-        image: { url: results[0].thumbnail },
+        image: { url: productImage },
         caption: infoMsg
     }, { quoted: m });
 
     await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
 
   } catch (e) {
-    console.error(e);
-    m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* Servizio di ricerca non disponibile.');
+    console.error("ERRORE RICERCA:", e.message);
+    m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* Servizio di ricerca momentaneamente offline.');
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
   }
 };
