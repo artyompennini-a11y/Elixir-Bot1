@@ -68,7 +68,6 @@ let handler = async (m, { conn, args, usedPrefix }) => {
   }
 
   // Parse argomenti: !password [lunghezza] [opzioni]
-  // Opzioni: -s (simboli), -n (solo numeri), -l (solo minuscole), -m (no maiuscole)
   let lunghezza = 16
   let opzioni = { minuscole: true, maiuscole: true, numeri: true, simboli: false }
   let quante = 1
@@ -110,7 +109,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
   \`-l\`  → solo minuscole
   \`1-5\` → quante password generare
 
-_☣️ Generazione crittograficamente sicura._`, m)
+_☣️ Elixir Bot - Generazione sicura._`, m)
   }
 
   await m.react('🔑')
@@ -140,7 +139,7 @@ _☣️ Generazione crittograficamente sicura._`, m)
 
 ${lista}
 
-_☣️ Password generata in modo sicuro._`
+_☣️ Password generata da Elixir Bot._`
   }, { quoted: m })
 }
 
