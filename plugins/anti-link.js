@@ -55,42 +55,40 @@ async function containsSuspiciousLink(text) {
 
 async function handleViolation(conn, m, reason, isBotAdmin) {
     const sender = m.sender;
-    const header = `⋆｡˚『 ╭ \`SISTEMA ANTILINK\` ╯ 』˚｡⋆`;
-    const footer = `╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒`;
+    
+    // Testo con stile "Cyber-Minimal"
+    const text = `
+┏─━─━─━  〔 🛡️ 〕  ━─━─━─┓
+     *SECURITY ENFORCEMENT*
+┗─━─━─━─━─━─━─━─━─┛
 
-    // Elimina il messaggio
+◈ *Utente:* @${sender.split('@')[0]}
+◈ *Stato:* Violazione Rilevata
+◈ *Causa:* ${reason}
+
+> _Il protocollo di sicurezza ha rimosso il contenuto non autorizzato per proteggere l'integrità del gruppo._`.trim();
+
     if (isBotAdmin) {
         try { await conn.sendMessage(m.chat, { delete: m.key }); } catch {}
     }
-
-    const text = `${header}
-╭
-┃ 🚨 \`Stato:\` *Protocollo Blood Attivo*
-┃
-┃ 『 👤 』 \`Target:\` @${sender.split('@')[0]}
-┃ 『 🚫 』 \`Azione:\` *Messaggio Rimosso*
-┃ 『 🔗 』 \`Motivo:\` *${reason}*
-┃
-┃ ⚠️ \`Nota:\` L'invio di link non è autorizzato.
-╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒`;
 
     await conn.sendMessage(m.chat, {
         text,
         mentions: [sender],
         contextInfo: {
             externalAdReply: {
-                title: 'BLOOD SECURITY SYSTEM',
-                body: 'Link vietato rilevato',
-                thumbnailUrl: 'https://qu.ax/TfUj.jpg',
+                title: 'ᴇʟɪxɪʀ sᴇᴄᴜʀɪᴛʏ sʏsᴛᴇᴍ ᴠ3',
+                body: 'Restrizione Accesso Link Attiva',
+                thumbnailUrl: 'https://qu.ax',
                 mediaType: 1,
-                renderLargerThumbnail: true
+                renderLargerThumbnail: true,
+                showAdAttribution: true
             }
         }
     });
 
-    // Opzionale: Rimuovi l'utente se non è admin e il bot è admin
     if (isBotAdmin) {
-        await conn.groupParticipantsUpdate(m.chat, [sender], 'remove');
+        await conn.groupParticipantsUpdate(m.chat, [sender], 'remove').catch(() => null);
     }
 }
 
@@ -109,10 +107,9 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isSam }) {
 
     if (await containsSuspiciousLink(extractedText)) {
         linkFound = true;
-        reason = isWhatsAppLink(extractedText) ? 'Link WhatsApp rilevato' : 'Link/URL abbreviato rilevato';
+        reason = isWhatsAppLink(extractedText) ? 'Link WhatsApp non autorizzato' : 'Circuito URL abbreviato';
     }
 
-    // Se troviamo un link, attiviamo la punizione
     if (linkFound) {
         await handleViolation(conn, m, reason, isBotAdmin);
         return true;
