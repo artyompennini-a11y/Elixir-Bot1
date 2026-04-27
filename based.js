@@ -326,7 +326,7 @@ async function connectionUpdate(update) {
     `| $$_____ | $$| $$ /  $$$$\\ | $$| $$            | $$__/ $$| $$__/ $$| $$   `,
     `| $$     \\| $$| $$|  $$ \\$$\\| $$| $$            | $$    $$ \\$$    $$| $$   `,
     ` \\$$$$$$$$ \\$$ \\$$ \\$$   \\$$ \\$$ \\$$             \\$$$$$$$   \\$$$$$$  \\$$`
-];
+]
 
             varebot.forEach((line, i) => {
                 const color = logoColors[i] || logoColors[logoColors.length - 1];
