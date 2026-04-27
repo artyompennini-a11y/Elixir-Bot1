@@ -8,8 +8,8 @@ let handler = async (m, { conn, command }) => {
     await conn.groupSettingUpdate(m.chat, status)
 
     const message = isOpening 
-        ? "« 🔓 »  **L'ARENA È APERTA**\n\n> *Il silenzio è rotto. La parola torna al popolo. Esprimetevi con saggezza.*"
-        : "« 🔒 »  **SILENZIO DI STATO**\n\n> *Le porte si chiudono. Solo le divinità regnano in questo spazio.*"
+        ? "« 🔓 »  *L'ARENA È APERTA*\n\n> *Il silenzio è rotto. La parola torna al popolo. Esprimetevi con saggezza.*"
+        : "« 🔒 »  *SILENZIO DI STATO*\n\n> *Le porte si chiudono. Solo le divinità regnano in questo spazio.*"
 
     await conn.sendMessage(m.chat, {
         text: message,
