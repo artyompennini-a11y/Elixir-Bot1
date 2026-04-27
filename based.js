@@ -328,6 +328,8 @@ async function connectionUpdate(update) {
     ` \\$$$$$$$$ \\$$ \\$$ \\$$   \\$$ \\$$ \\$$             \\$$$$$$$   \\$$$$$$  \\$$`
 ]
 
+          // Assicurati che l'array 'varebot' e 'logoColors' siano definiti sopra
+        if (!global.isLogoPrinted) {
             varebot.forEach((line, i) => {
                 const color = logoColors[i] || logoColors[logoColors.length - 1];
                 console.log(chalk.hex(color).bold(line));
