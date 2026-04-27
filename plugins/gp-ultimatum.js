@@ -55,7 +55,7 @@ const handler = async (msg, { conn, command, text, isAdmin }) => {
     }
 
     return conn.sendMessage(chatId, {
-      text: `╭━━━━━━━🚨━━━━━━━╮\n  ✦ 𝐔𝐋𝐓𝐈𝐌𝐀𝐓𝐔𝐌 ✦\n╰━━━━━━━🚨━━━━━━━╯\n\n👤 𝐔𝐭𝐞𝐧𝐭𝐞: ${tag}\n📊 𝐒𝐭𝐚𝐭ο: ${user.ultimatum}/𝟑\n📝 𝐌𝐨𝐭𝐢𝐯𝐨: ${reason}\n\n⚠️ *𝐀𝐭𝐭𝐞𝐧𝐳𝐢𝐨𝐧𝐞: 𝐚𝐥 𝐩𝐫𝐨𝐬𝐬𝐢𝐦𝐨 𝐫𝐢𝐜𝐡𝐢𝐚𝐦𝐨  perderai il grado.*`,
+      text: `╭━━━━━━━🚨━━━━━━━╮\n     ✦ 𝐔𝐋𝐓𝐈𝐌𝐀𝐓𝐔𝐌 ✦\n╰━━━━━━━🚨━━━━━━━╯\n\n👤 𝐔𝐭𝐞𝐧𝐭𝐞: ${tag}\n📊 𝐒𝐭𝐚𝐭ο: ${user.ultimatum}/𝟑\n📝 𝐌𝐨𝐭𝐢𝐯𝐨: ${reason}\n\n⚠️ *𝐀𝐭𝐭𝐞𝐧𝐳𝐢𝐨𝐧𝐞: 𝐚𝐥 𝐩𝐫𝐨𝐬𝐬𝐢𝐦𝐨 𝐫𝐢𝐜𝐡𝐢𝐚𝐦𝐨  perderai il grado.*`,
       mentions: [mentionedJid],
     });
   }
@@ -66,7 +66,7 @@ const handler = async (msg, { conn, command, text, isAdmin }) => {
     user.ultimatum -= 1;
 
     return conn.sendMessage(chatId, {
-      text: `╭━━━━━━━🛡️━━━━━━━╮\n  ✦ 𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍𝐄 ✦\n╰━━━━━━━🛡️━━━━━━━╯\n\n👤 𝐔𝐭𝐞𝐧𝐭𝐞: ${tag}\n✅ 𝐔𝐥𝐭𝐢𝐦𝐚𝐭𝐮𝐦 𝐫𝐢𝐦𝐨𝐬𝐬𝐨.\n📊 𝐒𝐭𝐚𝐭𝐨 𝐚𝐭𝐭𝐮𝐚𝐥𝐞: ${user.ultimatum}/𝟑`,
+      text: `╭━━━━━━━🛡️━━━━━━━╮\n     ✦ 𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍𝐄 ✦\n╰━━━━━━━🛡️━━━━━━━╯\n\n👤 𝐔𝐭𝐞𝐧𝐭𝐞: ${tag}\n✅ 𝐔𝐥𝐭𝐢𝐦𝐚𝐭𝐮𝐦 𝐫𝐢𝐦𝐨𝐬𝐬𝐨.\n📊 𝐒𝐭𝐚𝐭𝐨 𝐚𝐭𝐭𝐮𝐚𝐥𝐞: ${user.ultimatum}/𝟑`,
       mentions: [mentionedJid],
     });
   }
