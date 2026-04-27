@@ -34,7 +34,7 @@ const handler = async (msg, { conn, command, text, isAdmin }) => {
     return conn.reply(chatId, `╭━━━📢━━━╮\n 𝐔𝐓𝐄𝐍𝐓𝐄 𝐌𝐀𝐍𝐂𝐀𝐍𝐓𝐄\n╰━━━📢━━━╯\n\n𝐔𝐬𝐨: .${command} @tag [motivazione]`, msg);
 
   if (mentionedJid === groupOwner || PROTECTED_USERS.includes(mentionedJid) || mentionedJid === botNumber)
-    throw '╭━━━👑━━━╮\n 𝐀𝐙𝐈𝐎𝐍𝐄 𝐍𝐄𝐆𝐀𝐓𝐀\n╰━━━👑━━━╯\n\n🚫 𝐈 𝐦𝐞𝐦𝐛𝐫𝐢 𝐝𝐞𝐥𝐥\'𝐀𝐥𝐭ο 𝐂𝐨𝐦𝐚𝐧𝐝ο 𝐬𝐨𝐧𝐨 𝐢𝐧𝐭𝐨𝐜𝐜𝐚𝐛𝐢𝐥𝐢.';
+    throw '╭━━━━━👑━━━━━╮\n 𝐀𝐙𝐈𝐎𝐍𝐄 𝐍𝐄𝐆𝐀𝐓𝐀\n╰━━━━━👑━━━━━╯\n\n🚫 𝐈 𝐦𝐞𝐦𝐛𝐫𝐢 𝐝𝐞𝐥𝐥\'𝐀𝐥𝐭ο 𝐂𝐨𝐦𝐚𝐧𝐝ο 𝐬𝐨𝐧𝐨 𝐢𝐧𝐭𝐨𝐜𝐜𝐚𝐛𝐢𝐥𝐢.';
 
   if (!global.db.data.users[mentionedJid]) global.db.data.users[mentionedJid] = { ultimatum: 0 };
   const user = global.db.data.users[mentionedJid];
