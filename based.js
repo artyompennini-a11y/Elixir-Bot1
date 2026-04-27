@@ -671,6 +671,24 @@ const mainWatcher = watch(filePath, async () => {
 });
 mainWatcher.setMaxListeners(20);
 
+// ─── AUTO LOG CHAT ID ─────────────────────────────────────────────────────────
+conn.ev.on('messages.upsert', ({ messages }) => {
+    const m = messages[0]
+    if (!m || !m.key?.remoteJid || m.key.fromMe) return
+
+    const jid = m.key.remoteJid
+    const isGroup = jid.endsWith('@g.us')
+    const isNewsletter = jid.endsWith('@newsletter')
+    const tipo = isGroup ? 'GROUP' : isNewsletter ? 'CHANNEL' : 'PRIVATE'
+    const colore = isGroup
+        ? chalk.hex('#FF69B4')   // rosa per gruppi
+        : isNewsletter
+        ? chalk.hex('#00D2FF')   // cyan per canali
+        : chalk.hex('#2ECC71')   // verde per privati
+
+    console.log(colore.bold(`CHAT ID ► ${jid} [${tipo}]`))
+})
+
 conn.ev.on('connection.update', async (update) => {
     if (update.connection === 'open') {
         ripristinaTimer(conn);
