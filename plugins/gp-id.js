@@ -6,5 +6,5 @@ var handler = async (m, { conn, groupMetadata }) => {
 }
 
 handler.command = /^(id|gpid|gcid)$/i
-handler.group = true
+handler.group = false
 export default handler
