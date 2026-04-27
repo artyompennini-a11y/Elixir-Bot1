@@ -1,15 +1,33 @@
 let handler = async (m, { conn, command }) => {
-    let isOpen = command === 'aperto'
-    await conn.groupSettingUpdate(m.chat, isOpen ? 'not_announcement' : 'announcement')
+    const isOpening = command === 'aperto'
+    const status = isOpening ? 'not_announcement' : 'announcement'
+    
+    // Reazione immediata per dare feedback del comando ricevuto
+    await conn.sendMessage(m.chat, { react: { text: isOpening ? '🔓' : '🔒', key: m.key } })
+
+    await conn.groupSettingUpdate(m.chat, status)
+
+    const message = isOpening 
+        ? "« 🔓 »  **L'ARENA È APERTA**\n\n> *Il silenzio è rotto. La parola torna al popolo. Esprimetevi con saggezza.*"
+        : "« 🔒 »  **SILENZIO DI STATO**\n\n> *Le porte si chiudono. Solo le divinità regnano in questo spazio.*"
+
     await conn.sendMessage(m.chat, {
-        text: isOpen ? '𝐩𝐚𝐫𝐥𝐚𝐭𝐞 𝐩𝐥𝐞𝐛𝐞𝐢' : '𝐨𝐫𝐚 𝐩𝐚𝐫𝐥𝐚𝐧𝐨 𝐠𝐥𝐢 𝐝𝐞𝐢',
+        text: message,
         contextInfo: {
-            forwardingScore: 99,
+            externalAdReply: {
+                title: isOpening ? '〔 ACCESS GRANTED 〕' : '〔 ACCESS DENIED 〕',
+                body: 'Gestionale Sistema Elixir',
+                thumbnailUrl: 'https://telegra.ph/file/your-image-link.jpg', // Opzionale: aggiungi un'immagine figa
+                sourceUrl: '',
+                mediaType: 1,
+                renderLargerThumbnail: false
+            },
+            forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '',
-                serverMessageId: '',
-                newsletterName: global.db.data.nomedelbot || `𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿`
+                newsletterJid: '120363233544482017@newsletter',
+                newsletterName: `✦ ${global.db.data.nomedelbot || '𝕰𝕷𝕴𝖃𝕴𝕽 𝕭𝕺𝕿'} ✦`,
+                serverMessageId: 143
             }
         }
     }, { quoted: m })
