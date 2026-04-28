@@ -20,7 +20,7 @@ let handler = async (m, { conn, text, command, isAdmin, isOwner }) => {
   // Assicurati che questo link punti a un'immagine QUADRATA.
   const imgElixir = 'https://percorso-tua-immagine-quadrata.jpg' 
 
-  const titleText = `test | 𝐄𝐥𝐢𝐱𝐢𝐫`
+  const titleText = `𝐄𝐥𝐢𝐱𝐢𝐫`
   const bodyText = isPromote ? 'NUOVO ADMIN PROMOSSO' : 'ADMIN RETROCESSO'
   
   const decorativeText = `*｡  °  ┌  ⌜  ${isPromote ? 'NUOVO ADMIN' : 'ADMIN RETRO'}  ⌟  ┘  °  ｡*
