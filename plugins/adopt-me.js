@@ -497,9 +497,9 @@ _☣️ Alleva il tuo animale per scalare la classifica!_`, m)
   }
 }
 
-handler.help = ['adotta [tipo] [nome]', 'animale', 'nutri', 'gioca', 'cura', 'abbandona', 'topanimali']
+handler.help = ['adopt [tipo] [nome]', 'animale', 'nutri', 'gioca', 'cura', 'abbandona', 'topanimali']
 handler.tags = ['animali']
-handler.command = ['adotta', 'animale', 'pet', 'miopet', 'nutri', 'mangia', 'gioca', 'play', 'cura', 'heal', 'abbandona', 'rilascia', 'classifica-animali', 'topanimali']
+handler.command = ['adopt', 'animale', 'pet', 'miopet', 'nutri', 'mangia', 'gioca', 'play', 'cura', 'heal', 'abbandona', 'rilascia', 'classifica-animali', 'topanimali']
 
 handler.group = true
 handler.private = false
