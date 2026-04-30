@@ -1,3 +1,4 @@
+// Plug-in creato da elixir
 let handler = async (m, { conn, text, usedPrefix, command }) => {
     let isCreator = false
     try {
@@ -11,7 +12,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 
     if (!isCreator) return m.reply('*⚠️ Solo il creatore del bot può rimuovere owner*')
-    if (!text) return m.reply(`*⚠️ Specifica il numero da rimuovere come owner*\n\n*Esempio:*\n${usedPrefix + command} @user`)
+    if (!text && !m.quoted) return m.reply(`*⚠️ Specifica il numero da rimuovere come owner*\n\n*Esempio:*\n${usedPrefix + command} @user`)
 
     let who
     if (m.isGroup) {
@@ -20,18 +21,22 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         who = text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
     }
 
-    if (!who) return m.reply('*⚠️ Tagga un utente o specifica un numero*')
+    if (!who || who.length < 10) return m.reply('*⚠️ Tagga un utente o specifica un numero valido*')
 
     const targetNumber = who.split('@')[0]
+    
+    // Verifica se è effettivamente un owner
     if (!global.owner.map(([number]) => number).includes(targetNumber)) {
         return m.reply('*⚠️ Questo utente non è un owner*')
     }
 
-    if (global.sam.map(([number]) => number).includes(targetNumber)) {
+    // Impedisce di rimuovere il creatore principale (sam)
+    if (global.sam.map(entry => Array.isArray(entry) ? entry[0] : entry).map(v => v.toString()).includes(targetNumber)) {
         return m.reply('*⚠️ Non puoi rimuovere il creatore del bot*')
     }
 
     try {
+        // Rimoziome dall'array in memoria
         global.owner = global.owner.filter(([number]) => number !== targetNumber)
 
         const fs = await import('fs')
@@ -40,11 +45,13 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
         let configContent = await fs.promises.readFile(configPath, 'utf8')
 
+        // Regex per trovare e rimuovere la riga specifica nel file config.js
         const ownerLineRegex = new RegExp(`\\[['"]${targetNumber}['"].*?\\],?\\n?`, 'g')
         configContent = configContent.replace(ownerLineRegex, '')
 
         await fs.promises.writeFile(configPath, configContent, 'utf8')
 
+        // Reset dati nel database
         if (global.db.data.users[who]) {
             global.db.data.users[who].role = 'user'
             global.db.data.users[who].premium = false
@@ -56,16 +63,15 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         })
 
     } catch (e) {
-        console.error('Errore togliowner:', e)
+        console.error('Errore delowner:', e)
         m.reply('*❌ Si è verificato un errore durante la rimozione dell\'owner*')
     }
 }
 
-handler.help = ['togliowner @user']
+handler.help = ['delowner @user']
 handler.tags = ['creatore']
-handler.command = /^(togliowner|removeowner|delowner)$/i
+handler.command = /^(delowner|removeowner|togliowner)$/i
 handler.creatorebot = true
 handler.rowner = true 
-handler.mods = false
 
 export default handler
