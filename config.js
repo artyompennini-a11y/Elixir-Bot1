@@ -13,12 +13,12 @@ const moduleCache = new NodeCache({ stdTTL: 300 });
 
 /*⭑⭒━━━✦❘༻☾⋆⁺₊✧ 𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿✧₊⁺⋆☽༺❘✦━━━⭒⭑*/
 
-global.sam = ['393784409415', '393514722317', '48729754276']
+global.sam = ['393784409415', '393514722317', 'xxx']
 global.owner = [
   ['393784409415', 'Elixir', true],
   ['393514722317', 'Momo', true],
   ['6282364029306', 'Elixir VoIP', true],
-  ['48729754276', 'ElixirVoIP', true], 
+  ['xxx', 'ElixirVoIP', true], 
   ['817093976899', 'ElixirVoIP', true],
   ['xxxxxxxxxxxxx']
 ]
