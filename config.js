@@ -20,7 +20,7 @@ global.owner = [
   ['6282364029306', 'Elixir VoIP', true],
   ['xxx', 'ElixirVoIP', true], 
   ['817093976899', 'ElixirVoIP', true],
-  ['xxxxxxxxxxxxx']
+  ['962770035395', 'Thepunisherbot', true]
 ]
 global.mods = ['393784409415', '393206032199', '6282364029306', 'xxx', '817093976899']
 global.prems = ['393784409415', '393206032199', '6282364029306', 'xxx', '817093976899']
