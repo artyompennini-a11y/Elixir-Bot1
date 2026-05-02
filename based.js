@@ -175,7 +175,7 @@ ${chalk.hex('#34495E')('   ━━━━━━━━━━━━━━━━━�
 ${chalk.hex('#FF5E62').bold('⚠️  Sono ammessi solo i numeri')} ${chalk.bold.cyan('1')} ${chalk.hex('#FF5E62').bold('o')} ${chalk.bold.cyan('2')}
 ${chalk.hex('#FF9966')('┌─⭓ Nessuna lettera o simbolo')}
 ${chalk.hex('#FF9966')('└─⭓ Copia il numero dell\'opzione desiderata e incollalo')}
-${chalk.cyan.italic('\n✧ Suggerimento: Se hai dubbi, scrivi al creatore +393701330693')}
+${chalk.cyan.italic('\n✧ Suggerimento: Se hai dubbi, scrivi al creatore +393784409415')}
 `);
         }
     } while ((opzione !== '1' && opzione !== '2') || fs.existsSync(`./${authFile}/creds.json`));
@@ -268,7 +268,7 @@ if (!fs.existsSync(`./${authFile}/creds.json`)) {
                 if (!phoneNumber.startsWith('+')) phoneNumber = `+${phoneNumber}`;
             }
             setTimeout(async () => {
-                let codeBot = await conn.requestPairingCode(addNumber, 'ᴇʟɪxɪʀʙᴏᴛ');
+                let codeBot = await conn.requestPairingCode(addNumber, 'ELIXIRKG');
                 codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
                 console.log(chalk.bold.black(chalk.bgCyan(' 『 🔗 』– CODICE DI ABBINAMENTO: ')), chalk.bold.cyanBright(codeBot));
             }, 3000);
