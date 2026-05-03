@@ -51,7 +51,7 @@ let handler = async (m, { conn, args }) => {
 
   if (!args[0]) {
     return m.reply(`┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴍᴇᴛᴇᴏ 💉
+ 💉 THE PUNISHER - ᴍᴇᴛᴇᴏ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🌦️ *Comando:* !meteo
@@ -93,7 +93,7 @@ _☣️ Previsioni in tempo reale, 100% gratis._`)
     if (!geoRes.data.results?.[0]) {
       await conn.sendMessage(m.chat, { delete: loading.key })
       return m.reply(`┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴍᴇᴛᴇᴏ 💉
+ 💉 THE PUNISHER - ᴍᴇᴛᴇᴏ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
 ❌ *Città non trovata.*
 _Prova con un nome più specifico._
@@ -183,7 +183,7 @@ ${weekForecast}
 
     // ✅ Gestione errori dettagliata
     let errorMsg = `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴇʀʀᴏʀᴇ 💉
+ 💉 THE PUNISHER - ᴇʀʀᴏʀᴇ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
 `
     if (e.code === 'ECONNABORTED' || e.message?.includes('timeout')) {
