@@ -10,7 +10,7 @@ const localImg = join(process.cwd(), 'menu-euro.jpeg');
 const defaultMenu = {
   before: `
 ┎━━━━━━━━━━━━━━━━━━━┑
-┃ ✧ ᴇʟɪxɪʀ - ᴇᴄᴏɴᴏᴍʏ ✧ ┃
+┃ ✧ THE PUNISHER - ᴇᴄᴏɴᴏᴍʏ ✧ ┃
 ┖━━━━━━━━━━━━━━━━━━━┙
 ┌───────────────────┐
   👤 𝚄𝚜𝚎𝚛: %name
