@@ -56,7 +56,7 @@ const handler = async (m, { conn }) => {
   ⋄ ᴛʜʀᴇᴀᴅꜱ: \`${cpuThreads} Core\`
   ⋄ ᴘʟᴀᴛꜰᴏʀᴍ: \`Linux/Node.js\`
 
-— ᴇʟɪxɪʀʙᴏᴛ ᴅɪᴀɢɴᴏꜱᴛɪᴄ ꜱʏꜱᴛᴇᴍ`.trim()
+— THE PUNISHER ᴅɪᴀɢɴᴏꜱᴛɪᴄ ꜱʏꜱᴛᴇᴍ`.trim()
 
   await conn.sendMessage(m.chat, { 
     text: text,
