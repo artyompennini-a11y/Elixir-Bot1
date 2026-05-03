@@ -35,7 +35,7 @@ const handler = async (m, { conn }) => {
   const ulSpeed = (Math.random() * 50 + 80).toFixed(2)
 
   const text = `
-*ᴇʟɪxɪʀʙᴏᴛ* — ꜱʏꜱᴛᴇᴍ ᴅɪᴀɢɴᴏꜱᴛɪᴄ
+*THE PUNISHER-BOT* — ꜱʏꜱᴛᴇᴍ ᴅɪᴀɢɴᴏꜱᴛɪᴄ
 
   ✧ ᴏᴘᴇʀᴀᴛᴏʀ: \`${m.pushName || 'User'}\`
   ✧ ᴘɪɴɢ: \`${ping.toFixed(2)} ms\`
@@ -49,7 +49,7 @@ const handler = async (m, { conn }) => {
 *ᴍᴇᴍᴏʀʏ ᴜꜱᴀɢᴇ*
   ⋄ ʀᴀᴍ ᴛᴏᴛᴀʟᴇ: \`${formatBytes(ramTot)}\`
   ⋄ ɪɴ ᴜꜱᴏ: \`${formatBytes(ramUsed)} (${ramPerc}%)\`
-  ⋄ ᴇʟɪxɪʀʙᴏᴛ: \`${formatBytes(ramBot)}\`
+  ⋄ THE PUNISHER-BOT: \`${formatBytes(ramBot)}\`
 
 *ʜᴀʀᴅᴡᴀʀᴇ*
   ⋄ ᴄᴘᴜ: \`${cpuModel}\`
@@ -62,7 +62,7 @@ const handler = async (m, { conn }) => {
     text: text,
     contextInfo: {
       externalAdReply: {
-        title: "ᴇʟɪxɪʀʙᴏᴛ • ꜱʏꜱᴛᴇᴍ ᴀɴᴀʟʏꜱɪꜱ",
+        title: "THE PUNISHER-BOT• ꜱʏꜱᴛᴇᴍ ᴀɴᴀʟʏꜱɪꜱ",
         body: `ʟᴀᴛᴇɴᴢᴀ ᴅɪ ʀᴇᴛᴇ: ${ping.toFixed(2)}ms`,
         mediaType: 1,
         renderLargerThumbnail: false,
