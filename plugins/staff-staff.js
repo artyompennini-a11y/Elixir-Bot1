@@ -1,24 +1,24 @@
 let handler = async (m, { conn, command, usedPrefix }) => {
     let staff = `
-ㅤㅤ⋆｡˚『 ╭ \`STAFF ELIXIR BOT\` ╯ 』˚｡⋆\n╭\n│
+ㅤㅤ⋆｡˚『 ╭ \`STAFF THE PUNISHER-BOT\` ╯ 』˚｡⋆\n╭\n│
 │ 『 🤖 』 \`Bot:\` *${global.nomebot}*
 │ 『 🍥 』 \`Versione:\` *${global.versione}*
 │
 │⭒─ׄ─『 👑 \`Sviluppatore\` 』 ─ׄ─⭒
 │
-│ • \`Nome:\` *ᴇʟɪxɪʀ*
+│ • \`Nome:\` *THE PUNISHER*
 │ • \`Ruolo:\` *Creatore / dev*
-│ • \`Contatto:\` @393784409415
+│ • \`Contatto:\` @393206032199
 │
 │⭒─ׄ─『 🛡️ \`Moderatori\` 』 ─ׄ─⭒
 │
-│ • \`Nome:\` *Elixir*
+│ • \`Nome:\` *THE PUNISHER*
 │ • \`Ruolo:\` *Moderatore*
 │─ׄ─『 📌 \`Info Utili\` 』 ─ׄ─⭒
 │
-│ • \`GitHub:\` *github.com/Elixir-png/Elixir-Bot1*
+│ • \`GitHub:\` *https://github.com/artyompennini-a11y*
 │ • \`Supporto:\` @393784409415
-│ • *instagram.com/eli.xir_gg*
+│ • *https://www.instagram.com/arty.340?igsh=ZGxranlrczNybHJ0*
 │
 *╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*`;
     await conn.reply(
@@ -49,7 +49,7 @@ let handler = async (m, { conn, command, usedPrefix }) => {
                     vcard: `BEGIN:VCARD
 VERSION:3.0
 FN:blood
-ORG:𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿 - Creatore
+ORG:THE PUNISHER-BOT - Creatore
 TEL;type=CELL;type=VOICE;waid=393476686131:+393476686131
 END:VCARD`
                 },
@@ -57,7 +57,7 @@ END:VCARD`
                     vcard: `BEGIN:VCARD
 VERSION:3.0
 FN: DEATH 
-ORG:𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿 - Moderatore
+ORG:THE PUNISHER-BOT - Moderatore
 TEL;type=CELL;type=VOICE;waid=67078163216:+67078163216
 END:VCARD`
                 },
