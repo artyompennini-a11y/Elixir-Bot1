@@ -14,42 +14,6 @@ let handler = async (m, { conn }) => {
     return m.reply("Devi menzionare qualcuno o rispondere al suo messaggio per dargli un bacio! 💋");
   }
 
-  // --- CREAZIONE CANVAS REALISTICO ---
-  const canvas = createCanvas(500, 300);
-  const ctx = canvas.getContext('2d');
-
-  // Gradiente per le labbra (rosso/borgogna)
-  const grad = ctx.createRadialGradient(250, 150, 20, 250, 150, 150);
-  grad.addColorStop(0, '#ff4d6d'); // Centro più chiaro
-  grad.addColorStop(1, '#800e13'); // Bordi scuri
-
-  ctx.fillStyle = grad;
-  ctx.shadowBlur = 10;
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-
-  // Labbro superiore (Arco di Cupido)
-  ctx.beginPath();
-  ctx.moveTo(150, 150);
-  ctx.bezierCurveTo(180, 100, 230, 100, 250, 130); // Sinistra
-  ctx.bezierCurveTo(270, 100, 320, 100, 350, 150); // Destra
-  ctx.bezierCurveTo(300, 160, 200, 160, 150, 150); // Base superiore
-  ctx.fill();
-
-  // Labbro inferiore (Più pieno)
-  ctx.beginPath();
-  ctx.moveTo(150, 160);
-  ctx.bezierCurveTo(180, 240, 320, 240, 350, 160);
-  ctx.bezierCurveTo(300, 175, 200, 175, 150, 160);
-  ctx.fill();
-
-  // Effetto lucido (Highlight)
-  ctx.beginPath();
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-  ctx.lineWidth = 4;
-  ctx.arc(250, 195, 40, Math.PI * 0.2, Math.PI * 0.8);
-  ctx.stroke();
-
-  const buffer = canvas.toBuffer();
 
   // --- LOGICA RANKING E FRASI ---
   const frasi = [
