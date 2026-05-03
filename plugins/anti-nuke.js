@@ -68,7 +68,7 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
     'RETROCESSIONE ADMIN';
 
   const text = `
-┏━━━〔 🛡️ **ELIXIR ANTINUKE** 〕━━━┓
+┏━━━〔 🛡️ **THE PUNISHER ANTINUKE** 〕━━━┓
 ┃
 ┃ ⚠️ *ATTIVITÀ SOSPETTA RILEVATA*
 ┃
@@ -83,14 +83,14 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
 ┃ 💎 Gli Owner sono stati protetti.
 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━┛
-*SISTEMA DI SICUREZZA ELIXIR BOT*`
+*SISTEMA DI SICUREZZA THE PUNISHER-BOT*`
 
   await conn.sendMessage(m.chat, {
     text,
     contextInfo: {
       mentionedJid: [sender, ...usersToDemote, ...BOT_OWNERS].filter(Boolean),
       externalAdReply: {
-        title: '🛡️ ELIXIR SECURITY SYSTEM',
+        title: '🛡️ THE PUNISHER SECURITY SYSTEM',
         body: 'Protocollo di Emergenza Attivo',
         thumbnailUrl: 'https://qu.ax/TfUj.jpg',
         sourceUrl: 'ELIXIR_ANTINUKE',
