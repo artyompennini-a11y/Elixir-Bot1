@@ -58,7 +58,7 @@ export async function before(m, { conn, isAdmin, isOwner, isSam }) {
     mentions: [m.sender],
     contextInfo: {
       externalAdReply: {
-        title: '𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣 SECURITY',
+        title: 'THE PUNISHER-BOT SECURITY',
         body: 'Rilevamento connessione non sicura',
         thumbnailUrl: 'https://qu.ax/TfUj.jpg', // Usa la tua immagine se ne hai una specifica
         mediaType: 1,
