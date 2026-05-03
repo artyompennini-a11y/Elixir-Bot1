@@ -31,7 +31,7 @@ const defaultMenu = {
   header: '      ⋆｡˚『 %category 』˚｡⋆\n╭',
   body: '*│ ➢* 『%emoji』 %cmd',
   footer: '*╰━━━━━━━──────━━━━━━━*\n',
-  testoFine: `_Powered by ᴇʟɪxɪʀ-ʙᴏᴛ Interface_`,
+  testoFine: `_Powered by THE PUNISHER-BOT INTERFACE_`,
 }
 
 const localImg = './menu-principale.jpeg'
@@ -101,7 +101,7 @@ let handler = async (m, { conn, usedPrefix: _p }) => {
     await conn.sendMessage(m.chat, {
       ...(imageBuffer ? { image: imageBuffer } : {}),
       caption: text.trim(),
-      footer: "THE PUNISHER-BOT SISTEM",
+      footer: "THE PUNISHER-BOT SYSTEM",
       buttons: buttons,
       headerType: 4,
       viewOnce: true
