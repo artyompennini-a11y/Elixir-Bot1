@@ -40,7 +40,7 @@ global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per co
 
 global.repobot ='https//wa.me/393784409415'
 global.gruppo = 'https://chat.whatsapp.com/JOaqS04seMvFepBFp4Q4rL'
-global.insta = 'instagram.com/eli.xir_gg'
+global.insta = 'https://www.instagram.com/arty.340?igsh=ZGxranlrczNybHJ0'
 
 /*⭑⭒━━━✦❘༻ MODULI ༺❘✦━━━⭒⭑*/
 
