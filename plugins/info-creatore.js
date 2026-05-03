@@ -37,7 +37,7 @@ ecco i riferimenti ufficiali del mio creatore.
 
   const buttonMessage = {
       text: text,
-      footer: 'ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴇʟɪxɪʀ ʙᴏᴛ',
+      footer: 'ᴘᴏᴡᴇʀᴇᴅ ʙʏ THE PUNISHER-BOT',
       buttons: buttons,
       headerType: 1,
       mentions: [m.sender]
