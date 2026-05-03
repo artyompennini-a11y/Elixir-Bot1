@@ -11,7 +11,7 @@ import NodeCache from 'node-cache'
 const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf-8'))
 const moduleCache = new NodeCache({ stdTTL: 300 });
 
-/*⭑⭒━━━✦❘༻☾⋆⁺₊✧ 𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿✧₊⁺⋆☽༺❘✦━━━⭒⭑*/
+/*⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT✧₊⁺⋆☽༺❘✦━━━⭒⭑*/
 
 global.sam = ['393784409415', '393206032199', 'xxx']
 global.owner = [
@@ -27,14 +27,14 @@ global.prems = ['393784409415', '393206032199', '6282364029306', 'xxx', '8170939
 
 /*⭑⭒━━━✦❘༻🩸 INFO BOT 🕊️༺❘✦━━━⭒⭑*/
 
-global.nomepack = '𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣'
-global.nomebot = '𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣'
-global.wm = '𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣'
-global.autore = 'ELIXIR'
-global.dev = 'ELIXIR'
-global.testobot = `𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣`
+global.nomepack = 'THE PUNISHER-BOT'
+global.nomebot = 'THE PUNISHER-BOT'
+global.wm = 'THE PUNISHER-BOT'
+global.autore = 'THE PUNISHER'
+global.dev = 'THE PUNISHER'
+global.testobot = `THE PUNISHER-BOT`
 global.versione = pkg.version
-global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per contattare lo sviluppatore. contatto diretto: +393784409415'
+global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per contattare lo sviluppatore. contatto diretto: +393206032199'
 
 /*⭑⭒━━━✦❘༻🌐 LINK 🌐༺❘✦━━━⭒⭑*/
 
