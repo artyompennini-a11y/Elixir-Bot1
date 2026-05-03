@@ -19,13 +19,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 ecco i riferimenti ufficiali del mio creatore.
 
 *┏━━━━━━━━━━━━━━━━┓*
-*┃* 👤 *OWNER:* Elixir
+*┃* 👤 *OWNER:* THE PUNISHER 
 *┃* 🪐 *STATUS:* Online
 *┃* 💻 *DEV:* JavaScript / Node.js
 *┗━━━━━━━━━━━━━━━━┛*
 
 ━━━━━━━━━━━━━━━━━━━━
-   *😈 ᴇʟɪxɪʀ ᴅᴏᴍɪɴᴀ ⚡*
+   *😈 THE PUNISHER ᴅᴏᴍɪɴᴀ ⚡*
 ━━━━━━━━━━━━━━━━━━━━`.trim()
 
   const buttons = [
