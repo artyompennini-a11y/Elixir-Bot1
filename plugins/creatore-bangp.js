@@ -5,7 +5,7 @@ let handler = async (m, { conn, args, isOwner }) => {
             errorMsg += `━━━━━━━━━━━━━━━━\n\n`
             errorMsg += `*⚠️ Motivo:*\n`
             errorMsg += `└─⭓ Comando riservato al proprietario\n\n`
-            errorMsg += `> elixir ✧ bot`
+            errorMsg += `> THE PUNISHER ✧ BOT`
             return m.reply(errorMsg)
         }
         if (!m.isGroup) {
