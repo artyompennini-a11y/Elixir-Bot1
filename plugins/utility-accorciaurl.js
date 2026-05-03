@@ -13,7 +13,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
 
   if (!args[0]) {
     return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴜʀʟ 💉
+ 💉 THE PUNISHER - ᴜʀʟ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🔗 *Comando:* ${usedPrefix}accorcia
@@ -57,7 +57,7 @@ _☣️ Accorcia qualsiasi link via TinyURL._`, m)
 
     await conn.sendMessage(m.chat, {
       text: `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴜʀʟ 💉
+ 💉 THE PUNISHER - ᴜʀʟ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ ✅ *URL Accorciato!*
@@ -77,7 +77,7 @@ _☣️ Link generato via TinyURL._`
     console.error('[Accorcia Plugin] Errore:', e.message)
 
     let msg = `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴇʀʀᴏʀᴇ 💉
+ 💉 THE PUNISHER - ᴇʀʀᴏʀᴇ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
 `
     if (e.code === 'ECONNABORTED') msg += '⏱️ *Timeout:* Il server non risponde. Riprova.'
