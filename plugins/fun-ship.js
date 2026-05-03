@@ -9,7 +9,7 @@ let handler = async (m, { conn, participants }) => {
   
   let love = Math.floor(Math.random() * 100)
   
-  let caption = `✨ *ELIXIR MATCHMAKER* ✨\n\n`
+  let caption = `✨ *THE PUNISHER MATCHMAKER* ✨\n\n`
   caption += `💞 @${a.split('@')[0]} + @${b.split('@')[0]}\n`
   caption += `💓 *Compatibilità:* ${love}%\n\n`
   caption += love > 70 ? "🔥 Una coppia esplosiva!" : "🧊 Forse è meglio restare amici..."
