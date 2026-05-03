@@ -23,7 +23,7 @@ const defmenu = {
 
 let handler = async (m, { conn, usedPrefix: _p }) => {
   let tags = {
-    'strumenti': 'LABORATORIO ELIXIR'
+    'strumenti': 'LABORATORIO THE PUNISHER'
   }
 
   try {
