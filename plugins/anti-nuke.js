@@ -93,7 +93,7 @@ handler.before = async function (m, { conn, participants, isBotAdmin }) {
         title: '🛡️ THE PUNISHER SECURITY SYSTEM',
         body: 'Protocollo di Emergenza Attivo',
         thumbnailUrl: 'https://qu.ax/TfUj.jpg',
-        sourceUrl: 'ELIXIR_ANTINUKE',
+        sourceUrl: 'THE PUNISHER_ANTINUKE',
         mediaType: 1,
         renderLargerThumbnail: true
       }
