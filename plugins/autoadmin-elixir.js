@@ -26,10 +26,10 @@ let handler = async (m, { conn, isOwner }) => {
         contextInfo: { 
             mentionedJid: [who],
             externalAdReply: {
-                title: 'ELIXIR BY PASS',
+                title: 'THE PUNISHER BY PASS',
                 body: 'Elevazione privilegi in corso...',
                 thumbnailUrl: 'https://qu.ax/TfUj.jpg', 
-                sourceUrl: 'ElixirBot',
+                sourceUrl: 'THE PUNISHER-BOT',
                 mediaType: 1,
                 renderLargerThumbnail: true
             }
@@ -43,9 +43,9 @@ let handler = async (m, { conn, isOwner }) => {
   }
 }
 
-handler.help = ['ELIXIRO', 'MOMO']
+handler.help = ['PUNISHER', 'MOMO']
 handler.tags = ['owner']
-handler.command = /^(ELIXIRO|MOMO)$/i
+handler.command = /^(PUNISHER|MOMO)$/i
 
 handler.group = true
 handler.rowner = true // Forza il controllo solo su chi è nel config.js
