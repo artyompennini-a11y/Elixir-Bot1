@@ -55,7 +55,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
 
   if (!args[0]) {
     return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴄᴀʟᴄ 💉
+ 💉 THE PUNISHER - ᴄᴀʟᴄ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🧮 *Comando:* ${usedPrefix}calc
@@ -97,7 +97,7 @@ _☣️ Calcolatrice avanzata integrata._`, m)
 
     await conn.sendMessage(m.chat, {
       text: `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴄᴀʟᴄ 💉
+ 💉 THE PUNISHER - ᴄᴀʟᴄ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🧮 *Espressione:*
@@ -113,7 +113,7 @@ _☣️ Calcolo completato._`
   } catch (e) {
     console.error('[Calc Plugin] Errore:', e.message)
     conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ᴇʀʀᴏʀᴇ 💉
+ 💉 THE PUNISHER - ᴇʀʀᴏʀᴇ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
 ❌ *Espressione non valida.*
 _Controlla la sintassi e riprova._
