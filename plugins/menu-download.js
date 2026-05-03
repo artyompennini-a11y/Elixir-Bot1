@@ -23,7 +23,7 @@ const defaultMenu = {
   header: '┍━━━〔 %category 〕━━━┑',
   body: '┇ 📥  *%cmd*',
   footer: '┕━━━━━──ׄ──ׅ──ׄ──━━━━━┙\n',
-  after: `_ᴇʟɪxɪʀ-ʙᴏᴛ ɴᴇᴛᴡᴏʀᴋ ᴅᴀᴛᴀ_`
+  after: `_THE PUNISHER-BOT NETWORK DATA_`
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
