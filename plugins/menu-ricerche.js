@@ -7,7 +7,7 @@ import os from 'os'
 const defaultMenu = {
   before: `
 ┎━━━━━━━━━━━━━━━━━━━┑
-┃ ✧ ᴇʟɪxɪʀ - ꜱᴇᴀʀᴄʜ ✧ ┃
+┃ ✧ THE PUNISHER - ꜱᴇᴀʀᴄʜ ✧ ┃
 ┖━━━━━━━━━━━━━━━━━━━┙
 ┌───────────────────┐
   👤 𝚄𝚜𝚎𝚛: %name
@@ -72,7 +72,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "✧ ᴇʟɪxɪʀʙᴏᴛ ꜱᴇᴀʀᴄʜ ʀɪᴄᴇʀᴄʜᴇ ✧"
+          newsletterName: "✧ THE PUNISHER-BOT SEARCH RICERCHE✧"
         }
       }
     }, { quoted: m })
