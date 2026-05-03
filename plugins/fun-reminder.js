@@ -19,7 +19,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
     const userReminders = [...activeReminders.values()].filter(r => r.sender === m.sender)
     if (userReminders.length === 0) {
       return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ʀᴇᴍɪɴᴅ 💉
+ 💉 THE PUNISHER- ʀᴇᴍɪɴᴅ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
 📋 *Nessun promemoria attivo.*
 _Usa ${usedPrefix}remind <tempo> <testo> per crearne uno!_`, m)
@@ -31,7 +31,7 @@ _Usa ${usedPrefix}remind <tempo> <testo> per crearne uno!_`, m)
     }).join('\n')
 
     return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ʀᴇᴍɪɴᴅ 💉
+ 💉 THE PUNISHER- ʀᴇᴍɪɴᴅ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 📋 *I tuoi promemoria:*
@@ -62,7 +62,7 @@ _Usa ${usedPrefix}remind cancel <id> per cancellarne uno._`, m)
   // ─── Uso normale: !remind <tempo> <testo> ────────────────────────────────
   if (!args[0] || !args[1]) {
     return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ʀᴇᴍɪɴᴅ 💉
+ 💉 THE PUNISHER - ʀᴇᴍɪɴᴅ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🔔 *Comando:* ${usedPrefix}remind
@@ -129,7 +129,7 @@ _☣️ Max 5 promemoria attivi per utente._`, m)
       const nome = await conn.getName(m.sender) || 'Soggetto'
       await conn.sendMessage(m.chat, {
         text: `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ʀᴇᴍɪɴᴅ 💉
+ 💉 THE PUNISHER - ʀᴇᴍɪɴᴅ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🔔 *PROMEMORIA [${id}]*
@@ -150,7 +150,7 @@ _☣️ Promemoria scattato come richiesto._`,
 
   await m.react('🔔')
   conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 ᴇʟɪxɪʀ - ʀᴇᴍɪɴᴅ 💉
+ 💉 THE PUNISHER- ʀᴇᴍɪɴᴅ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ ✅ *Promemoria impostato!*
