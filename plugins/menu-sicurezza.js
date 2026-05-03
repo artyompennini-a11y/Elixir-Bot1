@@ -43,7 +43,7 @@ let handler = async (m, { conn, usedPrefix: _p, command, args, isOwner, isAdmin 
   if (!args.length || /menu|help/i.test(args[0])) {
     let text = `
 ┎━━━━━━━━━━━━━━━━━━━━┑
-┃   ✧  THE PUNISHER - ᴍᴀꜱᴛᴇʀ ᴄᴏɴᴛʀᴏʟ  ✧   ┃
+┃   ✧  THE PUNISHER-ᴍᴀꜱᴛᴇʀ ᴄᴏɴᴛʀᴏʟ  ✧   ┃
 ┖━━━━━━━━━━━━━━━━━━━━┙
 ┌────────────────────┐
   👤 𝚄𝚜𝚎𝚛: ${userName}
@@ -63,7 +63,7 @@ ${securityFeatures.map(f => `┇ ${f.name}\n┇ _${f.desc}_\n┇ ➤ *${f.key}*\
 ${automationFeatures.map(f => `┇ ${f.name}\n┇ _${f.desc}_\n┇ ➤ *${f.key}*\n┇`).join('\n')}
 *┕━━━━━━━──ׄ──ׅ──ׄ──━━━━━━━┙*
 
-_ᴇʟɪxɪʀ-ʙᴏᴛ sᴇᴄᴜʀɪᴛʏ ɪɴᴛᴇʀꜰᴀᴄᴇ_`
+_THE PUNISHER-BOT SECURITY INTERFACE_`
 
     // Invio con immagine locale
     await conn.sendMessage(m.chat, { 
