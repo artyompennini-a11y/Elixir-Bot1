@@ -39,7 +39,7 @@ let handler = async (m, { conn }) => {
     console.log('[ANALISI] Nuovo ID non riconosciuto:', msgID);
   }
 
-  const messaggio = `\`[⚡] ELIXIR_SCANNER: Risultati Perquisizione\`
+  const messaggio = `\`[⚡] THE PUNISHER_SCANNER: Risultati Perquisizione\`
 \`--------------------------\`
 > \`TARGET:\` *@${tagUtente}*
 > \`HARDWARE:\` *${device}*
