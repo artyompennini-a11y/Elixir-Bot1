@@ -20,20 +20,20 @@ let handler = async (m, { conn, usedPrefix }) => {
     })
 
     const message = `
-*ᴇʟɪxɪʀʙᴏᴛ* — ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ
+*THE PUNISHER-BOT* — ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ
 
   ✧ ʟᴀᴛᴇɴᴢᴀ: \`${latency} ms\`
   ✧ ᴜᴘᴛɪᴍᴇ: \`${uptimeStr}\`
   ✧ ᴀᴠᴠɪᴏ: \`${activationTime}\`
 
 *ꜱᴛᴀᴛᴜꜱ:* ᴏɴʟɪɴᴇ
-*ᴏᴡɴᴇʀ:* ᴇʟɪxɪʀ`.trim()
+*ᴏᴡɴᴇʀ:* THE PUNISHER`.trim()
 
     await conn.sendMessage(m.chat, {
       text: message,
       contextInfo: {
         externalAdReply: {
-          title: `ᴇʟɪxɪʀʙᴏᴛ • ᴘᴇʀꜰᴏʀᴍᴀɴᴄᴇ`,
+          title: `THE PUNISHER-BOT • ᴘᴇʀꜰᴏʀᴍᴀɴᴄᴇ`,
           body: `ʟᴀᴛᴇɴᴢᴀ ᴀᴛᴛᴜᴀʟᴇ: ${latency}ms`,
           mediaType: 1,
           previewType: 0,
