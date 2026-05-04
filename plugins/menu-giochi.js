@@ -10,7 +10,7 @@ const localImg = join(process.cwd(), 'menu-giochi.jpeg');
 const defaultMenu = {
   before: `
 ╔════════════════════╗
-  🎮  *G A M E  C E N T E R* 🎮
+🎮  *G A M E  C E N T E R* 🎮
 ╚════════════════════╝
  ┌───────────────────
  │ 👤 *Utente:* %name
