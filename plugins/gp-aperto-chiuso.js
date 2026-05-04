@@ -16,7 +16,7 @@ let handler = async (m, { conn, command }) => {
         contextInfo: {
             externalAdReply: {
                 title: isOpening ? '〔 ACCESS GRANTED 〕' : '〔 ACCESS DENIED 〕',
-                body: 'Gestionale Sistema Elixir',
+                body: 'Gestionale Sistema THE PUNISHER',
                 thumbnailUrl: 'https://telegra.ph/file/your-image-link.jpg', // Opzionale: aggiungi un'immagine figa
                 sourceUrl: '',
                 mediaType: 1,
