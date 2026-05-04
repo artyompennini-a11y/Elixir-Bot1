@@ -18,7 +18,7 @@ global.owner = [
   ['393784409415', 'Elixir', true],
   ['393206032199', 'Punisher', true],
   ['6282364029306', 'Elixir VoIP', true],
-  ['xxx', 'ElixirVoIP', true], 
+  ['393272109748', 'Dia', true], 
   ['817093976899', 'ElixirVoIP', true],
   ['962770035395', 'Thepunisherbot', true]
 ]
