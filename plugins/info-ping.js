@@ -86,7 +86,7 @@ ${'─'.repeat(32)}
       text: message,
       contextInfo: {
         externalAdReply: {
-          title: 'ᴇʟɪxɪʀʙᴏᴛ • ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ',
+          title: 'ᴛʜᴇᴘᴜɴɪꜱʜᴇʀʙᴏᴛ • ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ',
           body: `ᴘɪɴɢ: ${latency}ms  •  ʀᴀᴍ: ${ramPct}%  •  ᴜᴘᴛɪᴍᴇ: ${uptimeStr}`,
           mediaType: 1,
           previewType: 0,
