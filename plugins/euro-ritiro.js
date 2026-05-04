@@ -30,7 +30,7 @@ indica la quantità di euro da prelevare.
 
     return await conn.sendMessage(m.chat, {
       text: message,
-      footer: 'ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʙʟᴅ ʙʟᴏᴏᴅ ʙᴏᴛ',
+      footer: 'ᴘᴏᴡᴇʀᴇᴅ ʙʏ THE PUNISHER-BOT',
       buttons: buttons,
       headerType: 1,
       mentions: [m.sender]
