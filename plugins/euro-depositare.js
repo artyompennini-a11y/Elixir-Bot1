@@ -398,7 +398,7 @@ let handler = async (m, { args, conn }) => {
         await conn.sendMessage(m.chat, { 
             image: mediaBuffer, 
             caption: successMessage, 
-            footer: '✧𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿✧', 
+            footer: '✧THE PUNISHER-BOT✧', 
             buttons: buttons, 
             headerType: 4 
         }, { quoted: m });
@@ -408,7 +408,7 @@ let handler = async (m, { args, conn }) => {
         console.error("Errore nella creazione dell'immagine:", error);
         await conn.sendMessage(m.chat, { 
             text: successMessage, 
-            footer: '✧𝕰𝕷𝕴𝖃𝕴𝕽𝕭𝕺𝕿✧', 
+            footer: '✧THE PUNISHER-BOT✧', 
             buttons: buttons, 
             headerType: 1 
         }, { quoted: m });
