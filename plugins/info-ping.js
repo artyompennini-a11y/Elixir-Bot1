@@ -54,7 +54,7 @@ let handler = async (m, { conn, usedPrefix }) => {
     const sep = '▸'
 
     const message = `
-*ᴛʜᴇᴘᴜɴɪꜱʜᴇʀʙᴏᴛ* 💀 — ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ
+*THE PUNISHER-BOT* 💀 — ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ
 ${'─'.repeat(32)}
 
 ⚡ *ᴘᴇʀꜰᴏʀᴍᴀɴᴄᴇ*
@@ -80,13 +80,13 @@ ${sep} ɢʀᴜᴘᴘɪ    » \`${totalGroups}\`
 ${sep} ᴅᴍ        » \`${totalDMs}\`
 
 ${'─'.repeat(32)}
-*ꜱᴛᴀᴛᴜꜱ* » 🟢 ᴏɴʟɪɴᴇ  •  *ᴏᴡɴᴇʀ* » ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ`.trim()
+*ꜱᴛᴀᴛᴜꜱ* » 🟢 ᴏɴʟɪɴᴇ  •  *ᴏᴡɴᴇʀ* » THE PUNISHER`.trim()
 
     await conn.sendMessage(m.chat, {
       text: message,
       contextInfo: {
         externalAdReply: {
-          title: 'ᴛʜᴇᴘᴜɴɪꜱʜᴇʀʙᴏᴛ • ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ',
+          title: 'THE PUNISHER-BOT • ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ',
           body: `ᴘɪɴɢ: ${latency}ms  •  ʀᴀᴍ: ${ramPct}%  •  ᴜᴘᴛɪᴍᴇ: ${uptimeStr}`,
           mediaType: 1,
           previewType: 0,
