@@ -15,7 +15,7 @@ var handler = async (m, { conn }) => {
 『 🪙 - ✨ 』 _Risorse:_
 - \`Euro:\` *+${oneTimeReward.euro}*
 - \`EXP:\` *+${oneTimeReward.exp}*
-\n> \`elixir ✧ bot\``, m);
+\n> \`THE PUNISHER ✧ BOT\``, m);
 };
 
 handler.help = ['onetime'];
