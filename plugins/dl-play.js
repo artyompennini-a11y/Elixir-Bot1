@@ -8,7 +8,7 @@ import path from 'path';
 import os from 'os';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return m.reply(`🔮 *ᴇʟɪxɪʀ ʙᴏᴛ*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
+  if (!text) return m.reply(`🔮 *THE PUNISHER-BOT*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
 
   // Percorsi file temporanei definiti fuori per essere accessibili al finally
   const tmpDir = os.tmpdir();
@@ -25,7 +25,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     // Menu principale con bottoni
     if (command === 'play') {
         let infoMsg = `┏━━━━━━━━━━━━━━━━━━━┓\n`;
-        infoMsg += `      🎧 ᴇʟɪxɪʀ ʙᴏᴛ ᴘʟᴀʏᴇʀ 🎧\n`;
+        infoMsg += `      🎧 THE PUNISHER-BOT ᴘʟᴀʏᴇʀ 🎧\n`;
         infoMsg += `┗━━━━━━━━━━━━━━━━━━━┛\n\n`;
         infoMsg += `◈ 📌 *𝗧𝗶𝘁𝗼𝗹𝗼:* ${vid.title}\n`;
         infoMsg += `◈ ⏱️ *𝗗𝘂𝗿𝗮𝘁𝗮:* ${vid.timestamp}\n\n`;
@@ -87,7 +87,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         await conn.sendMessage(m.chat, {
             video: fs.readFileSync(inputPath),
             mimetype: 'video/mp4',
-            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ ᴇʟɪxɪʀ ʙᴏᴛ*`,
+            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ THE PUNISHER-BOT*`,
         }, { quoted: m });
     }
 
@@ -95,7 +95,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   } catch (e) {
     console.error(e);
-    m.reply('🚀 *ᴇʟɪxɪʀ ʙᴏᴛ ᴇʀʀᴏʀ:* File non disponibile o server offline.');
+    m.reply('🚀 *THE PUNISHER-BOT ᴇʀʀᴏʀ:* File non disponibile o server offline.');
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
   } finally {
     // Pulizia file temporanei (Fondamentale!)
