@@ -26,7 +26,7 @@ let handler = async (m, { conn }) => {
                     title: '☣️ THE PUNISHER: ᴀʙꜱᴏʟᴜᴛᴇ_ᴄᴏɴᴛʀᴏʟ',
                     body: 'Il silenzio è l\'unica cosa che meritate.',
                     thumbnailUrl: 'https://qu.ax', 
-                    sourceUrl: '𝕰𝕷𝕴𝖃𝕴𝕽 𝕻𝕺𝖂𝕰𝕽',
+                    sourceUrl: 'THE PUNISHER-BOT',
                     mediaType: 1,
                     renderLargerThumbnail: true
                 }
@@ -46,7 +46,7 @@ let handler = async (m, { conn }) => {
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '',
                     serverMessageId: '',
-                    newsletterName: `𝕰𝕷𝕴𝖃𝕴𝕽 𝕾𝖄𝕾𝕿𝕰𝕸`
+                    newsletterName: `THE PUNISHER-BOT`
                 }
             }
         });
