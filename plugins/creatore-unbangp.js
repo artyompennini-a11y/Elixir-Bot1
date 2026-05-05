@@ -4,7 +4,7 @@ let handler = async (m, { conn, args, isOwner }) => {
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Comando riservato al proprietario\n\n`
-        errorMsg += `> elixir ✧ bot`
+        errorMsg += `> THE PUNISHER ✧ BOT`
         return m.reply(errorMsg)
     }
 
@@ -13,7 +13,7 @@ let handler = async (m, { conn, args, isOwner }) => {
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Utilizzabile solo nei gruppi\n\n`
-        errorMsg += `> elixir ✧ bot`
+        errorMsg += `> THE PUNISHER ✧ BOT`
         return m.reply(errorMsg)
     }
 
@@ -23,7 +23,7 @@ let handler = async (m, { conn, args, isOwner }) => {
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Questo gruppo non è bannato\n\n`
-        errorMsg += `> elixir ✧ bot`
+        errorMsg += `> THE PUNISHER ✧ BOT`
         return m.reply(errorMsg)
     }
 
