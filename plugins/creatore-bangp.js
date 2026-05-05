@@ -49,7 +49,7 @@ let handler = async (m, { conn, args, isOwner }) => {
             errorMsg += `━━━━━━━━━━━━━━━━\n\n`
             errorMsg += `*⚠️ Motivo:*\n`
             errorMsg += `└─⭓ Questo gruppo è già bannato\n\n`
-            errorMsg += `> elixir ✧ bot`
+            errorMsg += `> THE PUNISHER ✧ BOT`
             return m.reply(errorMsg)
         }
 
@@ -81,7 +81,7 @@ let handler = async (m, { conn, args, isOwner }) => {
         adminMsg += `└─⭓ Questo gruppo è stato bannato\n\n`
         adminMsg += `*📌 Note:*\n`
         adminMsg += `└─⭓ Il bot non risponderà ai comandi\n\n`
-        adminMsg += `> elixir ✧ bot`
+        adminMsg += `> THE PUNISHER ✧ BOT`
 
         for (let admin of admins) {
             await conn.sendMessage(admin.id, { text: adminMsg })
@@ -92,7 +92,7 @@ let handler = async (m, { conn, args, isOwner }) => {
                       `━━━━━━━━━━━━━━━━\n\n` +
                       `*⚠️ Si è verificato un errore*\n` +
                       `*📝 Tipo:* ${e.message}\n\n` +
-                      `> elixir ✧ bot`)
+                      `> THE PUNISHER ✧ BOT`)
     }
 }
 
