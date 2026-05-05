@@ -4,8 +4,11 @@ let handler = async (m, { conn }) => {
   await conn.sendMessage(m.chat, { text: message }, { quoted: m });
 };
 
-handler.help = ['punisher2'];
+handler.help = ['punisher'];
 handler.tags = ['giochi'];
-handler.command = /^(punisher2)$/i; // Corretto il regex per attivarsi con "punisher2"
+
+// Questa regex rileva "punisher" ovunque nel messaggio, ignorando maiuscole/minuscole
+handler.customPrefix = /punisher/i; 
+handler.command = new RegExp; // Sovrascrive il comando standard per usare il prefisso personalizzato
 
 export default handler;
