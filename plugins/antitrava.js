@@ -41,13 +41,13 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isSam }) {
         const userTag = m.sender.split('@')[0];
         const reason = isTooLong ? 'Eccessiva lunghezza (Trava)' : 'Caratteri Zalgo/Crash rilevati';
         
-        // Messaggio estetico 𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣
+        // Messaggio estetico THE PUNISHER-BOT
         const header = `⋆｡˚『 ╭ \`ANTITRAVA SYSTEM\` ╯ 』˚｡⋆`;
         const footer = `╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒`;
 
         const textMsg = `${header}
 ╭
-┃ 🛡️ \`Stato:\` *Protocollo Blood Attivo*
+┃ 🛡️ \`Stato:\` *Protocollo THE PUNISHER-BOT Attivo*
 ┃
 ┃ 『 👤 』 \`Target:\` @${userTag}
 ┃ 『 ⚠️ 』 \`Rilevato:\` *Tentativo di Crash*
@@ -63,7 +63,7 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isSam }) {
             mentions: [m.sender],
             contextInfo: {
                 externalAdReply: {
-                    title: 'BLOOD CRASH PROTECTION',
+                    title: 'THE PUNISHER CRASH PROTECTION',
                     body: 'Minaccia neutralizzata',
                     thumbnailUrl: 'https://qu.ax/TfUj.jpg',
                     mediaType: 1,
