@@ -32,7 +32,7 @@ const SHORT_URL_REGEX = new RegExp(
 );
 
 const REQUEST_HEADERS = {
-    'User-Agent': '𝓔𝓛𝓘𝓧𝓘𝓡-𝓑𝓞𝓣/3.0',
+    'User-Agent': 'THE PUNISHER-BOT/3.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'DNT': '1',
     'Connection': 'keep-alive'
@@ -77,7 +77,7 @@ async function handleViolation(conn, m, reason, isBotAdmin) {
         mentions: [sender],
         contextInfo: {
             externalAdReply: {
-                title: 'ᴇʟɪxɪʀ sᴇᴄᴜʀɪᴛʏ sʏsᴛᴇᴍ ᴠ3',
+                title: 'THE PUNISHER SECURETY SYSTEM ᴠ3',
                 body: 'Restrizione Accesso Link Attiva',
                 thumbnailUrl: 'https://qu.ax',
                 mediaType: 1,
