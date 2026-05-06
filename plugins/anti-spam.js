@@ -77,7 +77,7 @@ handler.before = async function (m, { conn, isAdmin, isBotAdmin, isOwner, isSam 
 
                 const text = `${header}
 ╭
-┃ 🛡️ \`Stato:\` *Protocollo elixir Attivo*
+┃ 🛡️ \`Stato:\` *Protocollo THE PUNISHER Attivo*
 ┃
 ┃ 『 👤 』 \`Target:\` @${decodedSender.split('@')[0]}
 ┃ 『 ⚡ 』 \`Rilevato:\` *${typeSanz}*
@@ -92,7 +92,7 @@ handler.before = async function (m, { conn, isAdmin, isBotAdmin, isOwner, isSam 
                     mentions: [decodedSender],
                     contextInfo: {
                         externalAdReply: {
-                            title: 'ELIXIR ANTI-FLOOD',
+                            title: 'THE PUNISHER ANTI-FLOOD',
                             body: 'Minaccia spam neutralizzata',
                             thumbnailUrl: 'https://qu.ax/TfUj.jpg',
                             mediaType: 1
