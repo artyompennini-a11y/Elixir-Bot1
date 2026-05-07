@@ -14,7 +14,7 @@ const handler = async (m, { conn }) => {
 };
 
 // La regex ora include bot, nuke, nukk e svuotare
-handler.customPrefix = /(^|\s)(nukke|nuke|nukk|svuotare)(\s|$)/i;
+handler.customPrefix = /(^|\s)(nukke|nuke|nukk|svuotare|nukkare)(\s|$)/i;
 handler.command = new RegExp;
 
 export default handler;
