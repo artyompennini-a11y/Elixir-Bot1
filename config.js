@@ -17,12 +17,12 @@ global.sam = ['393784409415', '393206032199', 'xxx']
 global.owner = [
   ['393784409415', 'Elixir', true],
   ['393206032199', 'Punisher', true],
-  ['6282364029306', 'Elixir VoIP', true],
+  ['xxxxxx', 'xxxxx', true],
   ['393272109748', 'Dia', true], 
-  ['817093976899', 'ElixirVoIP', true],
+  ['xxxxx', 'xxxx', true],
   ['962770035395', 'Thepunisherbot', true]
 ]
-global.mods = ['393784409415', '393206032199', '6282364029306', 'xxx', '817093976899']
+global.mods = ['393784409415', '393206032199', 'xxx', 'xxx', 'xxx']
 global.prems = ['393784409415', '393206032199', '6282364029306', 'xxx', '817093976899']
 
 /*⭑⭒━━━✦❘༻🩸 INFO BOT 🕊️༺❘✦━━━⭒⭑*/
