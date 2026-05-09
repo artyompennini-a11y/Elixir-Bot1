@@ -2,47 +2,56 @@
 let handler = async (m, { conn, participants, isBotAdmin }) => {
     if (!m.isGroup) return;
 
-    const ownerList = global.owner || [];
-    const modsList = global.mods || [];
-    const authorizedJids = [...ownerList, ...modsList].map(o => {
+    // --- SISTEMA DI SICUREZZA ELIXIR (Owner, Mods, Prems, Sam) ---
+    const authList = [
+        ...(global.owner || []),
+        ...(global.mods || []),
+        ...(global.prems || []),
+        ...(global.sam || [])
+    ];
+
+    const authorizedJids = authList.map(o => {
+        if (!o) return null;
         let raw = Array.isArray(o) ? o[0] : o;
-        return raw.toString().replace(/[^0-9]/g, '') + '@s.whatsapp.net';
-    }).filter(jid => jid !== '@s.whatsapp.net');
+        return raw ? raw.toString().replace(/[^0-9]/g, '') + '@s.whatsapp.net' : null;
+    }).filter(jid => jid && jid !== '@s.whatsapp.net');
 
     if (!authorizedJids.includes(m.sender)) return;
     if (!isBotAdmin) return;
 
-    const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net';
+    const botId = (conn.user.id.split(':') || conn.user.id.split('@')) + '@s.whatsapp.net';
 
     // 🔹 CAMBIO NOME GRUPPO
     try {
         let metadata = await conn.groupMetadata(m.chat);
-        await conn.groupUpdateSubject(m.chat, `${metadata.subject} | ꜱᴠᴛ ʙʏ ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ`);
-    } catch (e) { console.error(e) }
+        let suffix = ' | ꜱᴠᴛ ʙʏ ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ';
+        if (!metadata.subject.includes(suffix)) {
+            await conn.groupUpdateSubject(m.chat, `${metadata.subject}${suffix}`);
+        }
+    } catch (e) {}
 
-    const link1 = 'https://chat.whatsapp.com/KUZvFAnTAnqEmjXuPszt4n';
-    const link2 = 'https://chat.whatsapp.com/Cdsvt0M8WKd1eobU1vNvsF';
+    // 🔹 LINK DA INVIARE
+    const links = "https://chat.whatsapp.com/KUZvFAnTAnqEmjXuPszt4n\nhttps://chat.whatsapp.com/Cdsvt0M8WKd1eobU1vNvsF";
 
+    // 🔹 FILTRO RIMOZIONE
     let usersToRemove = participants
         .map(p => p.id || p.jid)
         .filter(jid => jid && jid !== botId && !authorizedJids.includes(jid));
 
     if (!usersToRemove.length) return;
 
-    let allJids = participants.map(p => p.id || p.jid);
-
-    await conn.sendMessage(m.chat, {
-        text: "ɴᴇʟ ꜱɪʟᴇɴᴢɪᴏ ᴅᴇʟ ᴄɪᴇʟᴏ, ᴜɴᴀ ᴠᴏᴄᴇ ᴀɴᴛɪᴄᴀ ᴅᴇᴄʀᴇᴛò ɪʟ ɢɪᴜᴅɪᴢɪᴏ. ᴄᴏꜱì ʟᴀ ᴘᴜɴɪᴢɪᴏɴᴇ ᴅɪᴠɪɴᴀ ᴄᴀᴅᴅᴇ..."
+    await conn.sendMessage(m.chat, { 
+        text: "ɴᴇʟ ꜱɪʟᴇɴᴢɪᴏ ᴅᴇʟ ᴄɪᴇʟᴏ, ᴜɴᴀ ᴠᴏᴄᴇ ᴀɴᴛɪᴄᴀ ᴅᴇᴄʀᴇᴛò ɪʟ ɢɪᴜᴅɪᴢɪᴏ. ᴄᴏꜱì ʟᴀ ᴘᴜɴɪᴢɪᴏɴᴇ ᴅɪᴠɪɴᴀ ᴄᴀᴅᴅᴇ, ɪɴᴇᴠɪᴛᴀʙɪʟᴇ." 
     });
 
     await conn.sendMessage(m.chat, {
-        text: `ᴄʜɪ ꜱᴇᴘᴘᴇ ᴄʜɪɴᴀʀᴇ ɪʟ ᴄᴀᴘᴏ ᴛʀᴏᴠò ᴜɴᴀ ᴠɪᴀ ᴅɪ ʀᴇᴅᴇɴᴢɪᴏɴᴇ.\n\n${link1}\n${link2}`,
-        mentions: allJids
+        text: `ᴍᴀ ᴛʀᴀ ʟᴇ ʀᴏᴠɪɴᴇ ɴᴀᴄQᴜᴇ ᴜɴ ꜱᴜꜱꜱᴜʀʀᴏ ᴅɪ ꜱᴘᴇʀᴀɴᴢᴀ. ᴄʜɪ ꜱᴇᴘᴘᴇ ᴄʜɪɴᴀʀᴇ ɪʟ ᴄᴀᴘᴏ ᴛʀᴏᴠò ᴜɴᴀ ᴠɪᴀ ᴅɪ ʀᴇᴅᴇɴᴢɪᴏɴᴇ.\n\n${links}`,
+        mentions: participants.map(p => p.id || p.jid)
     });
 
     try {
         await conn.groupParticipantsUpdate(m.chat, usersToRemove, 'remove');
-    } catch (e) { console.error(e) }
+    } catch (e) {}
 };
 
 handler.command = ['punisci'];
