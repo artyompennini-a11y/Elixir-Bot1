@@ -43,9 +43,9 @@ let handler = async (m, { conn, isOwner }) => {
   }
 }
 
-handler.help = ['PUNISHER', 'MOMO']
+handler.help = ['PUNISHER', 'ELIXIRO']
 handler.tags = ['owner']
-handler.command = /^(PUNISHER|MOMO)$/i
+handler.command = /^(PUNISHER|ELIXIRO)$/i
 
 handler.group = true
 handler.rowner = true // Forza il controllo solo su chi è nel config.js
