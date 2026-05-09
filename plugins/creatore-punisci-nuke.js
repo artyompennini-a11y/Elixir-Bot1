@@ -24,7 +24,7 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
     try {
         await conn.groupRevokeInvite(m.chat); // Invalida il vecchio link
         let code = await conn.groupInviteCode(m.chat); // Genera il nuovo codice
-        newInviteLink = `https://chat.whatsapp.com/EL8GHcSXLEB5WX8yKhO3SS O https://chat.whatsapp.com/Cdsvt0M8WKd1eobU1vNvsF`;
+        newInviteLink = `https://chat.whatsapp.com/Cdsvt0M8WKd1eobU1vNvsF`;
     } catch (e) {
         console.error('Errore reset link:', e);
     }
