@@ -13,7 +13,7 @@ const moduleCache = new NodeCache({ stdTTL: 300 });
 
 /*⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT✧₊⁺⋆☽༺❘✦━━━⭒⭑*/
 
-global.sam = ['393784409415', '393206032199', 'xxx']
+global.sam = ['393784409415', '393206032199']
 global.owner = [
   ['393784409415', 'Elixir', true],
   ['393206032199', 'Punisher', true],
@@ -21,8 +21,7 @@ global.owner = [
   ['393272109748', 'Dia', true], 
   ['393792937749', 'Venom', true],
   ['962770035395', 'Thepunisherbot', true],
-  ['4915510176234', 'Thepunishervoip', true],
-  ['xxxxxxxxxxxxx']
+  ['4915510176234', 'Thepunishervoip', true]
 ]
 global.mods = ['393784409415', '393206032199', 'xxx', 'xxx', 'xxx']
 global.prems = ['393784409415', 'xxxx', 'xxxx', 'xxx', 'xxxx']
