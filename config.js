@@ -20,8 +20,8 @@ global.owner = [
   ['393792023950', 'Vortix', true],
   ['393272109748', 'Dia', true], 
   ['393792937749', 'Venom', true],
-  ['962770035395', 'Thepunisherbot', true]
-  ['4915510176234','Thepunishervoip', true]
+  ['962770035395', 'Thepunisherbot', true],
+  ['4915510176234', 'Thepunishervoip', true],
 ]
 global.mods = ['393784409415', '393206032199', 'xxx', 'xxx', 'xxx']
 global.prems = ['393784409415', 'xxxx', 'xxxx', 'xxx', 'xxxx']
