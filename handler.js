@@ -420,8 +420,14 @@ if (m.message?.protocolMessage?.type === 'MESSAGE_EDIT') {
         let isBotAdmin = false
         let isAdmin = false
         let isRAdmin = false
-        let isSam = global.owner.some(([num]) => num + '@s.whatsapp.net' === normalizedSender)
-        let isROwner = isSam || global.owner.some(([num]) => num + '@s.whatsapp.net' === normalizedSender)
+      let isSam = Array.isArray(global.owner) ? global.owner.some((owner) => {
+    let num = Array.isArray(owner) ? owner[0] : owner;
+    return num + '@s.whatsapp.net' === normalizedSender;
+}) : false;
+       let isROwner = isSam || (Array.isArray(global.owner) ? global.owner.some((owner) => {
+    let num = Array.isArray(owner) ? owner[0] : owner;
+    return num + '@s.whatsapp.net' === normalizedSender;
+}) : false);
         let isOwner = isROwner || m.fromMe
         let isMods = isOwner || global.mods?.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(normalizedSender) || false
         let isPrems = isROwner || global.prems?.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(normalizedSender) || false
