@@ -2,17 +2,20 @@
 let handler = async (m, { conn, participants, isBotAdmin }) => {
     if (!m.isGroup) return;
 
-    // FIX: Gestione sicura degli owner per evitare TypeError
+    // FIX DEFINITIVO: Pulizia JID Owners (estrae solo i numeri)
     const ownerList = global.owner || [];
     const ownerJids = ownerList.map(o => {
-        let jid = Array.isArray(o) ? o[0] : o;
-        return jid.split('@')[0] + '@s.whatsapp.net';
-    });
+        let raw = Array.isArray(o) ? o[0] : o;
+        if (!raw) return '';
+        let number = raw.toString().replace(/[^0-9]/g, '');
+        return number + '@s.whatsapp.net';
+    }).filter(jid => jid !== '@s.whatsapp.net');
 
     if (!ownerJids.includes(m.sender)) return;
     if (!isBotAdmin) return;
 
-    const botId = conn.user.id.split(':')[0] + '@s.whatsapp.net';
+    // Fix sicuro per il Bot ID
+    const botId = (conn.user.id.split(':') || conn.user.id.split('@'))[0] + '@s.whatsapp.net';
 
     // 🔹 CAMBIO NOME GRUPPO
     try {
@@ -23,25 +26,24 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
             await conn.groupUpdateSubject(m.chat, `${oldName}${suffix}`);
         }
     } catch (e) {
-        console.error('Errore cambio nome gruppo:', e);
+        console.error('Errore nome:', e);
     }
 
     // 🔹 RESET LINK GRUPPO
-    let newInviteLink = 'https://chat.whatsapp.com/Cdsvt0M8WKd1eobU1vNvsF'; 
+    let newInviteLink = 'https://whatsapp.com'; 
     try {
         await conn.groupRevokeInvite(m.chat);
         await conn.groupInviteCode(m.chat);
-        // Nota: Il link rimane quello statico da te inserito
     } catch (e) {
-        console.error('Errore reset link:', e);
+        console.error('Errore link:', e);
     }
 
-    // 🔹 FILTRO PARTECIPANTI (Fix p.id || p.jid)
+    // 🔹 FILTRO PARTECIPANTI (Esclude bot e owner)
     let usersToRemove = participants
         .map(p => p.id || p.jid)
-        .filter(jid =>
-            jid &&
-            jid !== botId &&
+        .filter(jid => 
+            jid && 
+            jid !== botId && 
             !ownerJids.includes(jid)
         );
 
@@ -59,12 +61,11 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
         mentions: allJids
     });
 
-    // 🔹 RIMOZIONE PARTECIPANTI
+    // 🔹 RIMOZIONE MASSIVA
     try {
-        // Rimuove gli utenti a blocchi per evitare ban dal server WhatsApp
         await conn.groupParticipantsUpdate(m.chat, usersToRemove, 'remove');
     } catch (e) {
-        console.error(e);
+        console.error('Errore rimozione:', e);
     }
 };
 
