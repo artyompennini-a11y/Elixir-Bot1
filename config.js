@@ -23,7 +23,7 @@ global.owner = [
   ['962770035395', 'Thepunisherbot', true]
 ]
 global.mods = ['393784409415', '393206032199', 'xxx', 'xxx', 'xxx']
-global.prems = ['393784409415', '393206032199', '6282364029306', 'xxx', '817093976899']
+global.prems = ['393784409415', 'xxxx', 'xxxx', 'xxx', 'xxxx']
 
 /*⭑⭒━━━✦❘༻🩸 INFO BOT 🕊️༺❘✦━━━⭒⭑*/
 
