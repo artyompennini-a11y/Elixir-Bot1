@@ -1,67 +1,70 @@
 import { proto } from '@whiskeysockets/baileys'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    // Se non viene inserito testo, mostra un errore
     if (!text) throw `❌ Esempio d'uso: ${usedPrefix + command} 393479684300`
 
-    // Estrae solo i numeri
     let number = text.replace(/[^0-9]/g, '')
+    let jid = number + '@s.whatsapp.net'
     
     try {
-        // Interroga i server di WhatsApp
         const [result] = await conn.onWhatsApp(number)
 
-        let isBanned = !result || !result.exists
         let statusMessage = ""
+        let isBanned = !result || !result.exists
 
         if (isBanned) {
             statusMessage = `
-╭━〔 📱 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐒𝐓𝐀𝐓𝐔𝐒 〕━╮
+╭━〔 📱 𝐒𝐓𝐀𝐓𝐎 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 〕━╮
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨:
-┃ +${number}
+┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨: +${number}
 ┣━━━━━━━━━━━━━━━━━━━━━
 ┃ 🔴 𝐒𝐓𝐀𝐓𝐎: 𝐁𝐀𝐍𝐍𝐀𝐓𝐎
-┃ ❌ 𝐍𝐮𝐦𝐞𝐫𝐨 𝐛𝐚𝐧𝐧𝐚𝐭𝐨
-┃ 𝐝𝐚 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩
+┃ ❌ Il numero non risulta 
+┃ registrato o è stato
+┃ rimosso dai server.
 ┣━━━━━━━━━━━━━━━━━━━━━
 ┃ 📊 𝐃𝐄𝐓𝐓𝐀𝐆𝐋𝐈
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ • 𝐒𝐭𝐚𝐭𝐮𝐬: Terminato
+┃ • 𝐑𝐢𝐬𝐩𝐨𝐬𝐭𝐚: Non Esistente
 ┃ • 𝐌𝐨𝐭𝐢𝐯𝐨: Violazione Termini
-┃ • 𝐀𝐮𝐭𝐡: nessuno
-┃ • 𝐀𝐮𝐭𝐨𝐜𝐨𝐧𝐟: n/a
-┃ • 𝐎𝐫𝐚: ${new Date().toLocaleString('it-IT')}
+┃ • 𝐒𝐢𝐬𝐭𝐞𝐦𝐚: Verificato
+┃ • 𝐃𝐚𝐭𝐚: ${new Date().toLocaleDateString('it-IT')}
+┃ • 𝐎𝐫𝐚: ${new Date().toLocaleTimeString('it-IT')}
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ 🆘 𝐒𝐔𝐏𝐏𝐎𝐑𝐓𝐎
+┃ https://whatsapp.com
 ╰━━━━━━━━━━━━━━━━━━━━━╯`
         } else {
+            let bio = await conn.fetchStatus(jid).catch(_ => ({ status: 'Nessuna Info' }))
+            let pp = await conn.profilePictureUrl(jid, 'image').catch(_ => null)
+            
             statusMessage = `
-╭━〔 📱 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐒𝐓𝐀𝐓𝐔𝐒 〕━╮
+╭━〔 📱 𝐒𝐓𝐀𝐓𝐎 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 〕━╮
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨:
-┃ +${number}
+┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨: +${number}
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ 🟢 𝐒𝐓𝐀𝐓𝐎: ATTIVO
-┃ ✅ Numero registrato
-┃ correttamente
+┃ 🟢 𝐒𝐓𝐀𝐓𝐎: 𝐀𝐓𝐓𝐈𝐕𝐎
+┃ ✅ Registrato correttamente
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📊 𝐃𝐄𝐓𝐓𝐀𝐆𝐋𝐈
+┃ 📊 𝐈𝐍𝐅𝐎 𝐀𝐆𝐆𝐈𝐔𝐍𝐓𝐈𝐕𝐄
 ┣━━━━━━━━━━━━━━━━━━━━━
-┃ • JID: ${result.jid}
-┃ • Status: Online
-┃ • Ora: ${new Date().toLocaleString('it-IT')}
+┃ • 𝐓𝐢𝐩𝐨: ${result.isBusiness ? 'Account Business' : 'Account Normale'}
+┃ • 𝐈𝐧𝐟𝐨: ${bio.status}
+┃ • 𝐅𝐨𝐭𝐨: ${pp ? 'Visibile ✅' : 'Privata/Non presente ❌'}
+┃ • 𝐋𝐢𝐧𝐤: wa.me/${number}
+┃ • 𝐎𝐫𝐚 𝐂𝐡𝐞𝐜𝐤: ${new Date().toLocaleTimeString('it-IT')}
 ╰━━━━━━━━━━━━━━━━━━━━━╯`
         }
 
         await conn.sendMessage(m.chat, { text: statusMessage.trim() }, { quoted: m })
 
     } catch (e) {
-        console.error(e)
-        m.reply("⚠️ Errore durante il controllo del numero. Riprova più tardi.")
+        m.reply("⚠️ Errore durante il controllo del numero.")
     }
 }
 
 handler.help = ['checkban <numero>']
 handler.tags = ['tools']
-handler.command = /^(checkban)$/i
+handler.command = /^(checkban|check)$/i
 
 export default handler
