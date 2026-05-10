@@ -1,70 +1,176 @@
-import { proto } from '@whiskeysockets/baileys'
+//by easter, mod axtral
+import fetch from 'node-fetch';
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `❌ Esempio d'uso: ${usedPrefix + command} 393479684300`
+let handler = async (m, { args, conn }) => {
 
-    let number = text.replace(/[^0-9]/g, '')
-    let jid = number + '@s.whatsapp.net'
-    
-    try {
-        const [result] = await conn.onWhatsApp(number)
+  if (!args[0]) {
+    return m.reply(`
+╭━〔 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐁𝐀𝐍 𝐂𝐇𝐄𝐂𝐊 〕━╮
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ 📌 *𝐔𝐬𝐨:* .checkban <numero>
+┃ 🌍 *𝐅𝐨𝐫𝐦𝐚𝐭𝐨:* internazionale
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ ✅ 𝐄𝐬𝐞𝐦𝐩𝐢:
+┃ • .checkban 391112224444
+┃ • .checkban +39 111 222 4444
+┃ • .checkban 347 968 4300
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ 🤖 𝐈𝐥 𝐛𝐨𝐭 𝐫𝐢𝐦𝐮𝐨𝐯𝐞
+┃ 𝐚𝐮𝐭𝐨𝐦𝐚𝐭𝐢𝐜𝐚𝐦𝐞𝐧𝐭𝐞 𝐬𝐩𝐚𝐳𝐢 𝐞 +
+╰━━━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+  }
 
-        let statusMessage = ""
-        let isBanned = !result || !result.exists
+  let phoneNumber = args.join(' ').trim();
 
-        if (isBanned) {
-            statusMessage = `
-╭━〔 📱 𝐒𝐓𝐀𝐓𝐎 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 〕━╮
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨: +${number}
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 🔴 𝐒𝐓𝐀𝐓𝐎: 𝐁𝐀𝐍𝐍𝐀𝐓𝐎
-┃ ❌ Il numero non risulta 
-┃ registrato o è stato
-┃ rimosso dai server.
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📊 𝐃𝐄𝐓𝐓𝐀𝐆𝐋𝐈
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ • 𝐑𝐢𝐬𝐩𝐨𝐬𝐭𝐚: Non Esistente
-┃ • 𝐌𝐨𝐭𝐢𝐯𝐨: Violazione Termini
-┃ • 𝐒𝐢𝐬𝐭𝐞𝐦𝐚: Verificato
-┃ • 𝐃𝐚𝐭𝐚: ${new Date().toLocaleDateString('it-IT')}
-┃ • 𝐎𝐫𝐚: ${new Date().toLocaleTimeString('it-IT')}
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 🆘 𝐒𝐔𝐏𝐏𝐎𝐑𝐓𝐎
-┃ https://whatsapp.com
-╰━━━━━━━━━━━━━━━━━━━━━╯`
-        } else {
-            let bio = await conn.fetchStatus(jid).catch(_ => ({ status: 'Nessuna Info' }))
-            let pp = await conn.profilePictureUrl(jid, 'image').catch(_ => null)
-            
-            statusMessage = `
-╭━〔 📱 𝐒𝐓𝐀𝐓𝐎 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 〕━╮
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨: +${number}
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 🟢 𝐒𝐓𝐀𝐓𝐎: 𝐀𝐓𝐓𝐈𝐕𝐎
-┃ ✅ Registrato correttamente
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ 📊 𝐈𝐍𝐅𝐎 𝐀𝐆𝐆𝐈𝐔𝐍𝐓𝐈𝐕𝐄
-┣━━━━━━━━━━━━━━━━━━━━━
-┃ • 𝐓𝐢𝐩𝐨: ${result.isBusiness ? 'Account Business' : 'Account Normale'}
-┃ • 𝐈𝐧𝐟𝐨: ${bio.status}
-┃ • 𝐅𝐨𝐭𝐨: ${pp ? 'Visibile ✅' : 'Privata/Non presente ❌'}
-┃ • 𝐋𝐢𝐧𝐤: wa.me/${number}
-┃ • 𝐎𝐫𝐚 𝐂𝐡𝐞𝐜𝐤: ${new Date().toLocaleTimeString('it-IT')}
-╰━━━━━━━━━━━━━━━━━━━━━╯`
-        }
+  phoneNumber = phoneNumber.replace(/[\s\-\(\)\+]/g, '');
 
-        await conn.sendMessage(m.chat, { text: statusMessage.trim() }, { quoted: m })
+  if (phoneNumber.startsWith('3') && phoneNumber.length === 10) {
+    phoneNumber = '39' + phoneNumber;
+  }
 
-    } catch (e) {
-        m.reply("⚠️ Errore durante il controllo del numero.")
+  if (!/^\d+$/.test(phoneNumber)) {
+    return m.reply(`
+╭━〔 ❌ 𝐍𝐔𝐌𝐄𝐑𝐎 𝐈𝐍𝐕𝐀𝐋𝐈𝐃𝐎 〕━╮
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ 📌 𝐈𝐧𝐬𝐞𝐫𝐢𝐬𝐜𝐢 𝐬𝐨𝐥𝐨 𝐧𝐮𝐦𝐞𝐫𝐢
+┃
+┃ ✅ 𝐅𝐨𝐫𝐦𝐚𝐭𝐢 𝐚𝐜𝐜𝐞𝐭𝐭𝐚𝐭𝐢:
+┃ • 391112224444
+┃ • +391112224444
+┃ • 347 968 4300
+┃ • +39 347 968 4300
+╰━━━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+  }
+
+  if (phoneNumber.length < 10) {
+    return m.reply(`
+╭━〔 𝐍𝐔𝐌𝐄𝐑𝐎 𝐓𝐑𝐎𝐏𝐏𝐎 𝐂𝐎𝐑𝐓𝐎 〕━╮
+┣━━━━━━━━━━━━━━━━━━━━
+┃ 📌 𝐈𝐧𝐬𝐞𝐫𝐢𝐬𝐜𝐢 𝐚𝐥𝐦𝐞𝐧𝐨
+┃ 𝟏𝟎 𝐜𝐢𝐟𝐫𝐞 𝐯𝐚𝐥𝐢𝐝𝐞
+╰━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+  }
+
+  try {
+
+    await m.reply(`
+╭━━〔 🔍 𝐂𝐎𝐍𝐓𝐑𝐎𝐋𝐋𝐎 〕━━╮
+┣━━━━━━━━━━━━━━━━━━━
+┃ 📱 𝐕𝐞𝐫𝐢𝐟𝐢𝐜𝐚 𝐧𝐮𝐦𝐞𝐫𝐨
+┃ 𝐢𝐧 𝐜𝐨𝐫𝐬𝐨 𝐬𝐮 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩...
+╰━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+
+    const tokenRes = await fetch('https://baron0.com/api/get-token');
+
+    if (!tokenRes.ok) {
+      return m.reply(`
+╭━━〔 ❌ 𝐄𝐑𝐑𝐎𝐑𝐄 𝐀𝐏𝐈 〕━━╮
+┣━━━━━━━━━━━━━━━━━━━
+┃ HTTP ${tokenRes.status}
+┃ Token non disponibile
+╰━━━━━━━━━━━━━━━━━━━╯
+`.trim());
     }
+
+    const { token } = await tokenRes.json();
+
+    const response = await fetch('https://baron0.com/check-number', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-page-token': token,
+      },
+      body: JSON.stringify({
+        number: `+${phoneNumber}`
+      }),
+    });
+
+    if (!response.ok) {
+      return m.reply(`
+╭━━〔 ❌ 𝐄𝐑𝐑𝐎𝐑𝐄 𝐀𝐏𝐈 〕━━╮
+┣━━━━━━━━━━━━━━━━━━━━
+┃ HTTP ${response.status}
+┃ Endpoint non disponibile
+╰━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+    }
+
+    const data = await response.json();
+
+    const isBanned = data.banned || false;
+    const err = data.error || {};
+
+    const status = err.status || 'unknown';
+    const reason = err.reason || 'unknown';
+    const loginNum = err.login || phoneNumber;
+
+    const methods =
+      Array.isArray(err.fallback_methods) &&
+      err.fallback_methods.length
+        ? err.fallback_methods.join(', ')
+        : 'nessuno';
+
+    const autoconf =
+      err.autoconf_type != null
+        ? err.autoconf_type
+        : 'n/a';
+
+    let replyMsg = `╭━〔 📱 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐒𝐓𝐀𝐓𝐔𝐒 〕━╮
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ 📞 𝐍𝐮𝐦𝐞𝐫𝐨:
+┃ +${loginNum}
+┣━━━━━━━━━━━━━━━━━━━━━
+`;
+
+if (isBanned) {
+  replyMsg += `┃ 🔴 𝐒𝐓𝐀𝐓𝐎: 𝐁𝐀𝐍𝐍𝐀𝐓𝐎
+┃ ❌ 𝐍𝐮𝐦𝐞𝐫𝐨 𝐛𝐚𝐧𝐧𝐚𝐭𝐨
+┃ 𝐝𝐚 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩
+`;
+} else {
+  replyMsg += `┃ 🟢 𝐒𝐓𝐀𝐓𝐎: 𝐀𝐓𝐓𝐈𝐕𝐎
+┃ ✅ 𝐍𝐮𝐦𝐞𝐫𝐨 𝐚𝐭𝐭𝐢𝐯𝐨
+┃ 𝐬𝐮 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩
+`;
 }
 
-handler.help = ['checkban <numero>']
-handler.tags = ['tools']
-handler.command = /^(checkban|check)$/i
+replyMsg += `┣━━━━━━━━━━━━━━━━━━━━━
+┃ 📊 𝐃𝐄𝐓𝐓𝐀𝐆𝐋𝐈
+┣━━━━━━━━━━━━━━━━━━━━━
+┃ • 𝐒𝐭𝐚𝐭𝐮𝐬: ${status}
+┃ • 𝐌𝐨𝐭𝐢𝐯𝐨: ${reason}
+┃ • 𝐀𝐮𝐭𝐡: ${methods}
+┃ • 𝐀𝐮𝐭𝐨𝐜𝐨𝐧𝐟: ${autoconf}
+┃ • 𝐎𝐫𝐚: ${new Date().toLocaleString('it-IT')}
+╰━━━━━━━━━━━━━━━━━━━━━╯`;
 
-export default handler
+m.reply(replyMsg.trim());
+
+  } catch (error) {
+
+    console.error('WhatsApp Ban Check Error:', error);
+
+    m.reply(`
+╭━━〔 ❌ 𝐄𝐑𝐑𝐎𝐑𝐄 〕━━╮
+┣━━━━━━━━━━━━━━━━━━━
+┃ 🌐 𝐄𝐫𝐫𝐨𝐫𝐞 𝐜𝐨𝐧𝐧𝐞𝐬𝐬𝐢𝐨𝐧𝐞
+┃
+┃ ${error.message}
+┃
+┃ 🔄 𝐑𝐢𝐩𝐫𝐨𝐯𝐚 𝐩𝐢𝐮̀ 𝐭𝐚𝐫𝐝𝐢
+╰━━━━━━━━━━━━━━━━━━━╯
+`.trim());
+  }
+};
+
+handler.help = ['checkban'];
+handler.tags = ['tools'];
+
+handler.command =
+ /^(checkban|check-ban|controllabn|controllawhatsapp|wa-check|whatsapp-check)$/i;
+
+export default handler;
