@@ -1,0 +1,28 @@
+let handler = async (m, { conn, text }) => {
+    if (!text) throw 'Indica il link del canale WhatsApp!\n\nEsempio:\n*!getid* https://whatsapp.com';
+    
+    let code = text.split('/').pop();
+    
+    try {
+        let res = await conn.newsletterMetadata("invite", code);
+        
+        let caption = `
+*ID CANALE TROVATO*
+        
+📌 *Nome:* ${res.name}
+🆔 *ID:* \`${res.id}\`
+👥 *Followers:* ${res.subscribers || 'Privato'}
+`.trim();
+
+        await conn.reply(m.chat, caption, m);
+        
+    } catch (e) {
+        throw '❌ Impossibile recuperare l\'ID. Link errato o non supportato.';
+    }
+}
+
+handler.help = ['getid'];
+handler.tags = ['tools'];
+handler.command = /^(getid|channelid|idcanale)$/i;
+
+export default handler;
