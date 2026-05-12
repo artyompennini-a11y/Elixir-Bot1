@@ -2,6 +2,7 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
   const chatId = msg.chat;
   
   // --- CONTROLLO ACCESSO ---
+  // Solo un admin può usare i comandi .warn/.unwarn
   if (!isAdmin) return conn.reply(chatId, '`[!] ACCESSO NEGATO: Privilegi Admin richiesti.`', msg);
 
   let mentionedJid = msg.mentionedJid?.[0] || msg.quoted?.sender;
@@ -18,18 +19,6 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
     return conn.reply(chatId, `*───「 ⚠️ UTENTE NON TROVATO 」───*\n\nTagga un utente o rispondi a un suo messaggio.\n\n*Esempio:* \`.warn @user Motivo\`\n*────────────────*`, msg);
   }
 
-  const botNumber = conn.user.jid.split(':')[0] + '@s.whatsapp.net';
-  const groupMetadata = await conn.groupMetadata(chatId);
-  const groupOwner = groupMetadata.owner || chatId.split('-')[0] + '@s.whatsapp.net';
-
-  // --- PROTEZIONI DI SISTEMA ---
-  // Verifica se il target è un admin o il bot stesso
-  const isTargetAdmin = groupMetadata.participants.find(p => p.id === mentionedJid)?.admin !== null;
-
-  if (mentionedJid === groupOwner || mentionedJid === botNumber || isTargetAdmin) {
-    return conn.reply(chatId, `*───「 👑 TARGET PROTETTO 」───*\n\nNon è possibile sanzionare il proprietario, un admin o il bot stesso.\n*────────────────*`, msg);
-  }
-
   // Inizializzazione Database
   if (!global.db.data.users) global.db.data.users = {}; 
   if (!global.db.data.users[mentionedJid]) global.db.data.users[mentionedJid] = { warn: 0 };
@@ -39,6 +28,7 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
 
   // --- COMANDO WARN ---
   if (command === 'warn') {
+    // Pulizia del testo per estrarre la motivazione
     let reason = text ? text.replace(new RegExp(`@${mentionedJid.split('@')[0]}|${mentionedJid.split('@')[0]}`, 'gi'), '').trim() : '';
     
     if (!reason || reason.length < 3) {
@@ -48,9 +38,10 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
     user.warn += 1;
 
     if (user.warn >= 3) {
-      if (!isBotAdmin) return conn.reply(chatId, '`[!] Errore: Non posso espellere l\'utente perché non sono Admin.`', msg);
+      // Se il bot non è admin, non può eseguire la rimozione fisica
+      if (!isBotAdmin) return conn.reply(chatId, '`[!] Il target ha raggiunto 3 warn, ma non posso espellerlo perché non sono Admin.`', msg);
       
-      user.warn = 0; 
+      user.warn = 0; // Reset dei warn dopo l'espulsione
       await conn.groupParticipantsUpdate(chatId, [mentionedJid], 'remove');
 
       return conn.sendMessage(chatId, {
@@ -65,7 +56,7 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
     });
   }
 
-  // --- COMANDO UNWARN ---
+  // --- COMANDO UNWWARN ---
   if (command === 'unwarn') {
     if (!user.warn || user.warn <= 0) {
         return conn.reply(chatId, '`[!] L\'utente non ha sanzioni attive.`', msg);
