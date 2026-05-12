@@ -1,5 +1,5 @@
 let handler = async (m, { conn, text }) => {
-    if (!text) throw 'Indica il link del canale WhatsApp!\n\nEsempio:\n*!getid* https://whatsapp.com';
+    if (!text) throw 'Indica il link del canale WhatsApp!\n\nEsempio:\n*!getid* https://whatsapp.com/channel/0029Vb7ptH62UPBKFFgByc3C';
     
     let code = text.split('/').pop();
     
