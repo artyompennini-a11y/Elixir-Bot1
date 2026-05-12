@@ -3,7 +3,12 @@ const PROTECTED_USERS = [
   '393514722317@s.whatsapp.net'
 ];
 
-const handler = async (msg, { conn, command, text, isAdmin }) => {
+const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
+  const chatId = msg.chat;
+  
+  // --- CONTROLLO ACCESSO ---
+  if (!isAdmin) return conn.reply(chatId, '`[!] ACCESSO NEGATO: Privilegi Admin richiesti.`', msg);
+
   let mentionedJid = msg.mentionedJid?.[0] || msg.quoted?.sender;
 
   // Identificazione utente dal testo se non c'è tag/quote
@@ -14,41 +19,44 @@ const handler = async (msg, { conn, command, text, isAdmin }) => {
     }
   }
 
-  const chatId = msg.chat;
-  const botNumber = conn.user.jid;
-  const groupMetadata = await conn.groupMetadata(chatId);
-  const groupOwner = groupMetadata.owner || chatId.split('-')[0] + '@s.whatsapp.net';
-
-  // --- CONTROLLO ACCESSO ---
-  if (!isAdmin) throw '`[!] ACCESSO NEGATO: Privilegi Admin richiesti.`';
-
   if (!mentionedJid) {
     return conn.reply(chatId, `*───「 ⚠️ UTENTE NON TROVATO 」───*\n\nTagga un utente o rispondi a un suo messaggio.\n\n*Esempio:* \`.warn @user Motivo\`\n*────────────────*`, msg);
   }
 
-  // --- ESTRAZIONE MOTIVAZIONE OBBLIGATORIA (Solo per Warn) ---
-  // Rimuove il tag o il numero dal testo per isolare il motivo
-  let reason = text ? text.replace(/@\d+|^\d+/, '').trim() : '';
-
-  if (command === 'warn' && (!reason || reason.length < 3)) {
-    return conn.reply(chatId, `*───「 ❌ ERRORE PROTOCOLLO 」───*\n\nDevi inserire una *motivazione* per ammonire l'utente.\n\n*Esempio:* \`.warn ${mentionedJid.split('@')[0]} Comportamento inappropriato\`\n*────────────────*`, msg);
-  }
+  const botNumber = conn.user.jid.split(':')[0] + '@s.whatsapp.net';
+  const groupMetadata = await conn.groupMetadata(chatId);
+  const groupOwner = groupMetadata.owner || chatId.split('-')[0] + '@s.whatsapp.net';
 
   // --- PROTEZIONI REALI ---
-  if (mentionedJid === groupOwner || PROTECTED_USERS.includes(mentionedJid) || mentionedJid === botNumber) {
-    return conn.reply(chatId, `*───「 👑 TARGET PROTETTO 」───*\n\nL'utente selezionato è presente nel database delle protezioni di *Elixir*.\n*────────────────*`, msg);
+  // Verifica se il target è un admin del gruppo
+  const isTargetAdmin = groupMetadata.participants.find(p => p.id === mentionedJid)?.admin !== null;
+
+  if (mentionedJid === groupOwner || PROTECTED_USERS.includes(mentionedJid) || mentionedJid === botNumber || isTargetAdmin) {
+    return conn.reply(chatId, `*───「 👑 TARGET PROTETTO 」───*\n\nL'utente selezionato è un Admin o è nel database delle protezioni.\n*────────────────*`, msg);
   }
 
+  // Inizializzazione Database
+  if (!global.db.data.users) global.db.data.users = {}; 
   if (!global.db.data.users[mentionedJid]) global.db.data.users[mentionedJid] = { warn: 0 };
+  
   const user = global.db.data.users[mentionedJid];
   const tag = '@' + mentionedJid.split('@')[0];
 
   // --- COMANDO WARN ---
   if (command === 'warn') {
-    user.warn = (user.warn || 0) + 1;
+    // Estrazione motivo: rimuove il numero/tag iniziale dal testo
+    let reason = text ? text.replace(new RegExp(`@${mentionedJid.split('@')[0]}|${mentionedJid.split('@')[0]}`, 'gi'), '').trim() : '';
+    
+    if (!reason || reason.length < 3) {
+      return conn.reply(chatId, `*───「 ❌ ERRORE PROTOCOLLO 」───*\n\nDevi inserire una *motivazione* valida.\n\n*Esempio:* \`.warn @user Spam\`\n*────────────────*`, msg);
+    }
+
+    user.warn += 1;
 
     if (user.warn >= 3) {
-      user.warn = 0;
+      if (!isBotAdmin) return conn.reply(chatId, '`[!] Errore: Non posso espellere l\'utente perché non sono Admin.`', msg);
+      
+      user.warn = 0; // Reset dopo kick
       await conn.groupParticipantsUpdate(chatId, [mentionedJid], 'remove');
 
       return conn.sendMessage(chatId, {
@@ -63,9 +71,12 @@ const handler = async (msg, { conn, command, text, isAdmin }) => {
     });
   }
 
-  // --- COMANDO UNWWARN ---
+  // --- COMANDO UNWARN ---
   if (command === 'unwarn') {
-    if (!user.warn || user.warn <= 0) throw '`[!] L\'utente non ha sanzioni attive.`';
+    if (!user.warn || user.warn <= 0) {
+        return conn.reply(chatId, '`[!] L\'utente non ha sanzioni attive.`', msg);
+    }
+    
     user.warn -= 1;
 
     return conn.sendMessage(chatId, {
@@ -79,4 +90,7 @@ handler.help = ['warn', 'unwarn'];
 handler.tags = ['admin'];
 handler.command = /^(warn|unwarn)$/i;
 handler.group = true;
+handler.admin = true;
 handler.botAdmin = true;
+
+export default handler;
