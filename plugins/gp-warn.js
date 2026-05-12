@@ -1,8 +1,3 @@
-const PROTECTED_USERS = [
-  '393784409415@s.whatsapp.net',
-  '393514722317@s.whatsapp.net'
-];
-
 const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
   const chatId = msg.chat;
   
@@ -27,12 +22,12 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
   const groupMetadata = await conn.groupMetadata(chatId);
   const groupOwner = groupMetadata.owner || chatId.split('-')[0] + '@s.whatsapp.net';
 
-  // --- PROTEZIONI REALI ---
-  // Verifica se il target è un admin del gruppo
+  // --- PROTEZIONI DI SISTEMA ---
+  // Verifica se il target è un admin o il bot stesso
   const isTargetAdmin = groupMetadata.participants.find(p => p.id === mentionedJid)?.admin !== null;
 
-  if (mentionedJid === groupOwner || PROTECTED_USERS.includes(mentionedJid) || mentionedJid === botNumber || isTargetAdmin) {
-    return conn.reply(chatId, `*───「 👑 TARGET PROTETTO 」───*\n\nL'utente selezionato è un Admin o è nel database delle protezioni.\n*────────────────*`, msg);
+  if (mentionedJid === groupOwner || mentionedJid === botNumber || isTargetAdmin) {
+    return conn.reply(chatId, `*───「 👑 TARGET PROTETTO 」───*\n\nNon è possibile sanzionare il proprietario, un admin o il bot stesso.\n*────────────────*`, msg);
   }
 
   // Inizializzazione Database
@@ -44,7 +39,6 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
 
   // --- COMANDO WARN ---
   if (command === 'warn') {
-    // Estrazione motivo: rimuove il numero/tag iniziale dal testo
     let reason = text ? text.replace(new RegExp(`@${mentionedJid.split('@')[0]}|${mentionedJid.split('@')[0]}`, 'gi'), '').trim() : '';
     
     if (!reason || reason.length < 3) {
@@ -56,7 +50,7 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
     if (user.warn >= 3) {
       if (!isBotAdmin) return conn.reply(chatId, '`[!] Errore: Non posso espellere l\'utente perché non sono Admin.`', msg);
       
-      user.warn = 0; // Reset dopo kick
+      user.warn = 0; 
       await conn.groupParticipantsUpdate(chatId, [mentionedJid], 'remove');
 
       return conn.sendMessage(chatId, {
