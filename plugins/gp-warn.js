@@ -51,7 +51,7 @@ const handler = async (msg, { conn, command, text, isAdmin, isBotAdmin }) => {
     }
 
     return conn.sendMessage(chatId, {
-      text: `┏─━─━─━  〔 ⚠️ 〕  ━─━─━─┓\n     *ELIXIR WARN SYSTEM*\n┗─━─━─━─━─━─━─━─━─┛\n\n◈ *Target:* ${tag}\n◈ *Motivo:* \`${reason}\`\n◈ *Stato:* \`${user.warn}/3 Warn\`\n\n> *Attenzione:* Al prossimo richiamo verrai rimosso dal gruppo.`,
+      text: `┏─━─━─━  〔 ⚠️ 〕  ━─━─━─┓\n     *THE PUNISHER WARN SYSTEM*\n┗─━─━─━─━─━─━─━─━─┛\n\n◈ *Target:* ${tag}\n◈ *Motivo:* \`${reason}\`\n◈ *Stato:* \`${user.warn}/3 Warn\`\n\n> *Attenzione:* Al prossimo richiamo verrai rimosso dal gruppo.`,
       mentions: [mentionedJid]
     });
   }
