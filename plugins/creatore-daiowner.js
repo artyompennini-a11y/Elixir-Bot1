@@ -72,4 +72,4 @@ handler.command = /^(addowner|dadiowner|setowner)$/i
 handler.creatorebot = true
 handler.rowner = true 
 
-export default handler
+export default handler 
