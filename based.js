@@ -355,7 +355,7 @@ async function connectionUpdate(update) {
             global.connectionMessagesPrinted.badSession = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === DisconnectReason.connectionLost && !global.connectionMessagesPrinted.connectionLost) {
-            console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 📡 CONNESSIONE PERSA ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO... \n╰⭑⭒━━━✦❘༻☾⋆₊✧ ᴇʟɪxɪʀʙᴏᴛ� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 📡 CONNESSIONE PERSA ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO... \n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             global.connectionMessagesPrinted.connectionLost = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === DisconnectReason.connectionReplaced && !global.connectionMessagesPrinted.connectionReplaced) {
@@ -588,7 +588,7 @@ function clearDirectory(dirPath) {
 function purgeSession(sessionDir, cleanPreKeys = false) {
     try {
         if (!existsSync(sessionDir)) {
-            console.log(chalk.bold.hex('#F1C40F')(`\n╭⭑⭒━━━✦❘༻ 🟡 DIRECTORY 🟡 ༺❘✦━━━⭒⭑\n┃  ⚠️  Sessione non trovata: ${sessionDir}\n╰⭑⭒━━━✦❘༻☾⋆₊✧ ᴇʟɪxɪʀʙᴏᴛ� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#F1C40F')(`\n╭⭑⭒━━━✦❘༻ 🟡 DIRECTORY 🟡 ༺❘✦━━━⭒⭑\n┃  ⚠️  Sessione non trovata: ${sessionDir}\n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             return;
         }
         const files = readdirSync(sessionDir);
@@ -631,7 +631,7 @@ function purgeSession(sessionDir, cleanPreKeys = false) {
         if (preKeyDeletedCount > 0) {
             message += `\n┃  🔑 ${preKeyDeletedCount} chiavi obsolete rimosse`;
         }
-        message += `\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🗑️ ᴇʟɪxɪʀʙᴏᴛ� ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`;
+        message += `\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🗑️ THE PUNISHER-BOT� ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`;
 
         if (deletedCount > 0) {
             console.log(message);
