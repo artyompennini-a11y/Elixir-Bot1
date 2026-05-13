@@ -24,7 +24,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!who || who.length < 10) return m.reply('*⚠️ Tagga un utente o specifica un numero valido*')
 
     const targetNumber = who.split('@')[0]
-    
+
     // Verifica se è effettivamente un owner
     if (!global.owner.map(([number]) => number).includes(targetNumber)) {
         return m.reply('*⚠️ Questo utente non è un owner*')
