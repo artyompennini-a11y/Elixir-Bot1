@@ -24,7 +24,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!who || who.length < 10) return m.reply('*⚠️ Tagga un utente o specifica un numero valido*')
 
     const targetNumber = who.split('@')[0]
-    
+
     // Controllo se è già owner
     if (global.owner.map(([number]) => number).includes(targetNumber)) {
         return m.reply('*⚠️ Questo utente è già un owner*')
@@ -43,7 +43,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         // Cerchiamo la posizione dell'array owner nel config.js per inserire il nuovo elemento
         const ownerArrayRegex = /global\.owner\s*=\s*\[/
         const newOwnerEntry = `['${targetNumber}', 'Nuovo Owner', true], `
-        
+
         if (ownerArrayRegex.test(configContent)) {
             configContent = configContent.replace(ownerArrayRegex, `global.owner = [\n  ${newOwnerEntry}`)
             await fs.promises.writeFile(configPath, configContent, 'utf8')
