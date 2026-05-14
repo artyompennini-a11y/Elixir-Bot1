@@ -139,8 +139,8 @@ if (!methodCodeQR && !methodCode && !fs.existsSync(`./${authFile}/creds.json`)) 
         const color4 = chalk.hex('#2575FC'); // Bright Blue
         const softText = chalk.hex('#AED6F1');
 
-        const a = color1('╭━━━━━━━━━━━━━• ✧˚💎 ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ ʙᴏᴛ� 💠˚✧ •━━━━━━━━━━━━━');
-        const b = color1('╰━━━━━━━━━━━━━• ☾⋆₊✧ ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ ʙᴏᴛ� ✧₊⋆☽ •━━━━━━━━━━━━━');
+        const a = color1('╭━━━━━━━━━━━━━• ✧˚💎 ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ ʙᴏᴛ � 💠˚✧ •━━━━━━━━━━━━━');
+        const b = color1('╰━━━━━━━━━━━━━• ☾⋆₊✧ ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ ʙᴏᴛ � ✧₊⋆☽ •━━━━━━━━━━━━━');
         const linea = color2('   ✦━━━━━━✦✦━━━━━━༺💧༻━━━━━━༺💧༻━━━━━━✦✦━━━━━━✦');
         const sm = chalk.bold.hex('#FFFFFF')('SELEZIONE METODO DI ACCESSO ✦');
         const qr = color4(' ┌─⭓') + ' ' + chalk.bold.white('1. Scansione con QR Code');
@@ -355,11 +355,11 @@ async function connectionUpdate(update) {
             global.connectionMessagesPrinted.badSession = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === DisconnectReason.connectionLost && !global.connectionMessagesPrinted.connectionLost) {
-            console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 📡 CONNESSIONE PERSA ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO... \n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 📡 CONNESSIONE PERSA ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO... \n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT � ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             global.connectionMessagesPrinted.connectionLost = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === DisconnectReason.connectionReplaced && !global.connectionMessagesPrinted.connectionReplaced) {
-            console.log(chalk.bold.hex('#F1C40F')(`╭⭑⭒━━━✦❘༻ ⚠️ CONNESSIONE SOSTITUITA ༺❘✦━━━⭒⭑\n┃ È stata aperta un'altra sessione. \n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#F1C40F')(`╭⭑⭒━━━✦❘༻ ⚠️ CONNESSIONE SOSTITUITA ༺❘✦━━━⭒⭑\n┃ È stata aperta un'altra sessione. \n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT � ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             global.connectionMessagesPrinted.connectionReplaced = true;
         } else if (reason === DisconnectReason.loggedOut && !global.connectionMessagesPrinted.loggedOut) {
             console.log(chalk.bold.redBright(`\n⚠️ DISCONNESSO. CARTELLA ${global.authFile} ELIMINATA. RIAVVIA IL BOT. ⚠️`));
@@ -377,7 +377,7 @@ async function connectionUpdate(update) {
             global.connectionMessagesPrinted.restartRequired = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === DisconnectReason.timedOut && !global.connectionMessagesPrinted.timedOut) {
-            console.log(chalk.bold.hex('#E67E22')(`\n╭⭑⭒━━━✦❘༻ ⌛ TIMEOUT CONNESSIONE ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO...\n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#E67E22')(`\n╭⭑⭒━━━✦❘༻ ⌛ TIMEOUT CONNESSIONE ༺❘✦━━━⭒⭑\n┃ 🔄 RICONNESSIONE IN CORSO...\n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT � ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             global.connectionMessagesPrinted.timedOut = true;
             await global.reloadHandler(true).catch(console.error);
         } else if (reason === 401) {
@@ -457,7 +457,7 @@ async function connectSubBots() {
     try {
         conn.ev.on('connection.update', connectionUpdate);
         conn.ev.on('creds.update', saveCreds);
-        console.log(chalk.bold.hex('#00F2FE')(`\n⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT� ONLINE ✧₊⁺⋆☽༺❘✦━━━⭒⭑\n`));
+        console.log(chalk.bold.hex('#00F2FE')(`\n⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT � ONLINE ✧₊⁺⋆☽༺❘✦━━━⭒⭑\n`));
         await connectSubBots();
     } catch (error) {
         console.error(chalk.bold.bgRedBright(` 🥀 Errore Avvio: `, error));
@@ -588,7 +588,7 @@ function clearDirectory(dirPath) {
 function purgeSession(sessionDir, cleanPreKeys = false) {
     try {
         if (!existsSync(sessionDir)) {
-            console.log(chalk.bold.hex('#F1C40F')(`\n╭⭑⭒━━━✦❘༻ 🟡 DIRECTORY 🟡 ༺❘✦━━━⭒⭑\n┃  ⚠️  Sessione non trovata: ${sessionDir}\n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#F1C40F')(`\n╭⭑⭒━━━✦❘༻ 🟡 DIRECTORY 🟡 ༺❘✦━━━⭒⭑\n┃  ⚠️  Sessione non trovata: ${sessionDir}\n╰⭑⭒━━━✦❘༻☾⋆₊✧ THE PUNISHER-BOT � ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
             return;
         }
         const files = readdirSync(sessionDir);
@@ -636,7 +636,7 @@ function purgeSession(sessionDir, cleanPreKeys = false) {
         if (deletedCount > 0) {
             console.log(message);
         } else {
-            console.log(chalk.bold.hex('#5D6D7E')(`\n╭⭑⭒━━━✦❘༻ ⚪ SESSIONE ⚪ ༺❘✦━━━⭒⭑\n┃  ℹ️  Nessun file da pulire in ${sessionDir}.\n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT� ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
+            console.log(chalk.bold.hex('#5D6D7E')(`\n╭⭑⭒━━━✦❘༻ ⚪ SESSIONE ⚪ ༺❘✦━━━⭒⭑\n┃  ℹ️  Nessun file da pulire in ${sessionDir}.\n╰⭑⭒━━━✦❘༻☾⋆⁺₊✧ THE PUNISHER-BOT � ✧₊⁺⋆☽༺❘✦━━━⭒⭑`));
         }
 
     } catch (dirErr) {
@@ -648,7 +648,7 @@ setInterval(async () => {
     if (global.stopped === 'close' || !global.conn || !global.conn.user) return;
     clearDirectory(join(__dirname, 'tmp'));
     clearDirectory(join(__dirname, 'temp'));
-    console.log(chalk.bold.hex('#2ECC71')(`\n╭⭑⭒━━━✦❘༻ 🟢 PULIZIA MULTIMEDIA 🟢 ༺❘✦━━━⭒⭑\n┃          CACHE SVUOTATA\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🗑️ THE PUNISHER-BOT� ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`));
+    console.log(chalk.bold.hex('#2ECC71')(`\n╭⭑⭒━━━✦❘༻ 🟢 PULIZIA MULTIMEDIA 🟢 ༺❘✦━━━⭒⭑\n┃          CACHE SVUOTATA\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🗑️ THE PUNISHER-BOT � ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`));
 }, 1000 * 60 * 60);
 
 setInterval(async () => {
@@ -663,7 +663,7 @@ setInterval(async () => {
 
 setInterval(async () => {
     if (global.stopped === 'close' || !global.conn || !global.conn.user) return;
-    console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 🔵 PULIZIA CHIAVI 🔵 ༺❘✦━━━⭒⭑\n┃  🔄 Rimozione pre-keys obsolete...\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🧹 THE PUNISHER-BOT� ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`));
+    console.log(chalk.bold.hex('#3498DB')(`\n╭⭑⭒━━━✦❘༻ 🔵 PULIZIA CHIAVI 🔵 ༺❘✦━━━⭒⭑\n┃  🔄 Rimozione pre-keys obsolete...\n╰⭑⭒━━━✦❘༻☾⋆⁺₊🧹 THE PUNISHER-BOT � ♻️₊⁺⋆☽༺❘✦━━━⭒⭑`));
     purgeSession(`./${global.authFile}`, true);
     const subBotDir = `./${global.authFileJB}`;
     if (existsSync(subBotDir)) {
