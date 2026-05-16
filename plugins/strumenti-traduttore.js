@@ -247,7 +247,7 @@ ${Object.entries(languages).map(([code, name]) => `*├─⭓* *${code}: ${name}
 ┌─⭓ \`Traduzione:\`
 └─⭓ ${fullTranslation}
                 `,
-                footer: 'elixir ✧ bot',
+                footer: 'THE PUNISHER✧BOT ',
                 buttons: buttons,
                 headerType: 1
             };
