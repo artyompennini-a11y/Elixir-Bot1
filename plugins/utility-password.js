@@ -109,7 +109,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
   \`-l\`  → solo minuscole
   \`1-5\` → quante password generare
 
-_☣️ Elixir Bot - Generazione sicura._`, m)
+_☣️ THE PUNISHER-BOT - Generazione sicura._`, m)
   }
 
   await m.react('🔑')
