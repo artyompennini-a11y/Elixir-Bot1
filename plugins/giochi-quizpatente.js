@@ -57,7 +57,7 @@ let handler = async (m, { conn, command, args }) => {
 
     const buttonMessage = {
       text: caption,
-      footer: 'elixir ✧ bot',
+      footer: 'THE PUNISHER ✧ BOT',
       buttons: buttons,
       headerType: 1
     }
