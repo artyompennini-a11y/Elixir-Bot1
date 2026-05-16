@@ -400,7 +400,7 @@ async function handleAnimeSearch(conn, m, query, geminiKey, usedPrefix) {
     await conn.sendMessage(m.chat, {
       image: { url: imageUrl },
       caption: animeMessage.trim(),
-      footer: `elixir ✧ bot`,
+      footer: `THE PUNISHER ✧ BOT`,
       interactiveButtons: buttons
     }, { quoted: m });
 
@@ -523,7 +523,7 @@ ${streamingText}
     await conn.sendMessage(m.chat, {
       image: { url: posterUrl },
       caption: message.trim(),
-      footer: `elixir ✧ bot`,
+      footer: `THE PUNISHER ✧ BOT`,
       interactiveButtons: buttons
     }, { quoted: m });
 
