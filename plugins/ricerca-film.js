@@ -320,7 +320,7 @@ ${streamingText}
     await conn.sendMessage(m.chat, {
       image: { url: posterUrl },
       caption: message.trim(),
-      footer: `elixir ✧ bot`,
+      footer: `THE PUNISHER ✧ BOT`,
       interactiveButtons: buttons
     }, { quoted: m });
 
