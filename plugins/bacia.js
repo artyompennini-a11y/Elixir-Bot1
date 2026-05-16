@@ -13,6 +13,7 @@ let handler = async (m, { conn }) => {
   } else {
     return m.reply("Devi menzionare qualcuno o rispondere al suo messaggio per dargli un bacio! 💋");
   }
+
   // --- CREAZIONE CANVAS REALISTICO ---
   const canvas = createCanvas(500, 300);
   const ctx = canvas.getContext('2d');
@@ -59,7 +60,7 @@ let handler = async (m, { conn }) => {
   ];
 
   const fraseRandom = frasi[Math.floor(Math.random() * frasi.length)];
-  
+
   if (!globalThis.baciRank[target]) globalThis.baciRank[target] = 0;
   globalThis.baciRank[target] += 1;
 
