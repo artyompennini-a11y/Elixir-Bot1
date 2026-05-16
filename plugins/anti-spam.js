@@ -84,7 +84,7 @@ handler.before = async function (m, { conn, isAdmin, isBotAdmin, isOwner, isSam 
 ┃ 『 🚫 』 \`Azione:\` *ELIMINAZIONE UTENTE*
 ┃
 ┃ ⚠️ \`Nota:\` Lo spam destabilizza il gruppo.
-┃ La sicurezza di elixir ha priorità.
+┃ La sicurezza di THE PUNISHER ha priorità.
 ╰⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒`;
 
                 await conn.sendMessage(m.chat, {
