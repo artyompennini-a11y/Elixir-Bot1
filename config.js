@@ -17,11 +17,11 @@ global.sam = ['393784409415', '393206032199']
 global.owner = [
   ['393784409415', 'Elixir', true],
   ['393206032199', 'Punisher', true],
-  ['393792023950', 'Vortix', true],
+  ['xxxxx', 'xxxxx', true],
   ['393272109748', 'Dia', true], 
   ['393792937749', 'Venom', true],
   ['962770035395', 'Thepunisherbot', true],
-  ['4915510176234', 'Thepunishervoip', true],
+  ['xxxxx', 'xxxxx', true],
   ['393514722317', 'Momo', true],
   ['393759045901', 'Blud', true],
 ]
