@@ -7,7 +7,7 @@ const handler = async (m, { conn, args, groupMetadata, participants, usedPrefix,
       errorMsg += `*⚠️ Inserisci un prefisso paese*\n\n`
       errorMsg += `*📝 Esempio:*\n`
       errorMsg += `└─⭓ ${usedPrefix + command} 39\n\n`
-      errorMsg += `> elixir ✧ bot`
+      errorMsg += `> THE PUNISHER ✧ BOT`
       return m.reply(errorMsg)
     }
 
@@ -96,7 +96,7 @@ const handler = async (m, { conn, args, groupMetadata, participants, usedPrefix,
       msg += `└─⭓ Totale membri: ${groupParticipants.length}\n`
       msg += `└─⭓ Admin: ${adminJids.length}\n`
       msg += `└─⭓ Con prefisso +${prefix}: 0\n\n`
-      msg += `> elixir ✧ bot`
+      msg += `> THE PUNISHER ✧ BOT`
       
       return m.reply(msg)
     }
