@@ -41,7 +41,7 @@ const checkUser = (id) => {
 async function createMarriageImage(user1, user2, conn, isMarriage = true) {
     const canvas = createCanvas(800, 500);
     const ctx = canvas.getContext('2d');
-    
+
     const grad = ctx.createLinearGradient(0, 0, 0, 500);
     grad.addColorStop(0, isMarriage ? '#FF6F61' : '#4B5EAA');
     grad.addColorStop(1, isMarriage ? '#FFF5EE' : '#E6E6FA');
@@ -67,7 +67,7 @@ async function createMarriageImage(user1, user2, conn, isMarriage = true) {
     ctx.fillStyle = isMarriage ? '#FF1493' : '#4B5EAA';
     ctx.font = 'bold 40px Arial'; ctx.textAlign = 'center';
     ctx.fillText(isMarriage ? 'Matrimonio Celebrato!' : 'Divorzio Completato', 400, 380);
-    
+
     return canvas.toBuffer();
 }
 
@@ -114,7 +114,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     if (command === 'accettasposa') {
         let proposal = global.marriage_proposals[user]
         if (!proposal) return m.reply('*⚠️ Nessuna proposta pendente.*')
-        
+
         let partner = proposal.proposer
         marriages[user] = partner
         marriages[partner] = user
@@ -129,7 +129,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
     if (command === 'divorzia') {
         let ex = marriages[user]
         if (!ex) return m.reply('*⚠️ Non sei sposato.*')
-        
+
         delete marriages[user]
         delete marriages[ex]
         saveMarriages()
@@ -143,7 +143,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
         if (!target || target === user) return m.reply('*⚠️ Tagga chi vuoi adottare!*')
         checkUser(target)
         if (global.db.data.users[target].s) return m.reply('*❌ Ha già un genitore!*')
-        
+
         global.db.data.users[user].p.push(target)
         global.db.data.users[target].s = user
         m.reply(`*👶 Hai adottato @${target.split('@')[0]}!*`, null, { mentions: [target] })
@@ -154,7 +154,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
         if (!target) return m.reply('*⚠️ Tagga il figlio!*')
         let figli = global.db.data.users[user].p || []
         if (!figli.includes(target)) return m.reply('*❌ Non è tuo figlio.*')
-        
+
         global.db.data.users[user].p = figli.filter(id => id !== target)
         global.db.data.users[target].s = null
         m.reply(`*🚫 @${target.split('@')[0]} rimosso dalla famiglia.*`, null, { mentions: [target] })
