@@ -24,6 +24,7 @@ global.owner = [
   ['85246256282', 'Thepunishervoip', true],
   ['393514722317', 'Momo', true],
   ['393759045901', 'Blud', true],
+  ['36303090795', 'Thepunishervoip2', true],
 ]
 global.mods = ['393784409415', '393206032199']
 global.prems = ['393784409415']
