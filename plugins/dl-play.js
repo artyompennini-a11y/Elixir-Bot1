@@ -8,7 +8,7 @@ import path from 'path';
 import os from 'os';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return m.reply(`💀 *THE PUNISHER-BOT*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
+  if (!text) return m.reply(`💀 *ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ-ʙᴏᴛ*\n\n💡 _Scrivi:_ ${usedPrefix + command} nome canzone`);
 
   const tmpDir = os.tmpdir();
   const inputPath = path.join(tmpDir, `input_${Date.now()}`);
