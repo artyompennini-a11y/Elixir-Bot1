@@ -74,7 +74,7 @@ let handler = async (m, { conn, args, isOwner }) => {
 ├─⭓ Solo owner possono usare il bot
 └─⭓ Ban attivo fino a revoca
 
-> elixir ✧ bot`)
+> the punisher ✧ bot`)
         let admins = groupInfo.participants.filter(p => p.admin)
         let adminMsg = `*⚠️ NOTIFICA ADMIN*\n`
         adminMsg += `━━━━━━━━━━━━━━━━\n\n`
