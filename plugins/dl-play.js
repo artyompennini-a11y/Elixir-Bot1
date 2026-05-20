@@ -24,7 +24,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
     // Menu principale
     if (command === 'play') {
         let infoMsg = `┏━━━━━━━━━━━━━━━━━━━┓\n`;
-        infoMsg += `      🎧 THE PUNISHER-BOT ᴘʟᴀʏᴇʀ 🎧\n`;
+        infoMsg += `      🎧 ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ-ʙᴏᴛ ᴘʟᴀʏᴇʀ 🎧\n`;
         infoMsg += `┗━━━━━━━━━━━━━━━━━━━┛\n\n`;
         infoMsg += `◈ 📌 *𝗧𝗶𝘁𝗼𝗹𝗼:* ${vid.title}\n`;
         infoMsg += `◈ ⏱️ *𝗗𝘂𝗿𝗮𝘁𝗮:* ${vid.timestamp}\n\n`;
@@ -85,7 +85,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
         await conn.sendMessage(m.chat, {
             video: fs.readFileSync(inputPath),
             mimetype: 'video/mp4',
-            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ THE PUNISHER-BOT*\n📌 *Titolo:* ${vid.title}`,
+            caption: `✅ *ꜱᴄᴀʀɪᴄᴀᴛᴏ ᴅᴀ ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ-ʙᴏᴛ*\n📌 *Titolo:* ${vid.title}`,
         }, { quoted: m });
     }
 
@@ -93,7 +93,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   } catch (e) {
     console.error(e);
-    m.reply('🚀 *THE PUNISHER-BOT ᴇʀʀᴏʀ:* Servizio momentaneamente non disponibile.');
+    m.reply('🚀 *ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ-ʙᴏᴛ ᴘʟᴀʏᴇʀ ᴇʀʀᴏʀ:* Servizio momentaneamente non disponibile.');
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
   } finally {
     // Pulizia file sicura
