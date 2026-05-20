@@ -10,7 +10,7 @@ let handler = async (m, { conn }) => {
   } else if (m.quoted && m.quoted.sender) {
     target = m.quoted.sender;
   } else {
-    return m.reply("Devi menzionare qualcuno da stuorare😏");
+    return m.reply("Devi menzionare qualcuno da stuprare😏");
   }
 
   const frasi = [
