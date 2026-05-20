@@ -4,7 +4,7 @@ let handler = async (m, { conn, args, isOwner }) => {
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Comando riservato al proprietario\n\n`
-        errorMsg += `> THE PUNISHER ✧ BOT`
+        errorMsg += `> elixir ✧ bot`
         return m.reply(errorMsg)
     }
 
@@ -13,21 +13,22 @@ let handler = async (m, { conn, args, isOwner }) => {
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Utilizzabile solo nei gruppi\n\n`
-        errorMsg += `> THE PUNISHER ✧ BOT`
+        errorMsg += `> elixir ✧ bot`
         return m.reply(errorMsg)
     }
 
     let chat = global.db.data.chats[m.chat]
-    if (!chat.banned) {
+    if (!chat.isBanned) {
         let errorMsg = `*❌ ERRORE COMANDO*\n`
         errorMsg += `━━━━━━━━━━━━━━━━\n\n`
         errorMsg += `*⚠️ Motivo:*\n`
         errorMsg += `└─⭓ Questo gruppo non è bannato\n\n`
-        errorMsg += `> THE PUNISHER ✧ BOT`
+        errorMsg += `> elixir ✧ bot`
         return m.reply(errorMsg)
     }
 
-    chat.banned = false
+    chat.isBanned = false
+    await global.db.write()
     m.reply(`*✅ GRUPPO SBANNATO*
 ━━━━━━━━━━━━━━━━
 
@@ -36,7 +37,7 @@ let handler = async (m, { conn, args, isOwner }) => {
 *🔓 Azione:* Unban accesso bot
 *📅 Data:* ${new Date().toLocaleString('it-IT')}
 
-> THE PUNISHER ✧ BOT`)
+> elixir ✧ bot`)
 }
 
 handler.help = ['unbangp']
