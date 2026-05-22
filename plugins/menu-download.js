@@ -10,7 +10,7 @@ const localImg = join(process.cwd(), 'menu-download.jpeg');
 const defaultMenu = {
   before: `
 ┎━━━━━━━━━━━━━━━━━━━┑
-┃THE PUNISHER- ᴅᴏᴡɴʟᴏᴀᴅ   ┃
+┃ THE PUNISHER- ᴅᴏᴡɴʟᴏᴀᴅ   ┃
 ┖━━━━━━━━━━━━━━━━━━━┙
 ┌───────────────────┐
   👤 𝚄𝚜𝚎𝚛: %name
