@@ -1,115 +1,67 @@
-// Plug-in creato da elixir
-import os from 'os'
+import { performance } from 'perf_hooks'
 
-let handler = async (m, { conn, usedPrefix }) => {
-  try {
-    // — Ping reale —
-    const start = process.hrtime.bigint()
-    await conn.readMessages([m.key])
-    const end = process.hrtime.bigint()
-    const latency = (Number(end - start) / 1_000_000).toFixed(2)
-
-    // — Uptime —
-    const uptimeMs  = process.uptime() * 1000
-    const uptimeStr = clockString(uptimeMs)
-    const botStartTime = new Date(Date.now() - uptimeMs)
-    const activationTime = botStartTime.toLocaleString('it-IT', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    })
-
-    // — RAM reale (OS) —
-    const totalRam = os.totalmem()
-    const freeRam  = os.freemem()
-    const usedRam  = totalRam - freeRam
-    const ramPct   = ((usedRam / totalRam) * 100).toFixed(1)
-    const toMB     = b => (b / 1024 / 1024).toFixed(1)
-
-    // — RAM processo Node —
-    const heap = process.memoryUsage()
-    const heapUsed  = toMB(heap.heapUsed)
-    const heapTotal = toMB(heap.heapTotal)
-    const rss       = toMB(heap.rss)
-
-    // — CPU —
-    const cpus    = os.cpus()
-    const cpuName = cpus[0]?.model?.trim() || 'N/D'
-    const cores   = cpus.length
-
-    // — Load average (1 min) —
-    const [load1] = os.loadavg()
-    const loadStr = load1.toFixed(2)
-
-    // — OS info —
-    const platform = os.platform()
-    const arch     = os.arch()
-    const nodeVer  = process.version
-
-    // — Utenti e gruppi —
-    const totalUsers  = Object.keys(global.db.data.users).length
-    const totalChats  = Object.entries(conn.chats).filter(([id, d]) => id && d.isChats)
-    const totalGroups = totalChats.filter(([id]) => id.endsWith('@g.us')).length
-    const totalDMs    = totalChats.filter(([id]) => !id.endsWith('@g.us')).length
-
-    const sep = '▸'
-
-    const message = `
-*ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ-ʙᴏᴛ* 💀 — ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ
-${'─'.repeat(32)}
-
-⚡ *ᴘᴇʀꜰᴏʀᴍᴀɴᴄᴇ*
-${sep} ᴘɪɴɢ       » \`${latency} ms\`
-${sep} ᴜᴘᴛɪᴍᴇ     » \`${uptimeStr}\`
-${sep} ᴀᴠᴠɪᴏ      » \`${activationTime}\`
-
-💾 *ᴍᴇᴍᴏʀɪᴀ*
-${sep} ꜱɪꜱᴛᴇᴍᴀ   » \`${toMB(usedRam)} / ${toMB(totalRam)} MB  (${ramPct}%)\`
-${sep} ʜᴇᴀᴘ      » \`${heapUsed} / ${heapTotal} MB\`
-${sep} ʀꜱꜱ       » \`${rss} MB\`
-
-🖥️ *ꜱɪꜱᴛᴇᴍᴀ*
-${sep} ᴄᴘᴜ       » \`${cpuName}\`
-${sep} ᴄᴏʀᴇ      » \`${cores}\`
-${sep} ʟᴏᴀᴅ      » \`${loadStr}\`
-${sep} ᴏꜱ        » \`${platform} / ${arch}\`
-${sep} ɴᴏᴅᴇ      » \`${nodeVer}\`
-
-📊 *ꜱᴛᴀᴛɪꜱᴛɪᴄʜᴇ*
-${sep} ᴜᴛᴇɴᴛɪ    » \`${totalUsers}\`
-${sep} ɢʀᴜᴘᴘɪ    » \`${totalGroups}\`
-${sep} ᴅᴍ        » \`${totalDMs}\`
-
-${'─'.repeat(32)}
-*ꜱᴛᴀᴛᴜꜱ* » 🟢 ᴏɴʟɪɴᴇ  •  *ᴏᴡɴᴇʀ* » ᴛʜᴇ ᴘᴜɴɪꜱʜᴇʀ`.trim()
-
-    await conn.sendMessage(m.chat, {
-      text: message,
-      contextInfo: {
-        externalAdReply: {
-          title: 'THE PUNISHER-BOT • ꜱʏꜱᴛᴇᴍ ʀᴇᴘᴏʀᴛ',
-          body: `ᴘɪɴɢ: ${latency}ms  •  ʀᴀᴍ: ${ramPct}%  •  ᴜᴘᴛɪᴍᴇ: ${uptimeStr}`,
-          mediaType: 1,
-          previewType: 0,
-          renderLargerThumbnail: false,
-          sourceUrl: ''
-        }
-      }
-    }, { quoted: m })
-
-  } catch (e) {
-    console.error('[ping] Errore:', e)
-    await conn.reply(m.chat, '❌ Errore nel recupero dei dati di sistema.', m)
+const toMathematicalAlphanumericSymbols = number => {
+  const map = {
+    '0': '𝟎', '1': '𝟏', '2': '𝟐', '3': '𝟑', '4': '𝟒',
+    '5': '𝟓', '6': '𝟔', '7': '𝟕', '8': '𝟖', '9': '𝟗', '.': '.'
   }
+
+  return number
+    .toString()
+    .split('')
+    .map(d => map[d] || d)
+    .join('')
 }
 
-handler.help    = ['ping']
-handler.tags    = ['info']
+const clockString = ms => {
+  const days = Math.floor(ms / 86400000)
+  const hours = Math.floor((ms % 86400000) / 3600000)
+  const minutes = Math.floor((ms % 3600000) / 60000)
+
+  return `${toMathematicalAlphanumericSymbols(days.toString().padStart(2, '0'))}d ${toMathematicalAlphanumericSymbols(hours.toString().padStart(2, '0'))}h ${toMathematicalAlphanumericSymbols(minutes.toString().padStart(2, '0'))}m`
+}
+
+const handler = async (m, { conn, usedPrefix }) => {
+  const start = performance.now()
+  const end = performance.now()
+
+  const speed = (end - start).toFixed(4)
+  const speedWithFont = toMathematicalAlphanumericSymbols(speed)
+
+  const uptime = clockString(process.uptime() * 1000)
+
+  const info = `
+*🏓 𝐏𝐨𝐧𝐠!*
+
+*🚀 𝐋𝐚𝐭𝐞𝐧𝐳𝐚:* ${speedWithFont} ms
+*⏱️ 𝐔𝐩𝐭𝐢𝐦𝐞:* ${uptime}
+*✅ 𝐒𝐭𝐚𝐭𝐮𝐬:* Online
+
+> *THE PUNISHER-BOT*
+`.trim()
+
+  const buttons = [
+    {
+      buttonId: `${usedPrefix}ping`,
+      buttonText: { displayText: '🔄 Rifai Ping' },
+      type: 1
+    },
+    {
+      buttonId: `${usedPrefix}menu`,
+      buttonText: { displayText: '📋 Menu' },
+      type: 1
+    }
+  ]
+
+  await conn.sendMessage(m.chat, {
+    text: info,
+    buttons,
+    headerType: 1
+  }, { quoted: m })
+}
+
+handler.help = ['ping']
+handler.tags = ['info']
 handler.command = /^(ping)$/i
-export default handler
 
-function clockString(ms) {
-  const h = Math.floor(ms / 3_600_000)
-  const m = Math.floor((ms % 3_600_000) / 60_000)
-  const s = Math.floor((ms % 60_000) / 1_000)
-  return [h, m, s].map(v => String(v).padStart(2, '0')).join(':')
-}
+export default handler
