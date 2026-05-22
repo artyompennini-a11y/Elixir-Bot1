@@ -3,7 +3,7 @@ import { join } from 'path'
 
 let handler = async (m, { conn, usedPrefix: _p, command, args, isOwner, isAdmin }) => {
   const userName = m.pushName || 'Utente'
-  
+
   // --- PERCORSO IMMAGINE LOCALE ---
   const localImg = join(process.cwd(), 'menu-sicurezza.jpeg')
 
@@ -43,7 +43,7 @@ let handler = async (m, { conn, usedPrefix: _p, command, args, isOwner, isAdmin 
   if (!args.length || /menu|help/i.test(args[0])) {
     let text = `
 ┎━━━━━━━━━━━━━━━━━━━━┑
-┃✧THE PUNISHER-ᴍᴀꜱᴛᴇʀ ᴄᴏɴᴛʀᴏʟ✧┃
+┃   ✧  THE PUNISHER - 𝐌𝐀𝐒𝐓𝐄𝐑 𝐂𝐎𝐍𝐓𝐑𝐎𝐋  ✧   ┃
 ┖━━━━━━━━━━━━━━━━━━━━┙
 ┌────────────────────┐
   👤 𝚄𝚜𝚎𝚛: ${userName}
@@ -73,7 +73,7 @@ _THE PUNISHER-BOT SECURITY INTERFACE_`
         mentionedJid: [m.sender],
         forwardedNewsletterMessageInfo: {
           newsletterJid: '120363232743845068@newsletter',
-          newsletterName: "🛡️ ꜱʏꜱᴛᴇᴍ ꜱᴇᴄᴜʀɪᴛʏ ᴄᴏɴᴛʀᴏʟ 🛡️"
+          newsletterName: "🛡️ 𝐒𝐘𝐒𝐓𝐄𝐌 𝐒𝐄𝐂𝐔𝐑𝐈𝐓𝐘 𝐂𝐎𝐍𝐓𝐑𝐎𝐋 🛡️"
         }
       }
     }, { quoted: m })
