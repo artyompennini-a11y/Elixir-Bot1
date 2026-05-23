@@ -71,22 +71,22 @@ let handler = async (m, { conn, text }) => {
         footer: 'THE PUNISHER-BOT',
         buttons: [
           {
-            buttonId: `.scopa lentamente ${mentionTarget}`,
+            buttonId: `.incula lentamente ${mentionTarget}`,
             buttonText: { displayText: '🥱 Lentamente' },
             type: 1
           },
           {
-            buttonId: `.scopa normalmente ${mentionTarget}`,
+            buttonId: `.incula normalmente ${mentionTarget}`,
             buttonText: { displayText: '😏 Normale' },
             type: 1
           },
           {
-            buttonId: `.scopa forte ${mentionTarget}`,
+            buttonId: `.incula forte ${mentionTarget}`,
             buttonText: { displayText: '🔥 Forte' },
             type: 1
           },
           {
-            buttonId: `.scopa massimo ${mentionTarget}`,
+            buttonId: `.incula massimo ${mentionTarget}`,
             buttonText: { displayText: '💀 Sfondala' },
             type: 1
           }
@@ -121,7 +121,7 @@ let handler = async (m, { conn, text }) => {
   const sent = await conn.sendMessage(
     chatId,
     {
-      text: `*𝐎𝐫𝐚 𝐦𝐢 𝐬𝐜𝐨𝐩𝐨${modeLabel} 𝐪𝐮𝐞𝐥𝐥𝐚 𝐩𝐮𝐭𝐭𝐚𝐧𝐚 𝐝𝐢* ${tag(destinatario)} *😏*`,
+      text: `*𝐎𝐫𝐚 𝐦𝐢 inculo${modeLabel} 𝐪𝐮𝐞𝐥𝐥𝐚 𝐩𝐮𝐭𝐭𝐚𝐧𝐚 𝐝𝐢* ${tag(destinatario)} *😏*`,
       mentions: [destinatario]
     },
     { quoted: m }
@@ -181,17 +181,17 @@ const frames = [
     conn,
     chatId,
     key,
-    `🥵 *${tag(mittente)} 𝐡𝐚 𝐬𝐜𝐨𝐩𝐚𝐭𝐨${modeLabel} 𝐪𝐮𝐞𝐥𝐥𝐚 𝐩𝐮𝐭𝐭𝐚𝐧𝐚 𝐝𝐢 ${tag(destinatario)} 𝐢𝐧 ${elapsed} 𝐬𝐞𝐜𝐨𝐧𝐝𝐢, 𝐥𝐚𝐬𝐜𝐢𝐚𝐧𝐝𝐨𝐥𝐚/𝐨 𝐩𝐞𝐫 𝐭𝐞𝐫𝐫𝐚 𝐩𝐢𝐞𝐧𝐚/𝐨 𝐝𝐢 𝐬𝐛𝐨𝐫𝐫𝐚!💦*`,
+    `🥵 *${tag(mittente)} 𝐡𝐚 inculato${modeLabel} 𝐪𝐮𝐞𝐥𝐥𝐚 𝐩𝐮𝐭𝐭𝐚𝐧𝐚 𝐝𝐢 ${tag(destinatario)} 𝐢𝐧 ${elapsed} 𝐬𝐞𝐜𝐨𝐧𝐝𝐢, 𝐥𝐚𝐬𝐜𝐢𝐚𝐧𝐝𝐨𝐥𝐚/𝐨 𝐩𝐞𝐫 𝐭𝐞𝐫𝐫𝐚 𝐩𝐢𝐞𝐧𝐚/𝐨 𝐝𝐢 𝐬𝐛𝐨𝐫𝐫𝐚!💦*`,
     [mittente, destinatario]
   )
 }
 
 handler.help = [
-  'scopa @utente',
-  'scopa lentamente @utente',
-  'scopa normalmente @utente',
-  'scopa forte @utente',
-  'scopa massimo @utente'
+  'incula @utente',
+  'incula lentamente @utente',
+  'incula normalmente @utente',
+  'incula forte @utente',
+  'incula massimo @utente'
 ]
 
 handler.tags = ['fun']
