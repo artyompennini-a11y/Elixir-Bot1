@@ -64,7 +64,7 @@ let handler = async (m, { conn, text }) => {
       {
         text:
 `╭━━━━━━━🔥━━━━━━━╮
-*✦ 𝐒𝐂𝐎𝐏𝐀 ✦*
+*✦ INCULA ✦*
 ╰━━━━━━━🔥━━━━━━━╯
 
 *😏 𝐒𝐜𝐞𝐠𝐥𝐢 𝐥𝐚 𝐦𝐨𝐝𝐚𝐥𝐢𝐭à.*`,
@@ -195,7 +195,7 @@ handler.help = [
 ]
 
 handler.tags = ['fun']
-handler.command = ['scopa2']
+handler.command = ['incula']
 handler.group = true
 
 export default handler
