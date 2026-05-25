@@ -13,7 +13,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 
     if (!existsSync(sessionFolder)) {
       return await conn.sendMessage(m.chat, {
-        text: "*❌ 𝐋𝐚 𝐜𝐚𝐫𝐭𝐞𝐥𝐥𝐚 𝐝𝐞𝐥𝐥𝐚 𝐬𝐛𝐨𝐫𝐫𝐚 𝐞̀ 𝐯𝐮𝐨𝐭𝐚 o 𝐧𝐨𝐧 𝐞𝐬𝐢𝐬𝐭𝐞.*"
+        text: "*❌ 𝐋𝐞 𝐝𝐨𝐜𝐜𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞 o 𝐧𝐨𝐧 𝐞𝐬𝐢𝐬𝐭𝐨𝐧𝐨.*"
       }, { quoted: m });
     }
 
@@ -28,8 +28,8 @@ const handler = async (m, { conn, usedPrefix }) => {
     }
 
     const textMsg = deletedCount === 0 
-      ? '❗ 𝐋𝐞 𝐩𝐚𝐥𝐥𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
-      : '🔥 𝐇𝐨 𝐬𝐛𝐨𝐫𝐫𝐚𝐭𝐨 ' + deletedCount + ' 𝐬𝐩𝐞𝐫𝐦𝐚𝐭𝐨𝐳𝐨𝐢!💦';
+      ? '❗ 𝐋𝐞 𝐝𝐨𝐜𝐜𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
+      : '🔥 𝐇𝐨 𝐛𝐫𝐮𝐜𝐢𝐚𝐭𝐨 ' + deletedCount + ' 𝐞𝐛𝐫𝐞𝐢!💦';
 
     await conn.sendMessage(m.chat, {
       text: textMsg,
