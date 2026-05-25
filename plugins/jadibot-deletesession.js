@@ -1,22 +1,55 @@
-import { readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync, promises as fs} from "fs"
-import path, { join } from 'path'
+import { existsSync, promises as fsPromises } from 'fs';
+import path from 'path';
 
-let handler  = async (m, { conn: parentw, usedPrefix, command}, args) => {
+const handler = async (m, { conn, usedPrefix }) => {
+  if (global.conn.user.jid !== conn.user.jid) {
+    return conn.sendMessage(m.chat, {
+      text: "*🚨 𝐔𝐭𝐢𝐥𝐢𝐳𝐳𝐢 𝐪𝐮𝐞𝐬𝐭𝐨 𝐜𝐨𝐦𝐚𝐧𝐝𝐨 𝐝𝐢𝐫𝐞𝐭𝐭𝐚𝐦𝐞𝐧𝐭𝐞 𝐧𝐞𝐥 𝐧𝐮𝐦𝐞𝐫𝐨 𝐝𝐞𝐥 𝐛𝐨𝐭.*"
+    }, { quoted: m });
+  }
 
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let uniqid = `${who.split`@`[0]}`
-let userS = `${conn.getName(who)}`
+  try {
+    const sessionFolder = "./varesession/";
 
-try {
-await fs.rmdir(`./jadibts/` + uniqid, { recursive: true, force: true })
-await parentw.sendMessage(m.chat, { text: 'ⓘ 𝐒𝐞𝐬𝐬𝐢𝐨𝐧𝐞 𝐒𝐮𝐛𝐁𝐨𝐭 𝐞𝐥𝐢𝐦𝐢𝐧𝐚𝐭𝐚 𝐜𝐨𝐧 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐨.' }, { quoted: m })
-} catch(err) {
-if (err.code === 'ENOENT' && err.path === `./jadibts/${uniqid}`) {
-await parentw.sendMessage(m.chat, { text: "ⓘ 𝐍𝐨𝐧 𝐡𝐚𝐢 𝐬𝐞𝐬𝐬𝐢𝐨𝐧𝐢 𝐒𝐮𝐛𝐁𝐨𝐭 𝐜𝐨𝐥𝐥𝐞𝐠𝐚𝐭𝐞." }, { quoted: m })
-} else {
-await m.reply('ⓘ 𝐒𝐢 𝐞̀ 𝐯𝐞𝐫𝐢𝐟𝐢𝐜𝐚𝐭𝐨 𝐮𝐧 𝐞𝐫𝐫𝐨𝐫𝐞')
-}}}
-handler.command = ['ds']
-handler.private = true
+    if (!existsSync(sessionFolder)) {
+      return await conn.sendMessage(m.chat, {
+        text: "*❌ 𝐋𝐚 𝐜𝐚𝐫𝐭𝐞𝐥𝐥𝐚 𝐝𝐞𝐥𝐥𝐚 𝐬𝐛𝐨𝐫𝐫𝐚 𝐞̀ 𝐯𝐮𝐨𝐭𝐚 o 𝐧𝐨𝐧 𝐞𝐬𝐢𝐬𝐭𝐞.*"
+      }, { quoted: m });
+    }
 
-export default handler
+    const sessionFiles = await fsPromises.readdir(sessionFolder);
+    let deletedCount = 0;
+
+    for (const file of sessionFiles) {
+      if (file !== "creds.json") {
+        await fsPromises.unlink(path.join(sessionFolder, file));
+        deletedCount++;
+      }
+    }
+
+    const textMsg = deletedCount === 0 
+      ? '❗ 𝐋𝐞 𝐩𝐚𝐥𝐥𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
+      : '🔥 𝐇𝐨 𝐬𝐛𝐨𝐫𝐫𝐚𝐭𝐨 ' + deletedCount + ' 𝐬𝐩𝐞𝐫𝐦𝐚𝐭𝐨𝐳𝐨𝐢! 𝐨𝐫𝐚 𝐦𝐚 𝐦𝐢𝐧𝐮 𝐞 𝐚 𝐢𝐧𝐜𝐡𝐢𝐮 𝐚𝐫𝐫𝐞💦';
+
+    await conn.sendMessage(m.chat, {
+      text: textMsg,
+      footer: "Seleziona un'opzione qui sotto 👇",
+      buttons: [
+        { buttonId: usedPrefix + "ds", buttonText: { displayText: "🔄 𝐒𝐯𝐮𝐨𝐭𝐚 𝐝𝐢 𝐧𝐮𝐨𝐯𝐨" }, type: 1 },
+        { buttonId: usedPrefix + "ping", buttonText: { displayText: "📡 𝐏𝐢𝐧𝐠" }, type: 1 },
+        { buttonId: usedPrefix + "pong", buttonText: { displayText: "⚡ 𝐏𝐨𝐧𝐠" }, type: 1 }
+      ],
+      headerType: 1
+    }, { quoted: m });
+
+  } catch (error) {
+    await conn.sendMessage(m.chat, { text: "❌ 𝐄𝐫𝐫𝐨𝐫𝐞 𝐝𝐢 𝐞𝐥𝐢𝐦𝐢𝐧𝐚𝐳𝐢𝐨𝐧𝐞!" }, { quoted: m });
+  }
+};
+
+handler.help = ['del_reg_in_session_owner'];
+handler.tags = ["owner"];
+handler.command = /^(deletession|ds)$/i;
+handler.admin = true;
+
+export default handler;
