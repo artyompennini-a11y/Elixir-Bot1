@@ -29,7 +29,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 
     const textMsg = deletedCount === 0 
       ? '❗ 𝐋𝐞 𝐩𝐚𝐥𝐥𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
-      : '🔥 𝐇𝐨 𝐬𝐛𝐨𝐫𝐫𝐚𝐭𝐨 ' + deletedCount + ' 𝐬𝐩𝐞𝐫𝐦𝐚𝐭𝐨𝐳𝐨𝐢! 𝐨𝐫𝐚 𝐦𝐚 𝐦𝐢𝐧𝐮 𝐞 𝐚 𝐢𝐧𝐜𝐡𝐢𝐮 𝐚𝐫𝐫𝐞💦';
+      : '🔥 𝐇𝐨 𝐬𝐛𝐨𝐫𝐫𝐚𝐭𝐨 ' + deletedCount + ' 𝐬𝐩𝐞𝐫𝐦𝐚𝐭𝐨𝐳𝐨𝐢!💦';
 
     await conn.sendMessage(m.chat, {
       text: textMsg,
@@ -37,7 +37,6 @@ const handler = async (m, { conn, usedPrefix }) => {
       buttons: [
         { buttonId: usedPrefix + "ds", buttonText: { displayText: "🔄 𝐒𝐯𝐮𝐨𝐭𝐚 𝐝𝐢 𝐧𝐮𝐨𝐯𝐨" }, type: 1 },
         { buttonId: usedPrefix + "ping", buttonText: { displayText: "📡 𝐏𝐢𝐧𝐠" }, type: 1 },
-        { buttonId: usedPrefix + "pong", buttonText: { displayText: "⚡ 𝐏𝐨𝐧𝐠" }, type: 1 }
       ],
       headerType: 1
     }, { quoted: m });
