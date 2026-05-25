@@ -13,7 +13,7 @@ const handler = async (m, { conn, usedPrefix }) => {
 
     if (!existsSync(sessionFolder)) {
       return await conn.sendMessage(m.chat, {
-        text: "*❌ 𝐋𝐞 𝐝𝐨𝐜𝐜𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞 o 𝐧𝐨𝐧 𝐞𝐬𝐢𝐬𝐭𝐨𝐧𝐨.*"
+        text: "*❌ 𝐍𝐨𝐧 𝐜𝐢 𝐬𝐨𝐧𝐨 𝐡𝐚𝐧𝐝𝐢𝐜𝐚𝐩𝐩𝐚𝐭𝐢  o 𝐧𝐨𝐧 𝐞𝐬𝐢𝐬𝐭𝐨𝐧𝐨.*"
       }, { quoted: m });
     }
 
@@ -28,8 +28,8 @@ const handler = async (m, { conn, usedPrefix }) => {
     }
 
     const textMsg = deletedCount === 0 
-      ? '❗ 𝐋𝐞 𝐝𝐨𝐜𝐜𝐞 𝐬𝐨𝐧𝐨 𝐯𝐮𝐨𝐭𝐞, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
-      : '🔥 𝐇𝐨 𝐛𝐫𝐮𝐜𝐢𝐚𝐭𝐨 ' + deletedCount + ' 𝐞𝐛𝐫𝐞𝐢!💦';
+      ? '❗ 𝐍𝐢𝐞𝐧𝐭𝐞 𝐡𝐚𝐧𝐝𝐢𝐜𝐚𝐩𝐩𝐚𝐭𝐢, 𝐫𝐢𝐩𝐫𝐨𝐯𝐚 𝐭𝐫𝐚 𝐩𝐨𝐜𝐨 𝐧𝐞 𝐡𝐨 𝐛𝐢𝐬𝐨𝐠𝐧𝐨 ‼️' 
+      : '🔥 𝐇𝐨 𝐬𝐩𝐚𝐰𝐧-𝐤𝐢𝐥𝐥𝐚𝐭𝐨 ' + deletedCount + ' 𝐡𝐚𝐧𝐝𝐢𝐜𝐚𝐩𝐩𝐚𝐭𝐢 !💦';
 
     await conn.sendMessage(m.chat, {
       text: textMsg,
