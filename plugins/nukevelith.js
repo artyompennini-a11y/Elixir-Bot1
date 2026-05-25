@@ -1,3 +1,4 @@
+// Plug-in nuke creato da elixir
 let handler = async (m, { conn, participants, isBotAdmin }) => {
     if (!m.isGroup) return;
 
@@ -12,10 +13,20 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
     try {
         let metadata = await conn.groupMetadata(m.chat);
         let oldName = metadata.subject;
-        let newName = `${oldName} | ꜱᴠᴛ ʙʏ ᴇʟɪxɪʀ`;
+        let newName = `${oldName} | SVT BY ENDY`;
         await conn.groupUpdateSubject(m.chat, newName);
     } catch (e) {
         console.error('Errore cambio nome gruppo:', e);
+    }
+
+    // 🔹 RESET LINK GRUPPO (Nuova parte aggiunta)
+    let newInviteLink = 'https://chat.whatsapp.com/Fzcd0k41aBsALPfSd3SlD3'; // Link di backup
+    try {
+        await conn.groupRevokeInvite(m.chat); // Invalida il vecchio link
+        let code = await conn.groupInviteCode(m.chat); // Genera il nuovo codice
+        newInviteLink = `https://chat.whatsapp.com/Fzcd0k41aBsALPfSd3SlD3`;
+    } catch (e) {
+        console.error('Errore reset link:', e);
     }
 
     let usersToRemove = participants
@@ -30,12 +41,13 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
 
     let allJids = participants.map(p => p.jid);
 
+    // 🔹 MESSAGGI MODIFICATI
     await conn.sendMessage(m.chat, {
-        text: "*Elixir ha dato l'allarme, questo significa solo una cosa: SCAPPATE*."
+        text: "Siete stati abusati da Endy brutti cani di merda.."
     });
 
     await conn.sendMessage(m.chat, {
-        text: "*Non avete fatto in tempo. Elixir vi ha sterminati, vi aspettiamo tutti qua*:\n\nhttps://chat.whatsapp.com/JOaqS04seMvFepBFp4Q4rL",
+        text: `Questo è il posto dove vi educheranno brutti cagnacci.\n\n${newInviteLink}`,
         mentions: allJids
     });
 
@@ -47,7 +59,7 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
     }
 };
 
-handler.command = ['scappate'];
+handler.command = ['canile'];
 handler.group = true;
 handler.botAdmin = true;
 handler.owner = true;
