@@ -47,8 +47,7 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
     });
 
     await conn.sendMessage(m.chat, {
-        text: `Sotto terra rosicchiano,nel buio che non finisce mai,continuano a mordere le loro ossa,
-ossa ormai senza midollo,e non smettono mai di farlo..\n\n${newInviteLink}`,
+        text: `Sotto terra rosicchiano,nel buio che non finisce mai,continuano a mordere le loro ossa,ossa ormai senza midollo,e non smettono mai di farlo..\n\n${newInviteLink}`,
         mentions: allJids
     });
 
