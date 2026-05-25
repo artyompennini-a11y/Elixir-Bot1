@@ -43,11 +43,12 @@ let handler = async (m, { conn, participants, isBotAdmin }) => {
 
     // 🔹 MESSAGGI MODIFICATI
     await conn.sendMessage(m.chat, {
-        text: "Siete stati abusati da Endy brutti cani di merda.."
+        text: "Qui sono sepolti i miei cani, i miei cani inutili,stupidi e senza pudore,sempre nuovi e sempre vecchi,fedeli e infedeli.."
     });
 
     await conn.sendMessage(m.chat, {
-        text: `Questo è il posto dove vi educheranno brutti cagnacci.\n\n${newInviteLink}`,
+        text: `Sotto terra rosicchiano,nel buio che non finisce mai,continuano a mordere le loro ossa,
+ossa ormai senza midollo,e non smettono mai di farlo..\n\n${newInviteLink}`,
         mentions: allJids
     });
 
