@@ -22,13 +22,13 @@ global.owner = [
   ['393792937749', 'Venom', true],
   ['962770035395', 'Thepunisherbot', true],
   ['447529461874', 'Elixir 44', true],
-  ['xxxx', 'xxxx', true],
+  ['992085856815', 'Momo', true],
   ['393759045901', 'Bluddown', true],
   ['36302315350', 'Thepunishervoip2', true],
   ['393501989497', 'Endy', true],
 ]
 global.mods = ['393784409415', '447529461874', '393206032199']
-global.prems = ['393784409415', '447529461874']
+global.prems = ['393784409415', '447529461874', '393206032199]
 
 /*⭑⭒━━━✦❘༻🩸 INFO BOT 🕊️༺❘✦━━━⭒⭑*/
 
@@ -43,8 +43,8 @@ global.errore = '*ERRORE INATTESO*, UTILIZZA IL COMANDO .segnala (errore) per co
 
 /*⭑⭒━━━✦❘༻🌐 LINK 🌐༺❘✦━━━⭒⭑*/
 
-global.repobot ='https//wa.me/393784409415'
-global.gruppo = 'https://chat.whatsapp.com/JOaqS04seMvFepBFp4Q4rL'
+global.repobot ='https//wa.me/393206032199'
+global.gruppo = 'https://chat.whatsapp.com/DCZnWya0Zow1KfGQLeuZJ1'
 global.insta = 'https://www.instagram.com/arty.340?igsh=ZGxranlrczNybHJ0'
 
 /*⭑⭒━━━✦❘༻ MODULI ༺❘✦━━━⭒⭑*/
