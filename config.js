@@ -18,13 +18,13 @@ global.owner = [
   ['393784409415', 'Elixir', true],
   ['393206032199', 'Punisher', true],
   ['25777272476', 'Riley', true],
-  ['2348093733298', 'Thepunishervoip3', true], 
+  ['22793134748', 'Thepunishervoip3', true], 
   ['393792937749', 'Venom', true],
   ['962770035395', 'Thepunisherbot', true],
   ['447529461874', 'Elixir 44', true],
-  ['22793134748', 'Thepunishervoip4', true],
+  ['xxxx', 'xxxx', true],
   ['393759045901', 'Bluddown', true],
-  ['639756941396', 'Thepunishervoip2', true],
+  ['36302315350', 'Thepunishervoip2', true],
   ['393501989497', 'Endy', true],
 ]
 global.mods = ['393784409415', '447529461874', '393206032199']
