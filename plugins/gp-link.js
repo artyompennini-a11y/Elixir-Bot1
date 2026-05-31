@@ -11,19 +11,17 @@ const handler = async (m, { conn }) => {
         try {
             ppUrl = await conn.profilePictureUrl(m.chat, 'image');
         } catch {
-            ppUrl = 'https://i.ibb.co/3Fh9V6p/avatar-group-default.png';
+            ppUrl = 'https://ibb.co';
         }
 
-        const messageText = `╭────────────────────╮\n` +
-                            `   ✦  𝖶𝖧𝖠𝖳𝖲𝖠𝖯𝖯  𝖦𝖱𝖮𝖴𝖯  𝖫𝖨𝖭𝖪  ✦\n` +
-                            `╰────────────────────╯\n\n` +
-                            `  ◈  *GRUPPO:* ${groupName.toUpperCase()}\n` +
-                            `  ◈  *MEMBRI:* ${memberCount}\n\n` +
-                            `──────────────────────\n` +
-                            `  *ACCESSO DIRETTO:*\n` +
+        const messageText = `> ⛓️‍💥 *LINK GENERATO CON SUCCESSO*\n\n` +
+                            `*〢 𝖨𝖭𝖥𝖮𝖱𝖬𝖠𝖹𝖨𝖮𝖭𝖨 𝖦𝖱𝖴𝖯𝖯𝖮*\n` +
+                            `  » *Nome:* ${groupName}\n` +
+                            `  » *Utenti all'interno:* ${memberCount}\n\n` +
+                            `*〢 𝖢𝖮𝖭𝖭𝖤𝖲𝖲𝖨𝖮𝖭𝖤 𝖣𝖨𝖱𝖤𝖳𝖳𝖠*\n` +
                             `  ${linkgruppo}\n\n` +
-                            `──────────────────────\n` +
-                            `  _Richiesto da @${m.sender.split('@')[0]}_`;
+                            `＿\n` +
+                            `⌗ _Richiesta elaborata per @${m.sender.split('@')[0]}_`;
 
         await conn.sendMessage(
             m.chat,
