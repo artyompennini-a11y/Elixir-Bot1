@@ -1,54 +1,39 @@
-const handler = async (m, { conn }) => {
-    try {
-        // Recupero info gruppo
-        const metadata = await conn.groupMetadata(m.chat);
-        const groupName = metadata.subject;
-        const inviteCode = await conn.groupInviteCode(m.chat);
-        const linkgruppo = 'https://chat.whatsapp.com/' + inviteCode;
-        const memberCount = metadata.participants.length;
+// link by Deadly × Bonzino
 
-        let ppUrl;
-        try {
-            ppUrl = await conn.profilePictureUrl(m.chat, 'image');
-        } catch {
-            // Immagine di fallback se il gruppo non ha foto
-            ppUrl = 'https://i.ibb.co/3Fh9V6p/avatar-group-default.png';
-        }
+const handler=async(m,{conn})=>{
 
-        // Testo formattato in modo pulito e leggibile
-        const messageText = `
-        『 🔗 』 *LINK GRUPPO*
+const metadata=await conn.groupMetadata(m.chat)
+const participants=Array.isArray(metadata.participants)?metadata.participants:[]
+const totalMembers=participants.length
 
-*Nome:* ${groupName}
-*Membri:* ${memberCount}
+let inviteCode
+try{
+inviteCode=await conn.groupInviteCode(m.chat)
+}catch{
+inviteCode=null
+}
 
-*Link:*
-${linkgruppo}
+const link=inviteCode?`https://chat.whatsapp.com/${inviteCode}`:'𝐍𝐨𝐧 𝐝𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐢𝐥𝐞'
 
-_Tieni premuto sul link per copiarlo o clicca per condividerlo._`.trim();
+const text=`*╭━━━━━━━🔗━━━━━━━╮*
+*✦ 𝐈𝐧𝐟𝐨 𝐠𝐫𝐮𝐩𝐩𝐨 ✦*
+*╰━━━━━━━🔗━━━━━━━╯*
 
-        // Invio messaggio compatibile con tutti i dispositivi (iPhone/Android/Web)
-        await conn.sendMessage(
-            m.chat,
-            {
-                image: { url: ppUrl },
-                caption: messageText,
-                mentions: [m.sender] // Opzionale: menziona chi ha chiesto il link
-            },
-            { quoted: m }
-        );
+*🏷 𝐍𝐨𝐦𝐞:* *${metadata.subject||'Gruppo'}*
 
-    } catch (error) {
-        console.error('Errore invio messaggio link:', error);
-        // Fallback ultra-semplice in caso di errore critico
-        m.reply('❌ Errore nel recupero del link. Assicurati che il bot sia amministratore.');
-    }
-};
+*👥 𝐌𝐞𝐦𝐛𝐫𝐢:* *${totalMembers}*`
 
-handler.help = ['link'];
-handler.tags = ['gruppo'];
-handler.command = /^link$/i;
-handler.group = true;
-handler.botAdmin = true;
+await global.sendCopy(conn,m,{
+text,
+copy:link,
+button:'Copia link'
+})
+}
 
-export default handler;
+handler.help=['link']
+handler.tags=['group']
+handler.command=/^link$/i
+handler.group=true
+handler.botAdmin=true
+
+export default handler
