@@ -21,7 +21,7 @@ const handler = async (m, { conn }) => {
                             `*〢 𝖢𝖮𝖭𝖭𝖤𝖲𝖲𝖨𝖮𝖭𝖤 𝖣𝖨𝖱𝖤𝖳𝖳𝖠*\n` +
                             `  ${linkgruppo}\n\n` +
                             `＿\n` +
-                            `⌗ _Richiesta elaborata per @${m.sender.split('@')[0]}_`;
+                            `⌗ Richiesta elaborata per @${m.sender.split('@')[0]}`;
 
         await conn.sendMessage(
             m.chat,
