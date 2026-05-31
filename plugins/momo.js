@@ -8,7 +8,7 @@ handler.help = ['momo'];
 handler.tags = ['giochi'];
 
 // Questa regex rileva "momo" ovunque nel messaggio, ignorando maiuscole/minuscole
-handler.customPrefix = /punisher/i; 
+handler.customPrefix = /momo/i; 
 handler.command = new RegExp; // Sovrascrive il comando standard per usare il prefisso personalizzato
 
 export default handler;
