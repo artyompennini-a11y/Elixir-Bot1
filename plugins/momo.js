@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  const message = `Perchè citi il nome di quel down del gruppo?.`;
+  const message = `Perchè citi il nome di quell'handicappato?.`;
 
   await conn.sendMessage(m.chat, { text: message }, { quoted: m });
 };
