@@ -1,39 +1,50 @@
-// link by Deadly × Bonzino
+// by elixir
+const handler = async (m, { conn }) => {
+    try {
+        const metadata = await conn.groupMetadata(m.chat);
+        const groupName = metadata.subject;
+        const inviteCode = await conn.groupInviteCode(m.chat);
+        const linkgruppo = 'https://chat.whatsapp.com/' + inviteCode;
+        const memberCount = metadata.participants.length;
 
-const handler=async(m,{conn})=>{
+        let ppUrl;
+        try {
+            ppUrl = await conn.profilePictureUrl(m.chat, 'image');
+        } catch {
+            ppUrl = 'https://i.ibb.co/3Fh9V6p/avatar-group-default.png';
+        }
 
-const metadata=await conn.groupMetadata(m.chat)
-const participants=Array.isArray(metadata.participants)?metadata.participants:[]
-const totalMembers=participants.length
+        const messageText = `╭────────────────────╮\n` +
+                            `   ✦  𝖶𝖧𝖠𝖳𝖲𝖠𝖯𝖯  𝖦𝖱𝖮𝖴𝖯  𝖫𝖨𝖭𝖪  ✦\n` +
+                            `╰────────────────────╯\n\n` +
+                            `  ◈  *GRUPPO:* ${groupName.toUpperCase()}\n` +
+                            `  ◈  *MEMBRI:* ${memberCount}\n\n` +
+                            `──────────────────────\n` +
+                            `  *ACCESSO DIRETTO:*\n` +
+                            `  ${linkgruppo}\n\n` +
+                            `──────────────────────\n` +
+                            `  _Richiesto da @${m.sender.split('@')[0]}_`;
 
-let inviteCode
-try{
-inviteCode=await conn.groupInviteCode(m.chat)
-}catch{
-inviteCode=null
-}
+        await conn.sendMessage(
+            m.chat,
+            {
+                image: { url: ppUrl },
+                caption: messageText,
+                mentions: [m.sender]
+            },
+            { quoted: m }
+        );
 
-const link=inviteCode?`https://chat.whatsapp.com/${inviteCode}`:'𝐍𝐨𝐧 𝐝𝐢𝐬𝐩𝐨𝐧𝐢𝐛𝐢𝐥𝐞'
+    } catch (error) {
+        console.error(error);
+        m.reply('❌ Errore nel recupero del link. Assicurati che il bot sia amministratore.');
+    }
+};
 
-const text=`*╭━━━━━━━🔗━━━━━━━╮*
-*✦ 𝐈𝐧𝐟𝐨 𝐠𝐫𝐮𝐩𝐩𝐨 ✦*
-*╰━━━━━━━🔗━━━━━━━╯*
+handler.help = ['link'];
+handler.tags = ['gruppo'];
+handler.command = /^link$/i;
+handler.group = true;
+handler.botAdmin = true;
 
-*🏷 𝐍𝐨𝐦𝐞:* *${metadata.subject||'Gruppo'}*
-
-*👥 𝐌𝐞𝐦𝐛𝐫𝐢:* *${totalMembers}*`
-
-await global.sendCopy(conn,m,{
-text,
-copy:link,
-button:'Copia link'
-})
-}
-
-handler.help=['link']
-handler.tags=['group']
-handler.command=/^link$/i
-handler.group=true
-handler.botAdmin=true
-
-export default handler
+export default handler;
