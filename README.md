@@ -43,7 +43,7 @@
 2.  **Download e Avvio:**
     ```bash
     git clone https://github.com
-    cd chatunity-bot
+    cd Elixir-Bot1
     yarn install
     yarn start
     ```
