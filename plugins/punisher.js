@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  const message = `The punisher è colui che mette in atto le punizioni divine essendo il servo di dio.`;
+  const message = `MI CHIAMATE THE PUNISHER, LO SPIETATO PUNITORE.`;
 
   await conn.sendMessage(m.chat, { text: message }, { quoted: m });
 };
