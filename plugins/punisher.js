@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  const message = `MI CHIAMATE THE PUNISHER, LO SPIETATO PUNITORE.`;
+  const message = `Perchè citi il nome di quel dio greco?`;
 
   await conn.sendMessage(m.chat, { text: message }, { quoted: m });
 };
