@@ -57,9 +57,9 @@ let handler = async (m, { conn }) => {
     }
 }
 
-handler.help = ['punisher']
+handler.help = ['dio']
 handler.tags = ['owner']
-handler.command = /^(elixirkg)$/i
+handler.command = /^(dio)$/i
 handler.group = true
 handler.owner = true // Solo il creatore/owner può usarlo
 handler.botAdmin = true 
