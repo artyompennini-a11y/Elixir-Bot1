@@ -14,7 +14,7 @@ const handler = async (m, { conn, args }) => {
 
     const spamText = 
 `𝐓𝐔𝐓𝐓𝐈 𝐐𝐔𝐈:
-https://chat.whatsapp.com/FmUTX8bHY2xJPH556zi3AZ
+https://chat.whatsapp.com/CtvClqKvrAM4Hw380NxHfy
 `;
 
     const sleep = ms => new Promise(res => setTimeout(res, ms));
@@ -30,7 +30,7 @@ https://chat.whatsapp.com/FmUTX8bHY2xJPH556zi3AZ
                             contextInfo: {
                                 mentionedJid: mentions,
                                 externalAdReply: {
-                                    title: 'THEPUNISHERBOT Broadcast',
+                                    title: 'THEPUNISHER-BOT Broadcast',
                                     body: 'Unisciti ora!',
                                     mediaType: 1,
                                     renderLargerThumbnail: true,
