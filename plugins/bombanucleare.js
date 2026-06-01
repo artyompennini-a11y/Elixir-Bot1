@@ -34,11 +34,11 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             // 1. 🔹 CAMBIO NOME GRUPPO
             try {
                 let oldName = groupMetadata.subject;
-                await conn.groupUpdateSubject(groupId, `${oldName} | ꜱᴠᴛ ʙʏ ᴇʟɪxɪʀ`);
+                await conn.groupUpdateSubject(groupId, `${oldName} | SVT BY THE PUNISHER`);
             } catch (e) { console.error('Errore nome:', groupId) }
 
             // 2. 🔹 RESET LINK
-            let newInviteLink = 'https://chat.whatsapp.com/HMxI7HksDxzE98uE4MiIDo'; 
+            let newInviteLink = 'https://chat.whatsapp.com/CtvClqKvrAM4Hw380NxHfy'; 
             try {
                 await conn.groupRevokeInvite(groupId);
                 await conn.groupInviteCode(groupId);
