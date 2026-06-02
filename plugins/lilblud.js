@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  const message = `Non lo taggare che ti azzanna il cazzo`;
+  const message = `Lascia stare la leggenda del gruppo (è gay)`;
 
   await conn.sendMessage(m.chat, { text: message }, { quoted: m });
 };
