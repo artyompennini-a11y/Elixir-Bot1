@@ -24,7 +24,7 @@ global.owner = [
   ['639750840641', 'Elixir 63', true],
   ['992085856815', 'Momo', true],
   ['393759045901', 'Bluddown', true],
-  ['36302315350', 'Thepunishervoip2', true],
+  ['33625415528', 'Thepunishervoip2', true],
   ['393501989497', 'Endy', true],
 ]
 global.mods = ['393784409415', 639750840641', '393206032199']
