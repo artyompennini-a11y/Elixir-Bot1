@@ -40,6 +40,9 @@
    ```bash
    termux-setup-storage && pkg update && pkg upgrade -y && pkg install git nodejs ffmpeg imagemagick yarn -y
 git clone [https://github.com](https://github.com)
+
 cd Elixir-Bot1
+
 yarn install
+
 yarn start
