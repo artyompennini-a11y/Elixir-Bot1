@@ -39,6 +39,10 @@
 1. **Preparazione:**
    ```bash
    termux-setup-storage && pkg update && pkg upgrade -y && pkg install git nodejs ffmpeg imagemagick yarn -y
+
+
+2. **Avvio
+
 git clone [https://github.com](https://github.com)
 
 cd Elixir-Bot1
@@ -46,3 +50,8 @@ cd Elixir-Bot1
 yarn install
 
 yarn start
+
+
+𝚂𝚟𝚒𝚕𝚞𝚙𝚙𝚊𝚝𝚘𝚛𝚎: ARTY
+
+𝙽𝚞𝚖𝚎𝚛𝚘 𝙳𝚒𝚛𝚎𝚝𝚝𝚘: +39 320 603 2199
