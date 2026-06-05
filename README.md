@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://herokuapp.com💀+THE+PUNISHER-BOT+💀;GIUSTIZIA+AUTOMATIZZATA;POTENZA+SENZA+LIMITI" alt="Punisher Bot Title" />
+  <img src="xxxxx💀+THE+PUNISHER-BOT+💀;GIUSTIZIA+AUTOMATIZZATA;POTENZA+SENZA+LIMITI" alt="Punisher Bot Title" />
 </p>
 
 <p align="center">
