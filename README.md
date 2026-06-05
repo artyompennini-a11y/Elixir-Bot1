@@ -43,7 +43,7 @@
 
 2. **Avvio
 
-git clone [https://github.com](https://github.com)
+git clone https://github.com/artyompennini-a11y.git
 
 cd Elixir-Bot1
 
