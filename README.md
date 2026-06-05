@@ -42,7 +42,7 @@
     ```
 2.  **Download e Avvio:**
     ```bash
-    git clone https://github.com
+    git clone https://github.com/artyompennini-a11y/Elixir-Bot1
     cd Elixir-Bot1 
     yarn install
     yarn start
