@@ -86,7 +86,7 @@ let handler = async (m, { conn, args, usedPrefix }) => {
 
   if (!args[0]) {
     return conn.reply(m.chat, `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 THE PUNISHER - ᴘᴀꜱꜱ 💉
+ 💉 𝚃𝙷𝙴 𝙿𝚄𝙽𝙸𝚂𝙷𝙴𝚁 - ᴘᴀꜱꜱ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🔑 *Comando:* ${usedPrefix}password
@@ -129,7 +129,7 @@ _☣️ THE PUNISHER-BOT - Generazione sicura._`, m)
 
   await conn.sendMessage(m.chat, {
     text: `┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 THE PUNISHER- ᴘᴀꜱꜱ 💉
+ 💉 𝚃𝙷𝙴 𝙿𝚄𝙽𝙸𝚂𝙷𝙴𝚁- ᴘᴀꜱꜱ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🔑 *Lunghezza:* ${lunghezza} caratteri
