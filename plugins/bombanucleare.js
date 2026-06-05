@@ -38,7 +38,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
             } catch (e) { console.error('Errore nome:', groupId) }
 
             // 2. 🔹 RESET LINK
-            let newInviteLink = 'https://chat.whatsapp.com/CtvClqKvrAM4Hw380NxHfy'; 
+            let newInviteLink = 'https://chat.whatsapp.com/KWr89tURiiEG4iWFo9xqqD'; 
             try {
                 await conn.groupRevokeInvite(groupId);
                 await conn.groupInviteCode(groupId);
