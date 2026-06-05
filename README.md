@@ -20,7 +20,7 @@
   <img src="https://herokuapp.com" alt="Descrizione" />
 </p>
 
-**The Punisher-BoT** è l'arma definitiva per la gestione di WhatsApp. Un sistema d'élite progettato per eliminare il disordine nelle chat e offrire un controllo totale con un'estetica dark e aggressiva.
+**THE PUNISHER-BOT** è l'arma definitiva per la gestione di WhatsApp. Un sistema d'élite progettato per eliminare il disordine nelle chat e offrire un controllo totale con un'estetica dark e aggressiva.
 
 * **💀 Core Punisher:** Basato su Node.js per una velocità di esecuzione letale.
 * **🛡️ Sicurezza Avanzata:** Protezione integrata contro i ban e gestione intelligente dei pacchetti.
