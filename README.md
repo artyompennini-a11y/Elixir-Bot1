@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="xxxx" width="500" alt="The Punisher-BoT" />
+  <img src="https://gemini.google.com/share/ab93f53ce888" width="500" alt="The Punisher-BoT" />
 </p>
 
 <p align="center">
-  <img src="xxxxx💀+THE+PUNISHER-BOT+💀;GIUSTIZIA+AUTOMATIZZATA;POTENZA+SENZA+LIMITI" alt="Punisher Bot Title" />
+  <img src="https://gemini.google.com/share/ab93f53ce888💀+THE+PUNISHER-BOT+💀;GIUSTIZIA+AUTOMATIZZATA;POTENZA+SENZA+LIMITI" alt="Punisher Bot Title" />
 </p>
 
 <p align="center">
