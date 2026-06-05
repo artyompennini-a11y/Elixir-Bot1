@@ -7,7 +7,7 @@ const localImg = join(process.cwd(), 'menu-strumenti.jpeg');
 const defmenu = {
   before: `
 ┏━━━━━━━━━━━━━━━━━━━━┓
- 💉 THE PUNISHER - ᴛᴏᴏʟꜱ 💉
+ 💉 𝚃𝙷𝙴 𝙿𝚄𝙽𝙸𝚂𝙷𝙴𝚁 - ᴛᴏᴏʟꜱ 💉
 ┗━━━━━━━━━━━━━━━━━━━━┛
  ┌───────────────────
  │ 🧪 *Soggetto:* %name
