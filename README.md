@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://ibb.co" width="500" alt="The Punisher-BoT" />
+  <img src="xxxx" width="500" alt="The Punisher-BoT" />
 </p>
 
 <p align="center">
