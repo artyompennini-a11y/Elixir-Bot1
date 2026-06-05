@@ -79,7 +79,7 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isS
   const getStatus = (f) => (f.store === 'bot' ? bot[f.key] : chat[f.key]) ? '🟢' : '🔴';
 
   let menu = `┎━━━━━━━━━━━━━━━━━━━━┑
-┃✧THE PUNISHER-ᴍᴀꜱᴛᴇʀ ᴄᴏɴᴛʀᴏʟ  ✧       ┃
+┃✧𝚃𝙷𝙴 𝙿𝚄𝙽𝙸𝚂𝙷𝙴𝚁-ᴍᴀꜱᴛᴇʀ ᴄᴏɴᴛʀᴏʟ  ✧       ┃
 ┖━━━━━━━━━━━━━━━━━━━━┙
 ┌────────────────────┐
   👤 𝚄𝚜𝚎𝚛: ${userName}
